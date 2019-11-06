@@ -32,7 +32,7 @@
         }
 
 
-        #mymap {
+        div.myMap {
           height: 500px;
           width: 100%;
           padding: 0px;
@@ -83,6 +83,7 @@
                                     <a class="dropdown-item" href="{{ route('locations') }}">Locations</a>
                                     <a class="dropdown-item" href="{{ route('newlocation') }}">New Location</a>
                                     <a class="dropdown-item" href="{{ route('map') }}">Map</a>
+                                    <a class="dropdown-item" href="{{ route('stock') }}">Stock</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
