@@ -80,8 +80,9 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
-                                    <a class="dropdown-item" href="{{ route('locations') }}">Locations</a>
-                                    <a class="dropdown-item" href="{{ route('newlocation') }}">New Location</a>
+                                    <a class="dropdown-item" href="/admin">Admin</a>
+                                    <a class="dropdown-item" href="{{ route('locations') }}">Orders</a>
+                                    <a class="dropdown-item" href="{{ route('newlocation') }}">New Order</a>
                                     <a class="dropdown-item" href="{{ route('map') }}">Map</a>
                                     <a class="dropdown-item" href="{{ route('stock') }}">Stock</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

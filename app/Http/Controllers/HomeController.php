@@ -26,7 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $locations = Location::where('status', 'waiting')->get();
+        $donelocations = Location::where('status', 'done')->get();
+
+        return view('home',[
+            'locations' => $locations, 
+            'donelocations' => $donelocations,
+            'stocks' => Stock::all()
+        ]);
+    }
+
+    public function markDone($id)
+    {
+        $Location = Location::find($id);
+        $Location->update(['status'=>'done']);
+
+        return redirect()->back();
     }
 
     public function savestock(Request $request)
@@ -84,14 +99,22 @@ class HomeController extends Controller
 
     public function savelocation(Request $request)
     {
+        $value = 0;
+        $order = '';
+        foreach ($request['order'] as $stockID) {
+            $stock = Stock::find($stockID);
+            $value += $stock->price;
+            $order .= $stock->type()->name.' of '.$stock->product()->name.', ';
+        }
         Location::create([
             'lat' => $request['lat'],
             'lon' => $request['lon'],
             'called_at' => $request['called_at'],
-            'value' => $request['value'],
+            'value' => $value,
+            'order' => $order,
             'name' => $request['address'],
         ]);
-        return redirect('locations');
+        return redirect('newlocation');
     }
 
     public function gmaps()

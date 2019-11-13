@@ -31,3 +31,4 @@ Route::get('/newlocation', 'HomeController@newlocation')->name('newlocation');
 Route::post('/savelocation', 'HomeController@savelocation')->name('savelocation');
 Route::post('/savestock', 'HomeController@savestock')->name('savestock');
 
+Route::get('/locations/mark/done/{id}', 'HomeController@markDone')->name('mark.done');

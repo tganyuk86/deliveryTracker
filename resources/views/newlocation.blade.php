@@ -21,13 +21,12 @@
                     @foreach($products as $prod => $row)
                       <h3>{{ $prod }}</h3>
                       @foreach($row as $type => $data)
-                      <span>
-                        {{$type}}
-                        <input type="checkbox" name="order[]" value="{{$data->id}}" class="" />
-                      </span>
-                      
+                        <span>
+                          {{$type}}
+                          <input type="checkbox" name="order[]" value="{{$data->id}}" class="" />
+                        </span>
 
-                    @endforeach
+                      @endforeach
                     @endforeach
 
                     <hr >
@@ -52,6 +51,7 @@
 
                    
 
+                     <div id="address"></div>
                      <div class="myMap" id="mymap"></div>
                      <div class="myMap" id="mymap-out"></div>
 
@@ -76,12 +76,13 @@
 
                     lat = results[0].geometry.location.lat();
                     lon = results[0].geometry.location.lng();
-                    add = results[0].formatted_address;
+                    addFull = results[0].formatted_address;
+                    add = results[0].address_components[0].long_name+' '+results[0].address_components[1].short_name;
 
                     city = '';
                     //results[0].address_components[2].long_name+', '+results[0].address_components[4].short_name;
                     $(results[0].address_components).each(function(){
-                        console.log(this);
+                        // console.log(this);
                         if(this.types.includes('locality'))
                         {
                             city += this.long_name;
@@ -95,6 +96,7 @@
                     $('[name="lat"]').val(lat);
                     $('[name="lon"]').val(lon);
                     $('[name="address"]').val(add);
+                    $('#address').html(addFull);
                     
                     var mymap = new GMaps({
                           el: '#mymap',
