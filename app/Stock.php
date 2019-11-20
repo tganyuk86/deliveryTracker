@@ -13,7 +13,7 @@ class Stock extends Model
     protected $table = 'stock';
 
     protected $fillable = [
-        'productID', 'typeID', 'price',
+        'productID', 'typeID', 'price', 'amount',
     ];
 
 
@@ -34,7 +34,30 @@ class Stock extends Model
 
     public function type()
     {
-    	return StockType::find($this->typeID);
+        return StockType::find($this->typeID);
+    }
+
+    public static function allSorted()
+    {
+    	$stocks = Stock::orderBy('price', 'asc')->get();
+
+        foreach ($stocks as $stock) 
+        {
+            $out[$stock->product()->name][$stock->type()->name] = $stock;
+        }
+
+        return $out;
+    }
+
+    public function reduceAvailable()
+    {
+        if(($this->product()->amount - $this->type()->amount) < 0)
+        {
+            dd('Not Enough Stock of '.$this->product()->name);
+        }
+        $this->product()->update([
+            'amount' => ($this->product()->amount - $this->type()->amount)
+        ]);
     }
 
 }

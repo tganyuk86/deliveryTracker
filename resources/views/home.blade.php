@@ -27,39 +27,72 @@
                       Value
                     </div>
                   </div> -->
+                  @if($currentLocation)
+                  <div class="row active">
+                     <!--  <div class="col-md-2">
 
-                  @foreach($locations as $location)
-                    <div class="row">
-                      <div class="col-md-2">
-                        {{ $location->called_at}}
 
+                      </div> -->
+                      <div class="col-md-4">
+                        {{$currentLocation->name}}
                       </div>
                       <div class="col-md-4">
-                        {{$location->name}}
+                        <ul>
+                          {!! $currentLocation->order !!}
+                          <li>Total: ${{$currentLocation->value}}</li>
+                        </ul>
                       </div>
                       <div class="col-md-4">
-                        {{$location->order}}(${{$location->value}})
-                      </div>
-                      <div class="col-md-2">
-                        <a href="{{ route('mark.done', ['id' => $location->id]) }}">Done</a>
+                        <a href="{{ route('mark.done', ['id' => $currentLocation->id]) }}" class="btn btn-outline-success">Done</a>
+                        <a href="tel:{{ $currentLocation->phone }}" class="btn btn-outline-info">Call</a>
+                        <a href="sms:{{ $currentLocation->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
                       </div>
 
                     </div>
+                    @endif
 
-                  @endforeach
-<hr />
+                    <hr />
+                    <hr />
 
-                  @foreach($donelocations as $location)
-                    <div class="row done" >
-                      <div class="col-md-2">
+                  @foreach($locations as $location)
+                    <div class="row">
+                     <!--  <div class="col-md-2">
                         {{ $location->called_at}}
 
-                      </div>
+                      </div> -->
                       <div class="col-md-4">
                         {{$location->name}}
                       </div>
                       <div class="col-md-4">
-                        {{$location->order}}(${{$location->value}})
+                        <ul>
+                          {!! $location->order !!}
+                          <li>Total: ${{$location->value}}</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        @if(!$currentLocation)
+                          <a href="{{ route('mark.onRoute', ['id' => $location->id]) }}" class="btn btn-outline-info">Start</a>
+                        @endif
+                        <a href="tel:{{ $location->phone }}" class="btn btn-outline-info">Call</a>
+                        <a href="sms:{{ $location->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
+                      </div>
+
+                    </div>
+<hr />
+                  @endforeach
+
+
+                  @foreach($donelocations as $location)
+                    <div class="row done" >
+                      
+                      <div class="col-md-4">
+                        {{$location->name}}
+                      </div>
+                      <div class="col-md-4">
+                        <ul>
+                          {!! $location->order !!}
+                          <li>Total: ${{$location->value}}</li>
+                        </ul>
                       </div>
                       <div class="col-md-2">
 
@@ -85,37 +118,19 @@
 
 
 
-                    <div class="row justify-content-center">
-                        <div class="col-md-4">Product</div>
-                        <div class="col-md-4">Type</div>
-                        <div class="col-md-4">Price</div>
-                    </div>
-
-                @foreach($stocks as $stock)
-                    <input type="hidden" name="stock[{{$stock->id}}][id]" value="{{$stock->id}}">
-                     <div class="row justify-content-center">
-                        <div class="col-md-4">
-                            <select class="form-control" name="stock[{{$stock->id}}][productID]">
-                                <option value="0">REMOVE</option>
-                                @foreach($stock->products() as $prod)
-                                    <option value="{{$prod->id}}" {{$prod->id == $stock->productID ? 'selected' : '' }} >{{$prod->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-control" name="stock[{{$stock->id}}][typeID]">
-                                @foreach($stock->types() as $prod)
-                                    <option value="{{$prod->id}}" {{$prod->id == $stock->typeID ? 'selected' : '' }} >{{$prod->name}}</option>
-                                @endforeach
-                            </select>
-
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" name="stock[{{$stock->id}}][price]" value="{{ $stock->price }}" >
-                        </div>
-                    </div>
-
+                @foreach($stocks as $product => $data)
+                    <h2>{{$product}}</h2>
+                     <div class="row ">
+                        @foreach($data as $type => $stock)
+                          <div class="col-md-3">
+                            {{$type}} (${{$stock->price}})
+                          </div>
+                        @endforeach
+                      </div>
                 @endforeach
+                        
+                       
+
 
                 </div>
             </div>
@@ -154,8 +169,18 @@
                               click: function(e) {
                                 alert('This is '+value.name+'.');
                               }
-                            });
+                            }); 
+
                        });
+                            mymap.addMarker({
+                              lat: {{ Auth::user()->lat }},
+                              lng: {{ Auth::user()->lon }},
+                              title: '{{ Auth::user()->name }}',
+                              label: '{{ substr(Auth::user()->name, 0, 1) }}',
+                              click: function(e) {
+                                alert('This is a driver.');
+                              }
+                            });
 
 
                       </script>

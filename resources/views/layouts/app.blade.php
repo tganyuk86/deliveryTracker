@@ -41,6 +41,46 @@
         }
 
     </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            // jQuery('#ajaxSubmit').click(function(e){
+               // e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+            // });
+          });
+
+    </script>
+    @if(Auth::user() && !Auth::user()->isAdmin())
+        <script type="text/javascript">
+            if (navigator.geolocation) 
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+
+            function showPosition(position)
+            {
+                $.ajax({
+                    url: "{{ route('updatePosition') }}",
+                    type:'POST',
+                    headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      },
+                    data: {
+
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+    @endif
 </head>
 <body>
     <div id="app">
@@ -66,11 +106,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -78,13 +114,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
+                                    @if(Auth::user()->isAdmin())
                                     <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
                                     <a class="dropdown-item" href="/admin">Admin</a>
                                     <a class="dropdown-item" href="{{ route('locations') }}">Orders</a>
                                     <a class="dropdown-item" href="{{ route('newlocation') }}">New Order</a>
                                     <a class="dropdown-item" href="{{ route('map') }}">Map</a>
                                     <a class="dropdown-item" href="{{ route('stock') }}">Stock</a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

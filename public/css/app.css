@@ -19,3 +19,8 @@
 {
 	background-color: #d4fcd6;
 }
+
+.row.active {
+	/*background-color: yellow;*/
+	font-weight: bold;
+}

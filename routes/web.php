@@ -25,6 +25,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'HomeController@gmaps')->name('map');
 
+Route::post('/updatePosition', 'HomeController@updatePosition')->name('updatePosition');
+
 Route::get('/stock', 'HomeController@stock')->name('stock');
 Route::get('/locations', 'HomeController@locations')->name('locations');
 Route::get('/newlocation', 'HomeController@newlocation')->name('newlocation');
@@ -32,3 +34,4 @@ Route::post('/savelocation', 'HomeController@savelocation')->name('savelocation'
 Route::post('/savestock', 'HomeController@savestock')->name('savestock');
 
 Route::get('/locations/mark/done/{id}', 'HomeController@markDone')->name('mark.done');
+Route::get('/locations/mark/onroute/{id}', 'HomeController@markOnRoute')->name('mark.onRoute');

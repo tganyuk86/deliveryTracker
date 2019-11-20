@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Stock;
 use App\Location;
 
+use Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -26,20 +28,85 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $currentLocation = Location::where('status', 'on-route')->get();
+
+        if(isset($currentLocation[0]))
+        {
+            $currentLocation = $currentLocation[0];
+
+            $order = explode(', ', $currentLocation->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $currentLocation->order = $out;
+        }
+        else
+            $currentLocation = false;
+
+
+
         $locations = Location::where('status', 'waiting')->get();
         $donelocations = Location::where('status', 'done')->get();
 
+        foreach ($locations as $Location) 
+        {
+            $order = explode(', ', $Location->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $Location->order = $out;
+        }
+
+        foreach ($donelocations as $Location) 
+        {
+            $order = explode(', ', $Location->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $Location->order = $out;
+        }
+
         return view('home',[
             'locations' => $locations, 
+            'currentLocation' => $currentLocation, 
             'donelocations' => $donelocations,
-            'stocks' => Stock::all()
+            'stocks' => Stock::allSorted()
         ]);
     }
 
+    public function updatePosition(Request $request)
+    {
+
+        Auth::user()->update([
+            'lat' => $request['lat'],
+            'lon' => $request['lon'],
+        ]);
+    }
     public function markDone($id)
     {
+
         $Location = Location::find($id);
         $Location->update(['status'=>'done']);
+        activity()->on($Location)->log('Marked Done');
+
+        return redirect()->back();
+    }
+
+    public function markOnRoute($id)
+    {
+
+        $Location = Location::find($id);
+        $Location->update(['status'=>'on-route']);
+        activity()->on($Location)->log('Marked On Route');
 
         return redirect()->back();
     }
@@ -101,19 +168,24 @@ class HomeController extends Controller
     {
         $value = 0;
         $order = '';
-        foreach ($request['order'] as $stockID) {
+        foreach ($request['order'] as $stockID) 
+        {
             $stock = Stock::find($stockID);
             $value += $stock->price;
             $order .= $stock->type()->name.' of '.$stock->product()->name.', ';
+            $stock->reduceAvailable();
         }
-        Location::create([
+        $new = Location::create([
             'lat' => $request['lat'],
             'lon' => $request['lon'],
             'called_at' => $request['called_at'],
             'value' => $value,
             'order' => $order,
+            'phone' => $request['phone'],
             'name' => $request['address'],
         ]);
+        activity()->on($new)->log('Order Added - '.$new->name);
+
         return redirect('newlocation');
     }
 

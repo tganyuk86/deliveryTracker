@@ -17,6 +17,9 @@
                     <label>Called @</label>
                     <input type="text" class="form-control" name="called_at" value="{{ date("gA") }}">
                     
+                     <label>Phone</label>
+                    <input type="phone" class="form-control" name="phone" value="">
+                    
                     <label>Order</label>
                     @foreach($products as $prod => $row)
                       <h3>{{ $prod }}</h3>
