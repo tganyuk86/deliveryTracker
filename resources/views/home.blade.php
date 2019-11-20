@@ -172,6 +172,7 @@
                             }); 
 
                        });
+                        @if(!Auth::user()->isAdmin())
                             mymap.addMarker({
                               lat: {{ Auth::user()->lat }},
                               lng: {{ Auth::user()->lon }},
@@ -182,7 +183,7 @@
                               }
                             });
 
-
+                          @endif
                       </script>
                 </div>
             </div>
