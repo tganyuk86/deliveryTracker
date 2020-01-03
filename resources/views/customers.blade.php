@@ -6,38 +6,38 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Map</div>
+                <div class="card-header">Customers</div>
 
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-2">
-                      Called @
+                      Address
+                    </div>
+                    <div class="col-md-4">
+                      Phone
                     </div>
                     <div class="col-md-4">
                       Name
                     </div>
-                    <div class="col-md-4">
-                      Order
-                    </div>
                     <div class="col-md-2">
-                      Value
+                      Buttons
                     </div>
                   </div>
 
-                  @foreach($locations as $location)
+                  @foreach($Customers as $customer)
                     <div class="row">
                       <div class="col-md-2">
-                        {{ \Carbon\Carbon::parse($location->called_at)->diffForHumans()}}
-
+                        {{$customer->address}}
+                        
                       </div>
                       <div class="col-md-4">
-                        {{$location->name}}
+                        {{$customer->phone}}
                       </div>
                       <div class="col-md-4">
-                        {{$location->order}}
+                        {{$customer->name}}
                       </div>
                       <div class="col-md-2">
-                        {{$location->value}}
+<a href="/neworder/{{$customer->id}}"><button>Place Order</button></a>
                       </div>
                     </div>
 

@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
+
 class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
@@ -41,5 +43,40 @@ class User extends \TCG\Voyager\Models\User
     public function isAdmin()
     {
         return $this->role_id == 1 ? true : false;
+    }
+
+    public function ordersBy($column)
+    {
+        $orders = $this->orders();
+        $out = [];
+        foreach ($orders as $order) 
+        {
+            $out[$order[$column]][] = $order;
+        }
+// dd($out);
+        return $out;
+    }
+    
+
+    public function orders($status = false)
+    {
+        $orders = Order::where('driverID', $this->id);
+        if($status)
+        {
+            $orders = $orders->where('status', $status);
+        }
+        $orders = $orders->get()->sortBy('priority');
+
+        return $orders;
+    }
+
+    public static function drivers()
+    {
+        return User::where('role_id', 2)->get();
+    }
+
+    public function stock()
+    {
+        return ProductStock::where('driverID', $this->id)->get();
     }
 }

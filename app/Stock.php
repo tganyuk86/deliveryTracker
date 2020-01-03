@@ -49,15 +49,14 @@ class Stock extends Model
         return $out;
     }
 
-    public function reduceAvailable()
+    public function reduceAvailable($driverID)
     {
-        if(($this->product()->amount - $this->type()->amount) < 0)
-        {
-            dd('Not Enough Stock of '.$this->product()->name);
-        }
-        $this->product()->update([
-            'amount' => ($this->product()->amount - $this->type()->amount)
-        ]);
+        $prodStock = ProductStock::where('driverID', $driverID)
+                                 ->where('productID', $this->productID)
+                                 ->first();
+// dd($this->type());
+        $prodStock->amount -= $this->type()->amount;
+        $prodStock->save();
     }
 
 }

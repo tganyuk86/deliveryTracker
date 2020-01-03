@@ -24,3 +24,9 @@
 	/*background-color: yellow;*/
 	font-weight: bold;
 }
+
+sup {
+	display: block;
+	vertical-align: super;
+	line-height: 15px;
+}

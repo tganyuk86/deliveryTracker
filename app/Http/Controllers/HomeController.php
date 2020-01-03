@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Customer;
+use App\Product;
 use App\Stock;
-use App\Location;
+use App\User;
+use App\Order;
+use App\OrderItem;
 
 use Auth;
 
@@ -28,57 +32,62 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $currentLocation = Location::where('status', 'on-route')->get();
+        $currentOrder = Order::getCurrent();
 
-        if(isset($currentLocation[0]))
+        if(isset($currentOrder[0]))
         {
-            $currentLocation = $currentLocation[0];
+            $currentOrder = $currentOrder[0];
 
-            $order = explode(', ', $currentLocation->order);
+            $order = explode(', ', $currentOrder->order);
             $out = '';
             foreach($order as $o)
             {
                 if($o == '') continue;
                 $out .= "<li>$o</li>";
             }
-            $currentLocation->order = $out;
+            $currentOrder->order = $out;
         }
         else
-            $currentLocation = false;
+            $currentOrder = false;
 
 
+        $Orders = Order::getWaiting();
+        $doneOrders = Order::getDone();
 
-        $locations = Location::where('status', 'waiting')->get();
-        $donelocations = Location::where('status', 'done')->get();
-
-        foreach ($locations as $Location) 
+        foreach ($Orders as $Order) 
         {
-            $order = explode(', ', $Location->order);
+            $order = explode(', ', $Order->order);
             $out = '';
             foreach($order as $o)
             {
                 if($o == '') continue;
                 $out .= "<li>$o</li>";
             }
-            $Location->order = $out;
+            $Order->order = $out;
         }
 
-        foreach ($donelocations as $Location) 
+        foreach ($doneOrders as $Order) 
         {
-            $order = explode(', ', $Location->order);
+            $order = explode(', ', $Order->order);
             $out = '';
             foreach($order as $o)
             {
                 if($o == '') continue;
                 $out .= "<li>$o</li>";
             }
-            $Location->order = $out;
+            $Order->order = $out;
         }
 
-        return view('home',[
-            'locations' => $locations, 
-            'currentLocation' => $currentLocation, 
-            'donelocations' => $donelocations,
+        if(Auth::user()->isAdmin())
+            $view = 'dispatch';
+        else
+            $view = 'home';
+// dd($Orders);
+        return view($view,[
+            'Orders' => $Orders, 
+            'currentOrder' => $currentOrder, 
+            'doneOrders' => $doneOrders,
+            'drivers' => User::all(),
             'stocks' => Stock::allSorted()
         ]);
     }
@@ -91,22 +100,57 @@ class HomeController extends Controller
             'lon' => $request['lon'],
         ]);
     }
-    public function markDone($id)
+
+    public function assignDriver(Request $request)
     {
-
-        $Location = Location::find($id);
-        $Location->update(['status'=>'done']);
-        activity()->on($Location)->log('Marked Done');
-
-        return redirect()->back();
+        $order = Order::find($request['orderID']);
+// dump($request);
+// dd($order);
+        $order->update([
+            'driverID' => $request['driverID']
+        ]);
+        
+        return redirect('orders');
     }
 
     public function markOnRoute($id)
     {
 
-        $Location = Location::find($id);
-        $Location->update(['status'=>'on-route']);
-        activity()->on($Location)->log('Marked On Route');
+        $Order = Order::find($id);
+        $Order->update(['status'=>'on-route']);
+        activity()->on($Order)->log('Marked On Route');
+
+        return redirect()->back();
+    }
+
+    public function savePriority(Request $request)
+    {
+
+        foreach ($request['orders'] as $driverID => $orderlist) 
+        {
+            foreach ($orderlist as $priority => $orderID) 
+            {
+                Order::find($orderID)->update([
+                    'priority' => $priority
+                ]); 
+            }
+        }
+        return redirect()->back();
+    }
+    public function performMove(Request $request)
+    {
+        // dd($request);
+
+        foreach ($request['amount'] as $productID => $amount) 
+        {
+            $amount = intval($amount);
+            if($amount == 0) continue;
+
+            $product = Product::find($productID);
+
+            $product->moveStock($request['destination'], $amount);
+            
+        }
 
         return redirect()->back();
     }
@@ -142,56 +186,202 @@ class HomeController extends Controller
 
     }
 
-    public function locations()
+    public function Orders()
     {
-        $locations = Location::all();
+        // $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyAkfSv50NPZZJJ25fuuwFE8cWI_TMFqqJc'));
 
-        return view('locations', ['locations' => $locations]);
+        // dd($data);
+        $Orders = Order::getWaiting();
+        $doneOrders = Order::getDone();
+
+        return view('Orders', [
+            'orders' => $Orders,
+            'doneOrders' => $doneOrders,
+            'drivers' => User::drivers(),
+        ]);
+    }
+    public function OrdersFor($driverID)
+    {
+
+        // dd($data);
+        $Orders = Order::where('driverID', $driverID)->get();
+
+        $numOrders = count($Orders);
+        $orderNum = 0;
+
+        while(isset($Orders[$orderNum+1]))
+        {
+            $source = "{$Orders[$orderNum]->lat},{$Orders[$orderNum]->lon}";
+            $destination = "{$Orders[$orderNum+1]->lat}%2C{$Orders[$orderNum+1]->lon}";
+            $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$source}&destinations={$destination}&key=AIzaSyAkfSv50NPZZJJ25fuuwFE8cWI_TMFqqJc'));
+            $Orders[$orderNum+1]->distance = 
+            $orderNum++;
+        }
+
+        return view('Orders', ['orders' => $Orders]);
+    }
+
+    public function Customers()
+    {
+        $Customers = Customer::all();
+
+        return view('customers', ['Customers' => $Customers]);
     }
 
     public function stock()
     {
-        return view('stock', [ 'stocks' => Stock::all() ]);
+        return view('stock', [ 'stocks' => Stock::all()->sortByDesc('id') ]);
 
     }
-    public function newlocation()
+
+    public function allstock()
+    {
+        return view('allstock', [ 
+            'products' => Product::all(),
+            'drivers' => User::drivers(),
+
+        ]);
+
+    }
+    public function movestock()
+    {
+        return view('movestock', [ 
+            'products' => Product::all(),
+            'drivers' => User::drivers(),
+
+        ]);
+
+    }
+    public function newOrder()
     {
         $products = Stock::all();
         foreach($products as $p)
         {
             $out[$p->product()->name][$p->type()->name] = $p;
         }
-        return view('newlocation', [ 'products' => $out]);
+        return view('newOrder', [ 'products' => $out, 'customer' => new Customer() ]);
+    }
+    public function newOrderFor($customerID)
+    {
+        $products = Stock::all();
+        foreach($products as $p)
+        {
+            $out[$p->product()->name][$p->type()->name] = $p;
+        }
+        return view('newOrder', [ 'products' => $out, 'customer' => Customer::find($customerID)]);
     }
 
-    public function savelocation(Request $request)
+    public function saveOrder(Request $request)
     {
+        // dd($request);
         $value = 0;
         $order = '';
+        $dfee = 0;
         foreach ($request['order'] as $stockID) 
         {
             $stock = Stock::find($stockID);
             $value += $stock->price;
-            $order .= $stock->type()->name.' of '.$stock->product()->name.', ';
-            $stock->reduceAvailable();
+
+            if($stock->type()->id != 5)
+                $order .= $stock->type()->name.' of ';
+
+            $order .= $stock->product()->name.', ';
+            // $stock->reduceAvailable();
         }
-        $new = Location::create([
+
+        $customer = Customer::firstOrCreate([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
+        ]);
+
+        if($request['deliveryFee'] == 'auto')
+        {
+            if($value < 100)
+            {
+                $value += 5;
+                $dfee = 1;
+            }
+        }elseif($request['deliveryFee'] == '1')
+        {
+            $value += 5;
+            $dfee = 1;
+        }
+
+        $new = Order::create([
             'lat' => $request['lat'],
             'lon' => $request['lon'],
-            'called_at' => $request['called_at'],
             'value' => $value,
             'order' => $order,
+            'dfee' => $dfee,
             'phone' => $request['phone'],
-            'name' => $request['address'],
-        ]);
-        activity()->on($new)->log('Order Added - '.$new->name);
+            'address' => $request['address'],
+            'customerID' => $customer->id
 
-        return redirect('newlocation');
+        ]);
+        activity()->on($new)->log('Order Added - '.$customer->name);
+
+        foreach ($request['order'] as $stockID) 
+        {
+            // $stock = Stock::find($stockID);
+            OrderItem::create([
+                'stockID' => $stockID,
+                'orderID' => $new->id
+            ]);
+            
+        }
+
+        return redirect('neworder');
     }
+
+
+    public function cancelOrder($id)
+    {
+
+    }
+
+    public function markDone($id)
+    {
+
+        $Order = Order::find($id);
+        $Order->update(['status'=>'done']);
+        $driver = $Order->driver();
+        foreach ($Order->items() as $item) 
+        {
+// dd($item);
+            $item->reduceAvailable($driver->id);
+            // $prodStock = ProductStock::where('driverID', $driver->id)
+            //                          ->where('productID', $item->productID)
+            //                          ->get();
+
+            // $prodStock->amount -= $item->amount;
+            // $prodStock->save();
+        }
+        activity()->on($Order)->log('Marked Done');
+
+        return redirect()->back();
+    }
+
+    public function showAssign($OrderID)
+    {
+        return view('assign', [
+            'drivers' => User::drivers(),
+            'order' => Order::find($OrderID)
+        ]);
+    }
+
+    // public function assign(Request $request)
+    // {
+    //     $order = Order::find($request['orderID']);
+    //     $order->driverID = $request['driverID'];
+    //     $order->save();
+
+    //     return redirect('orders');
+    // }
 
     public function gmaps()
     {
-        $locations = Location::all();
-        return view('map',compact('locations'));
+        $Orders = Order::all();
+        return view('map',compact('Orders'));
     }
 }

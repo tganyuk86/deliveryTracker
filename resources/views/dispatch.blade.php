@@ -13,48 +13,7 @@
                 <div class="card-header">Orders</div>
 
                 <div class="card-body">
-                  <!-- <div class="row">
-                    <div class="col-md-2">
-                      Called @
-                    </div>
-                    <div class="col-md-4">
-                      Name
-                    </div>
-                    <div class="col-md-4">
-                      Order
-                    </div>
-                    <div class="col-md-2">
-                      Value
-                    </div>
-                  </div> -->
-                  @if($currentOrder)
-                  <div class="row active">
-                     <!--  <div class="col-md-2">
-
-
-                      </div> -->
-                      <div class="col-md-4">
-                        {{$currentOrder->customer()->address}}<br>
-                        <sup>{{$currentOrder->customer()->name}}<br>
-                        {{$currentOrder->customer()->phone}}</sup>
-                      </div>
-                      <div class="col-md-4">
-                        <ul>
-                          {!! $currentOrder->order !!}
-                          <li>Total: ${{$currentOrder->value}}</li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4">
-                        <a href="{{ route('mark.done', ['id' => $currentOrder->id]) }}" class="btn btn-outline-success">Done</a>
-                        <a href="tel:{{ $currentOrder->phone }}" class="btn btn-outline-info">Call</a>
-                        <a href="sms:{{ $currentOrder->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
-                      </div>
-
-                    </div>
-                    @endif
-
-                    <hr />
-                    <hr />
+                 
 
                   @foreach($Orders as $Order)
                     <div class="row">
@@ -64,8 +23,9 @@
                       </div> -->
                       <div class="col-md-4">
                         {{$Order->customer()->address}}<br>
-                        <sup>{{$Order->customer()->name}}<br>
-                        {{$Order->customer()->phone}}</sup>
+                        <sup>{{$Order->customer()->name}}</sup>
+                        <sup>{{$Order->customer()->phone}}</sup>
+                        <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
                       <div class="col-md-4">
                         <ul>
@@ -74,10 +34,19 @@
                         </ul>
                       </div>
                       <div class="col-md-4">
-                        <a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-outline-success">Done</a>
                         
-                        <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
-                        <a href="sms:{{ $Order->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
+                        <button type="button" class="btn btn-primary assignDriver" data-orderid="{{$Order->id}}" data-toggle="modal" data-target="#assignDriver">
+                          {{ $Order->driver()->isAdmin() ? 'Unassigned' : $Order->driver()->name}}
+                        </button>
+                        <!-- <a href="{{ route('editOrder', $Order->id) }}">
+                          <button type="button" class="btn btn-warning editOrder" data-orderid="{{$Order->id}}">
+                            Edit
+                          </button>
+                        </a>
+
+                        <button type="button" class="btn btn-danger cancelOrder" data-orderid="{{$Order->id}}">
+                          Cancel
+                        </button> -->
                       </div>
 
                     </div>
@@ -89,15 +58,18 @@
                     <div class="row done" >
                       
                       <div class="col-md-4">
-                        {{$Order->name}}
+                        {{$Order->customer()->address}}
+                        <sup>{{$Order->customer()->name}}</sup>
+                        <sup>{{$Order->customer()->phone}}</sup>
+                        <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}</li>
                         </ul>
                       </div>
                       <div class="col-md-2">
+                          ${{$Order->value}}
 
                       </div>
 
@@ -175,18 +147,12 @@
                             }); 
 
                        });
-                        @if(!Auth::user()->isAdmin())
-                            mymap.addMarker({
-                              lat: {{ Auth::user()->lat }},
-                              lng: {{ Auth::user()->lon }},
-                              title: '{{ Auth::user()->name }}',
-                              label: '{{ substr(Auth::user()->name, 0, 1) }}',
-                              click: function(e) {
-                                alert('This is a driver.');
-                              }
-                            });
 
-                          @endif
+                        $('.assignDriver').on('click', function () {
+                          $('[name="orderID"]').val($(this).data('orderid'));
+                        })
+
+                        
                       </script>
                 </div>
             </div>
@@ -198,5 +164,35 @@
         </div>
 
     </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="assignDriver" tabindex="-1" role="dialog" aria-labelledby="assignDriverLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form action="/assign" method="POST">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign to</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          @csrf
+          <select name="driverID">
+            @foreach($drivers as $driver)
+              <option value="{{$driver->id}}">{{$driver->name}}</option>
+            @endforeach
+          </select>
+          <input type="hidden" name="orderID">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+        </form>
+    </div>
+  </div>
 </div>
 @endsection

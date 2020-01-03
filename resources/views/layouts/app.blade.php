@@ -14,6 +14,8 @@
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
+
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyCkkv7pc03IVghDRRYKHsmSxK28VQz9t3w"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
 
@@ -56,12 +58,12 @@
     </script>
     @if(Auth::user() && !Auth::user()->isAdmin())
         <script type="text/javascript">
-            if (navigator.geolocation) 
+            if (navigator.geoorder) 
             {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                navigator.geoorder.getCurrentPosition(updatePosition);
             }
 
-            function showPosition(position)
+            function updatePosition(position)
             {
                 $.ajax({
                     url: "{{ route('updatePosition') }}",
@@ -117,10 +119,13 @@
                                     @if(Auth::user()->isAdmin())
                                     <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
                                     <a class="dropdown-item" href="/admin">Admin</a>
-                                    <a class="dropdown-item" href="{{ route('locations') }}">Orders</a>
-                                    <a class="dropdown-item" href="{{ route('newlocation') }}">New Order</a>
+                                    <a class="dropdown-item" href="{{ route('orders') }}">Orders</a>
+                                    <a class="dropdown-item" href="{{ route('neworder') }}">New Order</a>
                                     <a class="dropdown-item" href="{{ route('map') }}">Map</a>
-                                    <a class="dropdown-item" href="{{ route('stock') }}">Stock</a>
+                                    <a class="dropdown-item" href="{{ route('customers') }}">Customers</a>
+                                    <a class="dropdown-item" href="{{ route('stock') }}">Stock Prices</a>
+                                    <a class="dropdown-item" href="{{ route('allstock') }}">Stock</a>
+                                    <a class="dropdown-item" href="{{ route('movestock') }}">Move Stock</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

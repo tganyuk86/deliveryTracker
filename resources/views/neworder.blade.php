@@ -10,15 +10,23 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('savelocation') }}" method="post">
+                    <form action="{{ route('saveorder') }}" method="post">
                         
-                    <input type="text" class="form-control" name="address" placeholder="Address">
-                    <input type="button" class="form-control btn" id="getLocation" value="Fill">
-                    <label>Called @</label>
-                    <input type="text" class="form-control" name="called_at" value="{{ date("gA") }}">
+                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{$customer->address}}">
                     
-                     <label>Phone</label>
-                    <input type="phone" class="form-control" name="phone" value="">
+                     <!-- <label>Phone</label> -->
+                    <input type="text" class="form-control" name="phone" value="{{$customer->phone}}" placeholder="Phone">
+                    
+                     <!-- <label>Name</label> -->
+                    <input type="text" class="form-control" name="name" value="{{$customer->name}}" placeholder="Name">
+                    <input type="button" class="form-control btn btn-info" id="getorder" value="Fill">
+                    
+                     <label>Delivery fee</label>
+                     <select class="form-control" name="deliveryFee">
+                       <option value="auto">Auto</option>
+                       <option value="1">Yes</option>
+                       <option value="0">No</option>
+                     </select>
                     
                     <label>Order</label>
                     @foreach($products as $prod => $row)
@@ -31,14 +39,23 @@
 
                       @endforeach
                     @endforeach
+                    <br />
+                    <label>Order Notes</label>
+                    <textarea class="form-control" name="orderNotes"></textarea>
+
+                    <label>Customer Notes</label>
+                    <textarea class="form-control" name="customerNotes">{{$customer->notes}}</textarea>
 
                     <hr >
-                    <input type="text" class="form-control" name="lat">
-                    <input type="text" class="form-control" name="lon">
-
+                    <label>Lat/Lon</label>
+                    <input type="hidden" name="lat">
+                    <input type="hidden" name="lon">
+                    @if($customer->id)
+                      <input type="hidden" name="customerID" value="{{$customer->id}}">
+                    @endif
 
                     @csrf
-                    <input type="submit" class="form-control btn" name="" value="Save">
+                    <input type="submit" class="form-control btn btn-info" name="" value="Save">
                     </form>
 
 
@@ -68,7 +85,7 @@
 
 
 <script type="text/javascript">
-            $('#getLocation').click(function(){
+            $('#getorder').click(function(){
                 address = $('[name="address"]').val();
 
                 var geocoder = new google.maps.Geocoder();
@@ -135,17 +152,21 @@
 
                     // $('[name="city"]').val(city);
                   // if (status === 'OK') {
-                  //   resultsMap.setCenter(results[0].geometry.location);
+                  //   resultsMap.setCenter(results[0].geometry.order);
                   //   var marker = new google.maps.Marker({
                   //     map: resultsMap,
-                  //     position: results[0].geometry.location
+                  //     position: results[0].geometry.order
                   //   });
                   // } else {
                   //   alert('Geocode was not successful for the following reason: ' + status);
                   // }
                 });
-            })
+            });
 
+            @if($customer->id)
+                $('#getorder').trigger('click');
+            @endif
 
+</script>
                       </script>
 @endsection

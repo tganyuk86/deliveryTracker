@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Stock</div>
+                <div class="card-header">Stock Prices</div>
 
                 <div class="card-body">
 
@@ -16,6 +16,30 @@
                             <div class="col-md-4">Product</div>
                             <div class="col-md-4">Type</div>
                             <div class="col-md-4">Price</div>
+                        </div>
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <select class="form-control" name="productID">
+                                    <option value="0">Select Product</option>
+                                    @foreach($stocks[0]->products() as $prod)
+                                        <option value="{{$prod->id}}"  >{{$prod->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" name="typeID">
+                                    <option value="0">Select Type</option>
+                                    @foreach($stocks[0]->types() as $prod)
+                                        <option value="{{$prod->id}}"  >{{$prod->name}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="price" value="" >
+                            </div>
                         </div>
 
                     @foreach($stocks as $stock)
@@ -43,29 +67,8 @@
                         </div>
 
                     @endforeach
+                        
 
-                    <div class="row justify-content-center">
-                            <div class="col-md-4">
-                                <select class="form-control" name="productID">
-                                    <option value="0">Select Product</option>
-                                    @foreach($stock->products() as $prod)
-                                        <option value="{{$prod->id}}"  >{{$prod->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-control" name="typeID">
-                                    <option value="0">Select Type</option>
-                                    @foreach($stock->types() as $prod)
-                                        <option value="{{$prod->id}}"  >{{$prod->name}}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" name="price" value="" >
-                            </div>
-                        </div>
 
                    
                     @csrf
