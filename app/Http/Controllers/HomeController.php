@@ -194,7 +194,7 @@ class HomeController extends Controller
         $Orders = Order::getWaiting();
         $doneOrders = Order::getDone();
 
-        return view('Orders', [
+        return view('orders', [
             'orders' => $Orders,
             'doneOrders' => $doneOrders,
             'drivers' => User::drivers(),
