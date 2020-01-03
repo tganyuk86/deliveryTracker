@@ -218,7 +218,7 @@ class HomeController extends Controller
             $orderNum++;
         }
 
-        return view('Orders', ['orders' => $Orders]);
+        return view('orders', ['orders' => $Orders]);
     }
 
     public function Customers()
@@ -259,7 +259,7 @@ class HomeController extends Controller
         {
             $out[$p->product()->name][$p->type()->name] = $p;
         }
-        return view('newOrder', [ 'products' => $out, 'customer' => new Customer() ]);
+        return view('neworder', [ 'products' => $out, 'customer' => new Customer() ]);
     }
     public function newOrderFor($customerID)
     {
@@ -268,7 +268,7 @@ class HomeController extends Controller
         {
             $out[$p->product()->name][$p->type()->name] = $p;
         }
-        return view('newOrder', [ 'products' => $out, 'customer' => Customer::find($customerID)]);
+        return view('neworder', [ 'products' => $out, 'customer' => Customer::find($customerID)]);
     }
 
     public function saveOrder(Request $request)
