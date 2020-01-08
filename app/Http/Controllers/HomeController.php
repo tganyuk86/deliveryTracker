@@ -237,7 +237,7 @@ class HomeController extends Controller
     public function allstock()
     {
         return view('allstock', [ 
-            'products' => Product::all(),
+            'products' => Product::allActive(),
             'drivers' => User::drivers(),
 
         ]);
@@ -246,7 +246,7 @@ class HomeController extends Controller
     public function movestock()
     {
         return view('movestock', [ 
-            'products' => Product::all(),
+            'products' => Product::allActive(),
             'drivers' => User::drivers(),
 
         ]);
@@ -277,14 +277,22 @@ class HomeController extends Controller
         $value = 0;
         $order = '';
         $dfee = 0;
-        foreach ($request['order'] as $stockID) 
+        foreach ($request['order'] as $stockID => $data) 
         {
             $stock = Stock::find($stockID);
-            $value += $stock->price;
 
             if($stock->type()->id != 5)
+            {
+                $value += $stock->price;
                 $order .= $stock->type()->name.' of ';
+            }
+            else
+            {
 
+            
+                $order .= $request['orderquantity'][$stockID].'x ';
+                $value += $stock->price*$request['orderquantity'][$stockID];
+            }
             $order .= $stock->product()->name.', ';
             // $stock->reduceAvailable();
         }
@@ -321,13 +329,17 @@ class HomeController extends Controller
         ]);
         activity()->on($new)->log('Order Added - '.$customer->name);
 
-        foreach ($request['order'] as $stockID) 
+        foreach ($request['order'] as $stockID => $data) 
         {
             // $stock = Stock::find($stockID);
-            OrderItem::create([
+            $updatedata = [
                 'stockID' => $stockID,
                 'orderID' => $new->id
-            ]);
+            ];
+
+            if(isset($request['orderquantity'][$stockID]))
+                $updatedata['quantity'] = $request['orderquantity'][$stockID];
+            OrderItem::create($updatedata);
             
         }
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'amount',
+        'amount', 'status'
     ];
 
     public function moveStock($driverID, $amount)
@@ -46,6 +46,13 @@ class Product extends Model
     	$stock = ProductStock::where('driverID', 0)->where('productID', $this->id)->get();
 
     	return isset($stock[0]) ? $stock[0]->amount : 0;
+
+    }
+    public static function allActive()
+    {
+    	$stock = Product::where('status', 1)->get();
+
+    	return $stock;
 
     }
 

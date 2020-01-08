@@ -34,7 +34,10 @@
                       @foreach($row as $type => $data)
                         <span>
                           {{$type}}
-                          <input type="checkbox" name="order[]" value="{{$data->id}}" class="" />
+                          <input type="checkbox" name="order[{{$data->id}}]" value="{{$data->id}}" class="" />
+                          @if($type == 'Single Pack')
+                          <input type="number" name="orderquantity[{{$data->id}}]" value="1">
+                          @endif
                         </span>
 
                       @endforeach
