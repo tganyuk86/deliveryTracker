@@ -89,7 +89,9 @@
                     <div class="row done" >
                       
                       <div class="col-md-4">
-                        {{$Order->name}}
+                        {{$Order->customer()->address}}<br>
+                        <sup>{{$Order->customer()->name}}<br>
+                        {{$Order->customer()->phone}}</sup>
                       </div>
                       <div class="col-md-4">
                         <ul>
