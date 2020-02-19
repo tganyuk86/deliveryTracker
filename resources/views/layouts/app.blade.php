@@ -16,7 +16,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
 
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyCkkv7pc03IVghDRRYKHsmSxK28VQz9t3w"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAkfSv50NPZZJJ25fuuwFE8cWI_TMFqqJc"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
 
 
