@@ -88,7 +88,7 @@ class HomeController extends Controller
             'currentOrder' => $currentOrder, 
             'doneOrders' => $doneOrders,
             'drivers' => User::all(),
-            'stocks' => Stock::allSorted()
+            'stocks' => Stock::allActiveSorted()
         ]);
     }
 

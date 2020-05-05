@@ -37,6 +37,18 @@ class Stock extends Model
         return StockType::find($this->typeID);
     }
 
+    public static function allActiveSorted()
+	{
+		$stocks = Stock::orderBy('price', 'asc')->where('active',1)->get();
+
+        foreach ($stocks as $stock) 
+        {
+            $out[$stock->product()->name][$stock->type()->name] = $stock;
+        }
+
+        return $out;
+	}
+	
     public static function allSorted()
     {
     	$stocks = Stock::orderBy('price', 'asc')->get();
