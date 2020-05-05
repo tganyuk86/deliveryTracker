@@ -48,6 +48,11 @@ class Product extends Model
     	return isset($stock[0]) ? $stock[0]->amount : 0;
 
     }
+    public function isActive()
+	{
+		return $this->status ? true : false;
+	}
+	
     public static function allActive()
     {
     	$stock = Product::where('status', 1)->get();
