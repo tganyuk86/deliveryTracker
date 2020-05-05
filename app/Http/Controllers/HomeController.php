@@ -254,12 +254,9 @@ class HomeController extends Controller
     }
     public function newOrder()
     {
-        $products = Stock::all();
-        foreach($products as $p)
-        {
-            $out[$p->product()->name][$p->type()->name] = $p;
-        }
-        return view('neworder', [ 'products' => $out, 'customer' => new Customer() ]);
+        $products = Stock::allActiveSorted();
+        
+        return view('neworder', [ 'products' => $products, 'customer' => new Customer() ]);
     }
     public function newOrderFor($customerID)
     {
