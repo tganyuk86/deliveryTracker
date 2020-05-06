@@ -63,7 +63,7 @@ class Stock extends Model
 			
         }
 
-        return $out;
+        return $stocks;
 	}
 	
     public static function allSorted()
