@@ -19,7 +19,7 @@ class Stock extends Model
 
     public function products()
     {
-    	return Product::all();
+    	return Product::allActive();
     }
 
     public function types()
