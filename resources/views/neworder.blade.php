@@ -27,6 +27,13 @@
                        <option value="1">Yes</option>
                        <option value="0">No</option>
                      </select>
+					 
+					 
+                     <label>Payment Type</label>
+                     <select class="form-control" name="payType">
+                       <option value="cash">Cash</option>
+                       <option value="emt">E-Transfer</option>
+                     </select>
                     
                     <label>Order</label>
                     @foreach($products as $prod => $row)
