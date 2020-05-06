@@ -260,12 +260,9 @@ class HomeController extends Controller
     }
     public function newOrderFor($customerID)
     {
-        $products = Stock::all();
-        foreach($products as $p)
-        {
-            $out[$p->product()->name][$p->type()->name] = $p;
-        }
-        return view('neworder', [ 'products' => $out, 'customer' => Customer::find($customerID)]);
+        $products = Stock::allActiveSorted();
+        
+        return view('neworder', [ 'products' => $products, 'customer' => Customer::find($customerID)]);
     }
 
     public function saveOrder(Request $request)
@@ -312,6 +309,11 @@ class HomeController extends Controller
             $value += 5;
             $dfee = 1;
         }
+		
+		if($request['orderTotal'] > '0')
+		{
+			$value = $request['orderTotal'];
+		}
 
         $new = Order::create([
             'lat' => $request['lat'],

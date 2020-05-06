@@ -46,6 +46,12 @@
                     <label>Order Notes</label>
                     <textarea class="form-control" name="orderNotes"></textarea>
 
+					
+                    <br />
+                    <label>Order Total</label>
+                    <input type='number' class="form-control" name="orderTotal" value="0" />
+
+
                     <label>Customer Notes</label>
                     <textarea class="form-control" name="customerNotes">{{$customer->notes}}</textarea>
 

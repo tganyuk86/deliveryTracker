@@ -52,6 +52,20 @@ class Stock extends Model
         return $out;
 	}
 	
+    public static function allActive()
+	{
+		$stocks = Stock::all();
+
+        foreach ($stocks as $key => $stock) 
+        {
+			if(!$stock->product()->isActive())
+				unset($stocks[$key]);
+			
+        }
+
+        return $out;
+	}
+	
     public static function allSorted()
     {
     	$stocks = Stock::orderBy('price', 'asc')->get();
