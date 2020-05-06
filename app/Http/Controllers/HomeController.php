@@ -230,7 +230,7 @@ class HomeController extends Controller
 
     public function stock()
     {
-        return view('stock', [ 'stocks' => Stock::all()->sortByDesc('id') ]);
+        return view('stock', [ 'stocks' => Stock::allActive()->sortByDesc('id') ]);
 
     }
 
