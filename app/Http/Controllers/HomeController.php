@@ -401,6 +401,7 @@ class HomeController extends Controller
 	{
 		
 		$orders = Order::whereDate('created_at', '=', $request['repDate'])->get();
+		$total = 0;
 		$totalCash = 0;
 		$totalemt = 0;
 		$totalOrders = 0;
