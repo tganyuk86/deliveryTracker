@@ -33,7 +33,9 @@
                           ${{$order->value}}
                         </td>
 						<td>
-							<sup>Ordered {{ $order->created_at->diffForHumans() }}</sup><br>
+							<sup>Ordered {{ $order->created_at->diffForHumans() }}</sup>
+						</td>
+						<td>
 							<sup>Delivered {{ $order->updated_at->diffForHumans() }}</sup>
 						</td>
                        
