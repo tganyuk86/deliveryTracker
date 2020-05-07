@@ -24,23 +24,6 @@
                       
                 </div>
             </div>
-			
-			<div class="card">
-                <div class="card-header">Report</div>
-
-                <div class="card-body">
-
-					Num of Orders:
-                    Total:
-					Cash:
-					E-Transfer: 
-
-					Orders:
-					
-					
-                      
-                </div>
-            </div>
         </div>
     </div>
 </div>

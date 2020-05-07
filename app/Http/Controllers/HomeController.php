@@ -399,9 +399,13 @@ class HomeController extends Controller
 	
 	public function loadReport(Request $request)
 	{
+		$orders = Order::where('created_at', $request['repDate'])->get();
 		
+		dd($orders);
 		
-		return view('loadreport');
+		return view('loadreport', [
+			'data' => $data
+			]);
 	}
 
     public function gmaps()
