@@ -126,6 +126,7 @@
                                     <a class="dropdown-item" href="{{ route('stock') }}">Stock Prices</a>
                                     <a class="dropdown-item" href="{{ route('allstock') }}">Stock</a>
                                     <a class="dropdown-item" href="{{ route('movestock') }}">Move Stock</a>
+                                    <a class="dropdown-item" href="{{ route('report') }}">Report</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
