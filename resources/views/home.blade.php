@@ -64,6 +64,7 @@
                       </div> -->
                       <div class="col-md-4">
 						<a href="maps://maps.google.com/maps?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>
+						<a href="comgooglemaps://?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>
                         <br>
                         <sup>{{$Order->customer()->name}}<br>
                         {{$Order->customer()->phone}}</sup>
@@ -71,7 +72,7 @@
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}</li>
+                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
                         </ul>
                       </div>
                       <div class="col-md-4">
