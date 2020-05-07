@@ -406,6 +406,7 @@ class HomeController extends Controller
 		$totalCash = 0;
 		$totalemt = 0;
 		$totalOrders = 0;
+		$totalDFee = 0;
 		
 		foreach($orders as $order)
 		{
@@ -413,19 +414,31 @@ class HomeController extends Controller
 			if($order->payType == 'cash')
 			{
 				$totalCash += $order->value;
+				if($order->dfee == 1)
+					$totalCash -= 5;
+				
 			}else{
 				$totalemt += $order->value;
+				
+				if($order->dfee == 1)
+					$totalCash -= 5;
 			}
 			
 			$total += $order->value;
 			
+			if($order->dfee == 1)
+				$totalDFee += 5;
+			
 		}
+		
+		
 		
 		return view('loadreport', [
 			'orders' => $orders,
 			'totalCash' => $totalCash,
 			'totalOrders' => $totalOrders,
 			'total' => $total,
+			'totalDFee' => $totalDFee,
 			'totalemt' => $totalemt
 			]);
 	}
