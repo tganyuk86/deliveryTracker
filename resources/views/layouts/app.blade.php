@@ -61,7 +61,9 @@
             if (navigator.geolocation) 
             {
                 navigator.geolocation.getCurrentPosition(updatePosition);
-            }
+            }else{
+				console.log('no nav');
+			}
 
             function updatePosition(position)
             {
