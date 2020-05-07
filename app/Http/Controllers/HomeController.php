@@ -400,7 +400,7 @@ class HomeController extends Controller
 	public function loadReport(Request $request)
 	{
 		dump($request);
-		$orders = Order::whereDate('created_at', '=', $request['repDate']);->get();
+		$orders = Order::whereDate('created_at', '=', $request['repDate'])->get();
 		
 		dd($orders);
 		
