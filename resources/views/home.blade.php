@@ -63,8 +63,8 @@
 
                       </div> -->
                       <div class="col-md-4">
-						<a href="maps://maps.google.com/maps?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>
-						<a href="comgooglemaps://?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>
+						<!--<a href="maps://maps.google.com/maps?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>-->
+						<a href="comgooglemaps://?addr={{$Order->lat}},{{$Order->lon}}&amp;ll=Here">{{$Order->customer()->address}}</a>
                         <br>
                         <sup>{{$Order->customer()->name}}<br>
                         {{$Order->customer()->phone}}</sup>
