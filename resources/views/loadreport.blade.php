@@ -12,10 +12,10 @@
 
                 <div class="card-body">
 
-					<h2>Num of Orders:</h2>
-                    <h2>Total:</h2>
-					<h2>Cash:</h2>
-					<h2>E-Transfer:</h2>
+					<h2>Num of Orders: {{$totalOrders}}</h2>
+                    <h2>Total: {{$total}}</h2>
+					<h2>Cash: {{$totalCash}}</h2>
+					<h2>E-Transfer: {{$totalemt}}</h2>
 
 					Orders:
 					

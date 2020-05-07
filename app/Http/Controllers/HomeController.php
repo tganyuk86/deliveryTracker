@@ -401,11 +401,30 @@ class HomeController extends Controller
 	{
 		
 		$orders = Order::whereDate('created_at', '=', $request['repDate'])->get();
+		$totalCash = 0;
+		$totalemt = 0;
+		$totalOrders = 0;
 		
-		
+		foreach($orders as $order)
+		{
+			$totalOrders++;
+			if($order->payType == 'cash')
+			{
+				$totalCash += $order->value;
+			}else{
+				$totalemt += $order->value;
+			}
+			
+			$total += $order->value;
+			
+		}
 		
 		return view('loadreport', [
-			'data' => $data
+			'orders' => $orders,
+			'totalCash' => $totalCash,
+			'totalOrders' => $totalOrders,
+			'total' => $total,
+			'totalemt' => $totalemt
 			]);
 	}
 
