@@ -389,6 +389,20 @@ class HomeController extends Controller
 
     //     return redirect('orders');
     // }
+	
+	
+	public function report()
+	{
+		return view('report');
+
+	}
+	
+	public function loadReport(Request $request)
+	{
+		
+		
+		return view('loadreport');
+	}
 
     public function gmaps()
     {

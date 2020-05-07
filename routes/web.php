@@ -45,6 +45,9 @@ Route::post('/saveorder', 'HomeController@saveorder')->name('saveorder');
 Route::post('/savestock', 'HomeController@savestock')->name('savestock');
 Route::get('/assignPage/{id}', 'HomeController@showAssign')->name('assignPage');
 Route::post('/savePriority', 'HomeController@savePriority')->name('savePriority');
+
+Route::get('/rep', 'HomeController@report')->name('report');
+Route::post('/report', 'HomeController@loadReport')->name('loadReport');
 // Route::post('/assign', 'HomeController@assign')->name('assign');
 
 Route::get('/orders/mark/done/{id}', 'HomeController@markDone')->name('mark.done');
