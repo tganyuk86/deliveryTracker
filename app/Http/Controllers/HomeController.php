@@ -399,10 +399,10 @@ class HomeController extends Controller
 	
 	public function loadReport(Request $request)
 	{
-		dump($request);
+		
 		$orders = Order::whereDate('created_at', '=', $request['repDate'])->get();
 		
-		dd($orders);
+		
 		
 		return view('loadreport', [
 			'data' => $data
