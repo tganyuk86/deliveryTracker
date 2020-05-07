@@ -399,7 +399,7 @@ class HomeController extends Controller
 	
 	public function loadReport(Request $request)
 	{
-		$orders = Order::where('created_at', $request['repDate'])->get();
+		$orders = Order::where('created_at', 'LIKE', $request['repDate'])->get();
 		
 		dd($orders);
 		
