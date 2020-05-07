@@ -58,9 +58,9 @@
     </script>
     @if(Auth::user() && !Auth::user()->isAdmin())
         <script type="text/javascript">
-            if (navigator.geoorder) 
+            if (navigator.geolocation) 
             {
-                navigator.geoorder.getCurrentPosition(updatePosition);
+                navigator.geolocation.getCurrentPosition(updatePosition);
             }
 
             function updatePosition(position)
