@@ -323,6 +323,7 @@ class HomeController extends Controller
             'dfee' => $dfee,
             'phone' => $request['phone'],
             'address' => $request['address'],
+            'payType' => $request['payType'],
             'customerID' => $customer->id
 
         ]);
