@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -37,7 +37,7 @@
                         {{$customer->name}}
                       </div>
                       <div class="col-md-2">
-<a href="/neworder/{{$customer->id}}"><button>Place Order</button></a>
+<a href="/neworder/{{$customer->id}}"><button>Go</button></a>
                       </div>
                     </div>
 
