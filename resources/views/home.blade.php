@@ -80,7 +80,9 @@
                         <a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-outline-success">Done</a>
                         
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
-                        <a href="sms:{{ $Order->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
+                        <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
+                        <a href="sms:{{ $Order->phone }}&body=Hello, Im outside now in the black VW Golf" class="btn btn-outline-info">SMS</a>
+
                       </div>
 
                     </div>
