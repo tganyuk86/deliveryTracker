@@ -47,7 +47,8 @@
                       <div class="col-md-4">
                         <a href="{{ route('mark.done', ['id' => $currentOrder->id]) }}" class="btn btn-outline-success">Done</a>
                         <a href="tel:{{ $currentOrder->phone }}" class="btn btn-outline-info">Call</a>
-                        <a href="sms:{{ $currentOrder->phone }}&body=Hi" class="btn btn-outline-info">SMS</a>
+                        <a href="sms:{{ $currentOrder->phone }}" class="btn btn-outline-info">SMS</a>
+                        <a href="sms:{{ $currentOrder->phone }}&body=Hello, Im outside now in the black VW Golf" class="btn btn-outline-info">SMS</a>
                       </div>
 
                     </div>
