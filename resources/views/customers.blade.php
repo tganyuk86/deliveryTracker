@@ -25,7 +25,7 @@
                   </div>
 
                   @foreach($Customers as $customer)
-                    <div class="row">
+                    <div class="row filtered">
                       <div class="col-md-2">
                         {{$customer->address}}
                         
@@ -60,7 +60,7 @@
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
+    $(".filtered").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
