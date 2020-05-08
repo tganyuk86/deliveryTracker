@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Customers</div>
-
+<input id="myInput" placeholder="filter" />
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-2">
@@ -55,4 +55,16 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+</script>
 @endsection
