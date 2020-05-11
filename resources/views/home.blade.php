@@ -121,29 +121,7 @@
                       </script>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">Stock</div>
-
-                <div class="card-body">
-
-
-
-                @foreach($stocks as $product => $data)
-                    <h2>{{$product}}</h2>
-                     <div class="row ">
-                        @foreach($data as $type => $stock)
-                          <div class="col-md-3">
-                            {{$type}} (${{$stock->price}})
-                          </div>
-                        @endforeach
-                      </div>
-                @endforeach
-                        
-                       
-
-
-                </div>
-            </div>
+           
         </div>
         <div class="col-md-6">
             <div class="card">
@@ -167,7 +145,7 @@
                           el: '#mymap',
                           lat: 43.6532,
                           lng: -79.3832,
-                          zoom:10
+                          zoom:8
                         });
 
 
@@ -182,7 +160,7 @@
                             }); 
 
                        });
-                        @if(!Auth::user()->isAdmin())
+                        @if(!Auth::user()->isAdmin() && Auth::user()->lat )
                             mymap.addMarker({
                               lat: {{ Auth::user()->lat }},
                               lng: {{ Auth::user()->lon }},
