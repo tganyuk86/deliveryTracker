@@ -192,7 +192,7 @@ class HomeController extends Controller
         // dd($data);
         $Orders = Order::getWaiting();
         $doneOrders = Order::getDone();
-dump($Orders);
+
         return view('orders', [
             'orders' => $Orders,
             'doneOrders' => $doneOrders,

@@ -30,8 +30,11 @@
                         {{$customer->address}}
                         
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-2">
                         {{$customer->phone}}
+                      </div>
+                      <div class="col-md-2">
+                        {{count($customer->orders())}}
                       </div>
                       <div class="col-md-4">
                         {{$customer->name}}
