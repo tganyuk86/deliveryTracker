@@ -64,6 +64,7 @@ class HomeController extends Controller
                 $out .= "<li>$o</li>";
             }
             $Order->order = $out;
+			$Order->customerData = $Order->customer();
         }
 
         foreach ($doneOrders as $Order) 

@@ -145,7 +145,7 @@
                           el: '#mymap',
                           lat: 43.6532,
                           lng: -79.3832,
-                          zoom:8
+                          zoom:12
                         });
 
 
@@ -153,9 +153,9 @@
                             mymap.addMarker({
                               lat: value.lat,
                               lng: value.lon,
-                              title: value.name,
+                              title: value.customer.address,
                               click: function(e) {
-                                alert('This is '+value.name+'.');
+                                alert('This is '+value.customer.address+'.');
                               }
                             }); 
 
