@@ -13,8 +13,11 @@
                     <div class="col-md-2">
                       Address
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                       Phone
+                    </div>
+                    <div class="col-md-4">
+                      # of Orders
                     </div>
                     <div class="col-md-4">
                       Name

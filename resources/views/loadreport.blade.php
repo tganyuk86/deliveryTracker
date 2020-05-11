@@ -34,10 +34,7 @@
                           ${{$order->value}}
                         </td>
 						<td>
-							<sup>Ordered {{ $order->created_at->diffForHumans() }}</sup>
-						</td>
-						<td>
-							<sup>Delivered {{ $order->updated_at->diffForHumans() }}</sup>
+							<sup>Delivered in {{ $order->updated_at->diffInMinutes($order->created_at) }} Minutes</sup>
 						</td>
                        
                       </tr>
