@@ -12,7 +12,7 @@
               </div>
               <div class="card-body">
               <form action="{{route('savePriority')}}" method="POST">
-
+<button type="submit" class="btn btn-success save float-right">Save Changes</button>
 
                     <table id="table-1" cellspacing="0" cellpadding="2" width="100%">
 
@@ -44,12 +44,13 @@
                       @endforeach
                     </table>
                   
-
+</form>
 
               </div>
             </div>
 
           @endforeach
+		 
             <div class="card">
                 <div class="card-header">
                   Outstanding Orders
