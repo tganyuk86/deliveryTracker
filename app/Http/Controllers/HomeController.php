@@ -125,7 +125,6 @@ class HomeController extends Controller
 
     public function savePriority(Request $request)
     {
-dd($request);
         foreach ($request['orders'] as $driverID => $orderlist) 
         {
             foreach ($orderlist as $priority => $orderID) 
