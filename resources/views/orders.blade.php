@@ -43,7 +43,7 @@
                         </tr>
                       @endforeach
                     </table>
-                  
+                  @csrf 
 </form>
 
               </div>
