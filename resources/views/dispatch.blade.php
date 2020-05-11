@@ -150,9 +150,21 @@
 
                         $('.assignDriver').on('click', function () {
                           $('[name="orderID"]').val($(this).data('orderid'));
-                        })
-
-                        
+                        });
+						
+						@foreach(Auth::user()->drivers() as $driver)
+						@if($driver->lat)
+						 mymap.addMarker({
+                              lat: {{ $driver->lat }},
+                              lng: {{ $driver->lon }},
+                              title: '{{ $driver->name }}',
+                              label: '{{ substr($driver->name, 0, 1) }}',
+                              click: function(e) {
+                                alert('This is a driver.');
+                              }
+                            });
+						@endif
+                        @endforeach
                       </script>
                 </div>
             </div>
