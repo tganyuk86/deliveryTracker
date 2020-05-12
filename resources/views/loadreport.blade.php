@@ -31,7 +31,7 @@
                           {{$order->order}}
                         </td>
                         <td>
-                          ${{$order->value}}
+                          ${{$order->value}}({{$order->payType}})
                         </td>
 						<td>
 							<sup>Delivered in {{ $order->updated_at->diffInMinutes($order->created_at) }} Minutes</sup>
