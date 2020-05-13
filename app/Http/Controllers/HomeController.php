@@ -291,12 +291,22 @@ class HomeController extends Controller
             // $stock->reduceAvailable();
         }
 
-        $customer = Customer::firstOrCreate([
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'address' => $request['address'],
-        ]);
-
+		if($request['customerID'] > 0)
+		{
+			$customer = Customer::find($request['customerID']);
+			
+			$customer->update([
+				'phone' => $request['phone'],
+				'address' => $request['address'],
+			]);
+		}else{
+			$customer = Customer::firstOrCreate([
+				'name' => $request['name'],
+				'phone' => $request['phone'],
+				'address' => $request['address'],
+			]);	
+		}
+		
         if($request['deliveryFee'] == 'auto')
         {
             if($value < 100)

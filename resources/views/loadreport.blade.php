@@ -33,6 +33,9 @@
                         <td>
                           ${{$order->value}}({{$order->payType}})
                         </td>
+                        <td>
+                          <a href='/admin/orders/{{$order->id}}/edit'>Edit</a>
+                        </td>
 						<td>
 							<sup>Delivered in {{ $order->updated_at->diffInMinutes($order->created_at) }} Minutes</sup>
 						</td>
