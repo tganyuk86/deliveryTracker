@@ -15,10 +15,10 @@
                     <input type="text" class="form-control" name="address" placeholder="Address" value="{{$customer->address}}">
                     
                      <!-- <label>Phone</label> -->
-                    <input type="text" class="form-control" name="phone" value="{{$customer->phone}}" placeholder="Phone">
+                    <input type="text" class="form-control" name="phone" value="{{$customer->phone}}" placeholder="Phone"  required>
                     
                      <!-- <label>Name</label> -->
-                    <input type="text" class="form-control" name="name" value="{{$customer->name}}" placeholder="Name">
+                    <input type="text" class="form-control" name="name" value="{{$customer->name}}" placeholder="Name"  required>
                     <input type="button" class="form-control btn btn-info" id="getorder" value="Fill">
                     
                      <label>Delivery fee</label>
@@ -30,7 +30,8 @@
 					 
 					 
                      <label>Payment Type</label>
-                     <select class="form-control" name="payType">
+                     <select class="form-control" name="payType" required>
+					 <option>Choose...</option>
                        <option value="cash">Cash</option>
                        <option value="emt">E-Transfer</option>
                      </select>
@@ -131,7 +132,7 @@
 
                     $('[name="lat"]').val(lat);
                     $('[name="lon"]').val(lon);
-                    $('[name="address"]').val(add);
+                    $('[name="address"]').val(add+', '+city);
                     $('#address').html(addFull);
                     
                     var mymap = new GMaps({
