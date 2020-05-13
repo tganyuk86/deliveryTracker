@@ -52,7 +52,7 @@ class HomeController extends Controller
 
 
         $Orders = Order::getWaiting();
-        $doneOrders = Order::getDone()->sortBy('updated_at');
+        $doneOrders = Order::getDone()->sortByDesc('updated_at');
 
         foreach ($Orders as $Order) 
         {
