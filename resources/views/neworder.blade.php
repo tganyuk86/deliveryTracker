@@ -31,7 +31,7 @@
 					 
                      <label>Payment Type</label>
                      <select class="form-control" name="payType" required>
-					 <option>Choose...</option>
+					 <option value="" >Choose...</option>
                        <option value="cash">Cash</option>
                        <option value="emt">E-Transfer</option>
                      </select>

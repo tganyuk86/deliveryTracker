@@ -51,7 +51,7 @@ class HomeController extends Controller
             $currentOrder = false;
 
 
-        $Orders = Order::getWaiting();
+        $Orders = Order::getWaiting()->sortBy('updated_at');
         $doneOrders = Order::getDone();
 
         foreach ($Orders as $Order) 
