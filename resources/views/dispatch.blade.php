@@ -135,15 +135,16 @@
                           zoom:11
                         });
 
-
+						ind = 0;
                         $.each( Orders, function( index, value ){
+							ind++;
                             mymap.addMarker({
                               lat: value.lat,
                               lng: value.lon,
-                              title: value.address,
-                              label: index,
+                              title: value.customerData.address,
+                              label: ind,
                               click: function(e) {
-                                alert('This is '+value.address+'.');
+                                alert('This is '+value.lat+'.');
                               }
                             }); 
 
