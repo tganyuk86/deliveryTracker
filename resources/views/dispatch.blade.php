@@ -15,13 +15,14 @@
                 <div class="card-body">
                  
 
-                  @foreach($Orders as $Order)
+                  @foreach($Orders as $key => $Order)
                     <div class="row">
                      <!--  <div class="col-md-2">
                         {{ $Order->called_at}}
 
                       </div> -->
                       <div class="col-md-4">
+                        <b>#{{$key++}}:</b><br>
                         {{$Order->customer()->address}}<br>
                         <sup>{{$Order->customer()->name}}</sup>
                         <sup>{{$Order->customer()->phone}}</sup>
@@ -142,7 +143,7 @@
                               lat: value.lat,
                               lng: value.lon,
                               title: value.customerData.address,
-                              label: '-'+ind,
+                              label: '('+ind+')',
                               click: function(e) {
                                 alert('This is '+value.lat+'.');
                               }
