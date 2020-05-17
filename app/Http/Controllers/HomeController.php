@@ -209,8 +209,8 @@ class HomeController extends Controller
 			
 			if($prevOrder)
 			{
-				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}";
-				$data = json_decode(file_get_contents($url);
+				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key={{ env('GOOGLE_API_KEY') }}";
+				$data = json_decode(file_get_contents($url));
 				dump($data);
 
 			}
