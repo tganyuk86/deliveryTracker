@@ -91,7 +91,7 @@ class HomeController extends Controller
             $view = 'dispatch';
         else
             $view = 'home';
-// dd($Orders);
+ dump($Orders);
         return view($view,[
             'Orders' => $Orders, 
             'currentOrder' => $currentOrder, 
