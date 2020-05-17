@@ -142,7 +142,7 @@
                               lat: value.lat,
                               lng: value.lon,
                               title: value.customerData.address,
-                              label: ind,
+                              label: '-'+ind,
                               click: function(e) {
                                 alert('This is '+value.lat+'.');
                               }
