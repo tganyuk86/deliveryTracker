@@ -70,7 +70,7 @@ class HomeController extends Controller
 			if($prevOrder)
 			{
 				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key={{ env('GOOGLE_API_KEY') }}";
-				dump(file_get_contents($url));
+				//dump(file_get_contents($url));
 			}
 			$prevOrder = $Order;
         }
@@ -91,7 +91,7 @@ class HomeController extends Controller
             $view = 'dispatch';
         else
             $view = 'home';
- dump($Orders);
+ //dump($Orders);
         return view($view,[
             'Orders' => $Orders, 
             'currentOrder' => $currentOrder, 
@@ -196,11 +196,27 @@ class HomeController extends Controller
 
     public function Orders()
     {
-        // $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyAkfSv50NPZZJJ25fuuwFE8cWI_TMFqqJc'));
+        // $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key={{ env('GOOGLE_API_KEY') }}'));
 
         // dd($data);
         $Orders = Order::getWaiting();
         $doneOrders = Order::getDone();
+		$prevOrder = false;
+		foreach ($Orders as $Order) 
+        {
+            
+			$Order->customerData = $Order->customer();
+			
+			if($prevOrder)
+			{
+				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key={{ env('GOOGLE_API_KEY') }}";
+				$data = json_decode(file_get_contents($url);
+				dump($data);
+
+			}
+			$prevOrder = $Order;
+        }
+
 
         return view('orders', [
             'orders' => $Orders,
@@ -221,7 +237,7 @@ class HomeController extends Controller
         {
             $source = "{$Orders[$orderNum]->lat},{$Orders[$orderNum]->lon}";
             $destination = "{$Orders[$orderNum+1]->lat}%2C{$Orders[$orderNum+1]->lon}";
-            $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$source}&destinations={$destination}&key=AIzaSyAkfSv50NPZZJJ25fuuwFE8cWI_TMFqqJc'));
+            $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$source}&destinations={$destination}&key={{ env('GOOGLE_API_KEY') }}'));
             $Orders[$orderNum+1]->distance = 
             $orderNum++;
         }
