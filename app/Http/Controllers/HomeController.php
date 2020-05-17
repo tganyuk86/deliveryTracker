@@ -212,6 +212,7 @@ class HomeController extends Controller
 				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key=".env('GOOGLE_API_KEY');
 				$data = json_decode(file_get_contents($url));
 				dump($data->rows[0]->elements[0]);
+				$Order->travel = $data->rows[0]->elements[0];
 
 			}
 			$prevOrder = $Order;

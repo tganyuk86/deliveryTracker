@@ -84,7 +84,7 @@
                           <sup>{{ $order->created_at->diffForHumans() }}<sup>
                         </td>
                         <td>
-                          {{$order->customer()->name}}
+                          {{$order->travel->duration->text}}({{$order->travel->distance->text}})
                         </td>
                         <td>
                           {{$order->order}}
