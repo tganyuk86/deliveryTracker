@@ -54,6 +54,7 @@ class HomeController extends Controller
         $Orders = Order::getWaiting();
         $doneOrders = Order::getDone()->sortByDesc('updated_at');
 
+		$prevOrder = false;
         foreach ($Orders as $Order) 
         {
             $order = explode(', ', $Order->order);
@@ -65,6 +66,13 @@ class HomeController extends Controller
             }
             $Order->order = $out;
 			$Order->customerData = $Order->customer();
+			
+			if($prevOrder)
+			{
+				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key=YOUR_API_KEY";
+				dump(file_get_contents($url));
+			}
+			$prevOrder = $Order;
         }
 
         foreach ($doneOrders as $Order) 
