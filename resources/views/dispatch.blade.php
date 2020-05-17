@@ -140,9 +140,10 @@
                             mymap.addMarker({
                               lat: value.lat,
                               lng: value.lon,
-                              title: value.name,
+                              title: value.address,
+                              label: value.address,
                               click: function(e) {
-                                alert('This is '+value.name+'.');
+                                alert('This is '+value.address+'.');
                               }
                             }); 
 
