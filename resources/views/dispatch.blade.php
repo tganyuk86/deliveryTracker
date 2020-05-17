@@ -136,7 +136,7 @@
                           zoom:11
                         });
 
-						ind = 0;
+						ind = -1;
                         $.each( Orders, function( index, value ){
 							ind++;
                             mymap.addMarker({
