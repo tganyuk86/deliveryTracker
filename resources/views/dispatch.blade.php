@@ -132,7 +132,7 @@
                           el: '#mymap',
                           lat: 43.6532,
                           lng: -79.3832,
-                          zoom:10
+                          zoom:11
                         });
 
 
@@ -141,7 +141,7 @@
                               lat: value.lat,
                               lng: value.lon,
                               title: value.address,
-                              label: value.address,
+                              label: index,
                               click: function(e) {
                                 alert('This is '+value.address+'.');
                               }
