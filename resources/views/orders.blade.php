@@ -22,7 +22,9 @@
                             <sup>{{ $order->created_at->diffForHumans() }}<sup>
                           </td>
                           <td>
-                            {{$order->customer()->name}}
+                            @if($order->travel)
+							  {{$order->travel->duration->text}}({{$order->travel->distance->text}})
+							@endif
                           </td>
                           <td>
                             {{$order->order}}
