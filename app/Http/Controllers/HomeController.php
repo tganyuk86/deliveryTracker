@@ -237,7 +237,7 @@ class HomeController extends Controller
         {
             $source = "{$Orders[$orderNum]->lat},{$Orders[$orderNum]->lon}";
             $destination = "{$Orders[$orderNum+1]->lat}%2C{$Orders[$orderNum+1]->lon}";
-            $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$source}&destinations={$destination}&key={{ env('GOOGLE_API_KEY') }}'));
+            $data = json_decode(file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$source}&destinations={$destination}&key={ env('GOOGLE_API_KEY') }'));
             $Orders[$orderNum+1]->distance = 
             $orderNum++;
         }
