@@ -64,7 +64,7 @@
                     <textarea class="form-control" name="customerNotes">{{$customer->notes}}</textarea>
 
                     <hr >
-                    <label>Lat/Lon</label>
+                    
                     <input type="hidden" name="lat">
                     <input type="hidden" name="lon">
                     @if($customer->id)
@@ -73,7 +73,8 @@
 
                     @csrf
 					
-					<select name="driverID" required>
+					<label>Assigne to</label>
+					<select name="driverID" class="form-control" required>
 						<option value='' >Choose Driver</option>
 						@foreach(Auth::user()->drivers() as $driver)
 						  <option value="{{$driver->id}}">{{$driver->name}}</option>
