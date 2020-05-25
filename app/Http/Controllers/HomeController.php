@@ -280,8 +280,13 @@ class HomeController extends Controller
     public function newOrder()
     {
         $products = Stock::allActiveSorted();
-        
-        return view('neworder', [ 'products' => $products, 'customer' => new Customer() ]);
+        $Customers = Customer::all();
+		
+        return view('neworder', [ 
+			'products' => $products, 
+			'customer' => new Customer() ,
+			'Customers' => $Customers
+		]);
     }
     public function newOrderFor($customerID)
     {

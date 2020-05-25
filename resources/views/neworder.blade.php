@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Info</div>
 
@@ -12,7 +12,7 @@
 
                     <form action="{{ route('saveorder') }}" method="post">
                         
-                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{$customer->address}}">
+                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{$customer->address}}" id="myInput">
                     
                      <!-- <label>Phone</label> -->
                     <input type="text" class="form-control" name="phone" value="{{$customer->phone}}" placeholder="Phone"  required>
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Map</div>
 
@@ -97,11 +97,78 @@
                 </div>
             </div>
         </div>
+		
+		<div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Customers</div>
+
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2">
+                      Address
+                    </div>
+                    <div class="col-md-2">
+                      Phone
+                    </div>
+                    <div class="col-md-4">
+                      # of Orders
+                    </div>
+                    <div class="col-md-4">
+                      Name
+                    </div>
+                    <div class="col-md-2">
+                      Buttons
+                    </div>
+                  </div>
+
+                  @foreach($Customers as $customer)
+                    <div class="row filtered">
+                      <div class="col-md-2">
+                        {{$customer->address}}
+                        
+                      </div>
+                      <div class="col-md-2">
+                        {{$customer->phone}}
+                      </div>
+                      <div class="col-md-2">
+                        {{count($customer->orders())}}
+                      </div>
+                      <div class="col-md-4">
+                        {{$customer->name}}
+                      </div>
+                      <div class="col-md-2">
+<a href="/neworder/{{$customer->id}}"><button>Go</button></a>
+                      </div>
+                    </div>
+
+                  @endforeach
+
+
+                      <script type="text/javascript">
+
+
+                    
+
+                      </script>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".filtered").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+
             $('#getorder').click(function(){
                 address = $('[name="address"]').val();
 
