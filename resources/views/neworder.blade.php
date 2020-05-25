@@ -103,40 +103,18 @@
                 <div class="card-header">Customers</div>
 
                 <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-2">
-                      Address
-                    </div>
-                    <div class="col-md-2">
-                      Phone
-                    </div>
-                    <div class="col-md-4">
-                      # of Orders
-                    </div>
-                    <div class="col-md-4">
-                      Name
-                    </div>
-                    <div class="col-md-2">
-                      Buttons
-                    </div>
-                  </div>
+                  
 
                   @foreach($Customers as $customer)
                     <div class="row filtered">
-                      <div class="col-md-2">
-                        {{$customer->address}}
-                        
+                      <div class="col-md-4">
+                        {{$customer->address}}<br>
+                        <sup>{{$customer->phone}}</sup>
                       </div>
-                      <div class="col-md-2">
-                        {{$customer->phone}}
-                      </div>
-                      <div class="col-md-2">
+                      <div class="col-md-4">
                         {{count($customer->orders())}}
                       </div>
                       <div class="col-md-4">
-                        {{$customer->name}}
-                      </div>
-                      <div class="col-md-2">
 <a href="/neworder/{{$customer->id}}"><button>Go</button></a>
                       </div>
                     </div>
