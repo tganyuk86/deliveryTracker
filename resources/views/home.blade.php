@@ -82,7 +82,8 @@
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
                         <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
                         <a href="sms:{{ $Order->phone }}&body=Hello, Im outside now in the black VW Golf" class="btn btn-outline-info">SMS - Here</a>
-
+                        <a href="sms:{{ $Order->phone }}&body=Hey there, this is for litphast. I am on my way and can be there in 15 mins if you're ready." class="btn btn-outline-info">SMS - Here</a>
+						
                       </div>
 
                     </div>
