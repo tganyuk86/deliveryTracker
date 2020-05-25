@@ -291,8 +291,14 @@ class HomeController extends Controller
     public function newOrderFor($customerID)
     {
         $products = Stock::allActiveSorted();
-        
-        return view('neworder', [ 'products' => $products, 'customer' => Customer::find($customerID)]);
+        $Customers = Customer::all();
+		
+        return view('neworder', [ 
+			'products' => $products, 
+			'customer' => Customer::find($customerID),
+			'Customers' => $Customers
+			
+		]);
     }
 
     public function saveOrder(Request $request)
