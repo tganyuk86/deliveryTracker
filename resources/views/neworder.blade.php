@@ -72,6 +72,14 @@
                     @endif
 
                     @csrf
+					
+					<select name="driverID" required>
+						<option value='' >Choose Driver</option>
+						@foreach(Auth::user()->drivers() as $driver)
+						  <option value="{{$driver->id}}">{{$driver->name}}</option>
+						@endforeach
+					</select>
+					  
                     <input type="submit" class="form-control btn btn-info" name="" value="Save">
                     </form>
 

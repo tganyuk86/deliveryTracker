@@ -370,7 +370,8 @@ class HomeController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
             'payType' => $request['payType'],
-            'customerID' => $customer->id
+            'customerID' => $customer->id,
+			'driverID' => $request['driverID']
 
         ]);
         activity()->on($new)->log('Order Added - '.$customer->name);
@@ -388,6 +389,8 @@ class HomeController extends Controller
             OrderItem::create($updatedata);
             
         }
+		
+		
 
         return redirect('neworder');
     }

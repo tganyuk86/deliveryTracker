@@ -43,7 +43,7 @@
                         {{$customer->name}}
                       </div>
                       <div class="col-md-2">
-<a href="/neworder/{{$customer->id}}"><button>Go</button></a>
+<a href="/admin/customers/{{$customer->id}}/edit"><button>Edit</button></a>
                       </div>
                     </div>
 
