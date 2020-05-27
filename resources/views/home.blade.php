@@ -160,10 +160,10 @@
                             mymap.addMarker({
                               lat: value.lat,
                               lng: value.lon,
-                              title: value.customer.address,
+                              title: value.customerData.address,
 							  label: '('+index+')',
                               click: function(e) {
-                                alert('This is '+value.customer.address+'.');
+                                alert('This is '+value.customerData.address+'.');
                               }
                             }); 
 
