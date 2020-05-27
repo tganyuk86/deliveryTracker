@@ -68,7 +68,7 @@
 						<a href="comgooglemaps://?daddr={{urlencode($Order->customer()->address.', toronto')}}&amp;ll=Here">{{$Order->customer()->address}}</a>
                         <br>
                         <sup>{{$Order->customer()->name}}<br>
-                        {{$Order->customer()->phone}}</sup>
+                        {{$Order->phone}}</sup>
                       </div>
                       <div class="col-md-4">
                         <ul>
@@ -95,7 +95,6 @@
 					</div>
 <hr />
                   @endforeach
-
 
                   @foreach($doneOrders as $Order)
                     <div class="row done" >
