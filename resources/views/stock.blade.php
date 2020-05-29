@@ -23,7 +23,7 @@
                             <div class="col-md-4">
                                 <select class="form-control" name="productID">
                                     <option value="0">Select Product</option>
-                                    @foreach($stocks[0]->products() as $prod)
+                                    @foreach($stocks->first()->products() as $prod)
                                         <option value="{{$prod->id}}"  >{{$prod->name}}</option>
                                     @endforeach
                                 </select>
