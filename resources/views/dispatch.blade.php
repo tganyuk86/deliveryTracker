@@ -157,7 +157,7 @@
 						
 						setTimeout(function() {
 						  location.reload();
-						}, 180000);
+						}, 10000);
 						
 						@foreach(Auth::user()->drivers() as $driver)
 						@if($driver->lat)
