@@ -31,7 +31,7 @@
                             <div class="col-md-4">
                                 <select class="form-control" name="typeID">
                                     <option value="0">Select Type</option>
-                                    @foreach($stocks[0]->types() as $prod)
+                                    @foreach($stocks->first()->types() as $prod)
                                         <option value="{{$prod->id}}"  >{{$prod->name}}</option>
                                     @endforeach
                                 </select>
