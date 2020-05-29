@@ -58,13 +58,23 @@
                     <hr />
 
                   @foreach($Orders as $key => $Order)
+				  
+					<div class="row">
+						<b>#{{$key++}}:</b>
+					</div>
+					<div class="row">
+						<div class="col-md-12">{{$Order->notes}}</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">{{$Order->customer()->notes}}</div>
+					</div>
                     <div class="row">
                      <!--  <div class="col-md-2">
                         {{ $Order->called_at}}
 
                       </div> -->
                       <div class="col-md-4">
-					  <b>#{{$key++}}:</b><br>
+					  					  
 						<!--<a href="maps://maps.google.com/maps?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>-->
 						<a href="comgooglemaps://?daddr={{urlencode($Order->customer()->address.', toronto')}}&amp;ll=Here">{{$Order->customer()->address}}</a>
                         <br>
@@ -88,12 +98,7 @@
                       </div>
 
                     </div>
-					<div class="row">
-						<div class="col-md-12">{{$Order->notes}}</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">{{$Order->customer()->notes}}</div>
-					</div>
+					
 <hr />
                   @endforeach
 
