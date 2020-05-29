@@ -167,7 +167,7 @@
                               title: '{{ $driver->name }}',
                               label: '{{ substr($driver->name, 0, 1) }}',
                               click: function(e) {
-                                alert('This is a driver.');
+                                alert({{ $driver->updated_at->time()}});
                               }
                             });
 						@endif
