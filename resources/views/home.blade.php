@@ -159,6 +159,10 @@
                           lng: -79.3832,
                           zoom:11
                         });
+						
+						setTimeout(function() {
+						  location.reload();
+						}, 180000);
 
 
                         $.each( Orders, function( index, value ){
