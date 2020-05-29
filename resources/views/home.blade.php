@@ -62,10 +62,10 @@
 					<div class="row">
 						<b>#{{$key++}}:</b>
 					</div>
-					<div class="row">
+					<div class="row" style="color:red">
 						<div class="col-md-12">{{$Order->notes}}</div>
 					</div>
-					<div class="row">
+					<div class="row" style="color:red">
 						<div class="col-md-12">{{$Order->customer()->notes}}</div>
 					</div>
                     <div class="row">
