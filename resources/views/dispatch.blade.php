@@ -155,6 +155,10 @@
                           $('[name="orderID"]').val($(this).data('orderid'));
                         });
 						
+						setTimeout(function() {
+						  location.reload();
+						}, 180000);
+						
 						@foreach(Auth::user()->drivers() as $driver)
 						@if($driver->lat)
 						 mymap.addMarker({
