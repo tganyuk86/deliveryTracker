@@ -492,6 +492,16 @@ class HomeController extends Controller
 			]);
 	}
 
+    public function importProducts()
+	{
+		$url = "https://api-g.weedmaps.com/discovery/v1/listings/deliveries/litphast-com/menu_items?include%5B%5D=facets.categories&page_size=24&page=1&sort_by=name&sort_order=asc";
+		
+		$data = json_decode(file_get_contents($url));
+		
+		dump($data);
+
+	}
+	
     public function gmaps()
     {
         $Orders = Order::all();
