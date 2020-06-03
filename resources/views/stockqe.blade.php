@@ -18,7 +18,7 @@
                                 {{$item->product()->name}}
                             </div>
                             <div class="col-md-4">
-                                {{$item->driver()->name}}
+                                
                             </div>
                            
                             <div class="col-md-4">
