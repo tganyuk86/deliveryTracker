@@ -17,6 +17,10 @@ class ProductStock extends Model
     {
     	return Product::find($this->productID);
     }
+    public function driver()
+    {
+    	return User::find($this->driverID);
+    }
 
     public function reduceAvailable($reduceBy)
     {

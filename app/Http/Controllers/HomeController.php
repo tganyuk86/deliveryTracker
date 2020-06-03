@@ -163,6 +163,37 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function savestockqe(Request $request)
+    {
+        // dd($request);
+
+        foreach($request['stock'] as $row)
+        {
+            $stock = Stock::find($row['id']);
+
+            if($row['productID'] == 0)
+                $stock->delete();
+            else
+                $stock->update([
+                    'productID' => $row['productID'],
+                    'typeID' => $row['typeID'],
+                    'price' => $row['price'],
+                ]);
+        }
+
+        if($request['productID'])
+        {
+            Stock::create([
+                'productID' => $request['productID'],
+                'typeID' => $request['typeID'],
+                'price' => $request['price'],
+            ]);
+        }
+
+        return redirect('stock');
+
+    }
+
     public function savestock(Request $request)
     {
         // dd($request);
@@ -253,6 +284,11 @@ class HomeController extends Controller
         return view('customers', ['Customers' => $Customers]);
     }
 
+    public function stockqe()
+    {
+        return view('stockqe', [ 'items' => ProductStock::all() ]);
+
+    }
     public function stock()
     {
         return view('stock', [ 'stocks' => Stock::allActive()->sortByDesc('id') ]);

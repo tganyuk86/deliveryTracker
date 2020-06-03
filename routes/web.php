@@ -28,6 +28,7 @@ Route::get('/map', 'HomeController@gmaps')->name('map');
 Route::post('/updatePosition', 'HomeController@updatePosition')->name('updatePosition');
 
 Route::get('/stock', 'HomeController@stock')->name('stock');
+Route::get('/stockqe', 'HomeController@stockqe')->name('stockqe');
 Route::get('/movestock', 'HomeController@movestock')->name('movestock');
 Route::post('/performMove', 'HomeController@performMove')->name('performMove');
 Route::get('/allstock', 'HomeController@allstock')->name('allstock');
