@@ -43,6 +43,7 @@ Route::get('/neworder', 'HomeController@neworder')->name('neworder');
 Route::get('/neworder/{id}', 'HomeController@newOrderFor')->name('neworderfor');
 Route::post('/saveorder', 'HomeController@saveorder')->name('saveorder');
 Route::post('/savestock', 'HomeController@savestock')->name('savestock');
+Route::post('/savestockqe', 'HomeController@savestockqe')->name('savestockqe');
 Route::get('/assignPage/{id}', 'HomeController@showAssign')->name('assignPage');
 Route::post('/savePriority', 'HomeController@savePriority')->name('savePriority');
 
