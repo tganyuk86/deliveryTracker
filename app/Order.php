@@ -66,14 +66,17 @@ class Order extends Model
         else
             return Order::where('status', 'waiting')
                             ->where('driverID', \Auth::user()->id)
+							->orderBy('priority')
                             ->get()
-                            ->sortBy('priority');
+                            ;
     }
 
     public static function getDone()
     {
     	if(\Auth::user()->isAdmin())
-            return Order::where('status', 'done')->whereDate('created_at', Carbon::today())->get();
+            return Order::where('status', 'done')
+						->whereDate('created_at', Carbon::today())
+						->get();
         else
             return Order::where('status', 'done')
         					->whereDate('created_at', Carbon::today())
