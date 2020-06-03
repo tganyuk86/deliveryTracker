@@ -60,8 +60,9 @@ class Order extends Model
     {
     	if(\Auth::user()->isAdmin())
             return Order::where('status', 'waiting')
+						->orderBy('priority')
             		    ->get()
-            		    ->sortBy('priority');
+            		    ;
         else
             return Order::where('status', 'waiting')
                             ->where('driverID', \Auth::user()->id)
