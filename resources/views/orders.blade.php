@@ -175,7 +175,7 @@ $(document).ready(function() {
     // Initialise the table
     $("#table-1").tableDnD();
 
-    $(".up,.down").click(function(){
+    $(".up,.down").on('click',function(){
         var row = $(this).parents("tr:first");
         if ($(this).is(".up")) {
             row.insertBefore(row.prev());
