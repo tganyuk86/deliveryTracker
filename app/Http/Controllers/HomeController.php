@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Customer;
 use App\Product;
+use App\ProductStock;
 use App\Stock;
 use App\User;
 use App\Order;
