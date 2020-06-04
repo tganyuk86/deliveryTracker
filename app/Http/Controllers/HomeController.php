@@ -166,30 +166,19 @@ class HomeController extends Controller
 
     public function savestockqe(Request $request)
     {
-         dd($request);
-
-        foreach($request['stock'] as $row)
+         
+        foreach($request['items'] as $id => $value)
         {
-            $stock = Stock::find($row['id']);
+            $stock = ProductStock::find($id);
 
-            if($row['productID'] == 0)
-                $stock->delete();
-            else
+            
                 $stock->update([
-                    'productID' => $row['productID'],
-                    'typeID' => $row['typeID'],
-                    'price' => $row['price'],
+                    
+                    'amount' => $value,
                 ]);
         }
 
-        if($request['productID'])
-        {
-            Stock::create([
-                'productID' => $request['productID'],
-                'typeID' => $request['typeID'],
-                'price' => $request['price'],
-            ]);
-        }
+       
 
         return redirect('stock');
 
