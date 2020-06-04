@@ -166,7 +166,7 @@ class HomeController extends Controller
 
     public function savestockqe(Request $request)
     {
-        // dd($request);
+         dd($request);
 
         foreach($request['stock'] as $row)
         {
@@ -380,6 +380,10 @@ class HomeController extends Controller
 			]);	
 		}
 		
+		$customer->update([
+				'note' => $request['customerNote'],
+			]);
+		
         if($request['deliveryFee'] == 'auto')
         {
             if($value < 100)
@@ -407,6 +411,7 @@ class HomeController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
             'payType' => $request['payType'],
+            'note' => $request['orderNote'],
             'customerID' => $customer->id,
 			'driverID' => $request['driverID']
 
