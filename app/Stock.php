@@ -89,5 +89,16 @@ class Stock extends Model
         $prodStock->amount -= $this->type()->amount;
         $prodStock->save();
     }
+    public function increaseAvailable($driverID)
+    {
+        $prodStock = ProductStock::where('driverID', $driverID)
+                                 ->where('productID', $this->productID)
+                                 ->first();
+// dd($this->type());
+        if(!$prodStock) return;
+
+        $prodStock->amount += $this->type()->amount;
+        $prodStock->save();
+    }
 
 }

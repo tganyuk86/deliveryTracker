@@ -15,15 +15,13 @@
                         
                     <div class="row justify-content-center">
                             <div class="col-md-4">
-                                {{$item->product()->name}}
+                                <input type="number" name="items[{{$item->id}}]" value="{{$item->amount}}" />
+								{{$item->product()->name}}
                             </div>
                             <div class="col-md-4">
                                 {{$item->driverID}}
                             </div>
                            
-                            <div class="col-md-4">
-                                <input type="number" name="items[{{$item->id}}]" value="{{$item->amount}}" />
-                            </div>
                         </div>
 
                     @endforeach

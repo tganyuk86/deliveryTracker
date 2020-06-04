@@ -429,6 +429,23 @@ class HomeController extends Controller
 
     public function cancelOrder($id)
     {
+		$Order = Order::find($id);
+        $Order->update(['status'=>'x']);
+        $driver = $Order->driver();
+        foreach ($Order->items() as $item) 
+        {
+// dd($item);
+            $item->increaseAvailable($driver->id);
+            // $prodStock = ProductStock::where('driverID', $driver->id)
+            //                          ->where('productID', $item->productID)
+            //                          ->get();
+
+            // $prodStock->amount -= $item->amount;
+            // $prodStock->save();
+        }
+        activity()->on($Order)->log('Marked Done');
+
+        return redirect()->back();
 
     }
 
@@ -441,7 +458,7 @@ class HomeController extends Controller
         foreach ($Order->items() as $item) 
         {
 // dd($item);
-            $item->reduceAvailable($driver->id);
+            //$item->reduceAvailable($driver->id);
             // $prodStock = ProductStock::where('driverID', $driver->id)
             //                          ->where('productID', $item->productID)
             //                          ->get();
