@@ -112,6 +112,7 @@
                             </li>
                             
                         @else
+							@if(Auth::user()->isAdmin())
 							<li class="nav-item">
                                 <a class="nav-link" href="{{ route('orders') }}">Orders</a>
                             </li>
@@ -121,6 +122,7 @@
 							<li class="nav-item">
                                 <a class="nav-link" href="/admin">Admin</a>
                             </li>
+							@endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -135,6 +137,7 @@
                                     <a class="dropdown-item" href="{{ route('map') }}">Map</a>
                                     <a class="dropdown-item" href="{{ route('customers') }}">Customers</a>
                                     <a class="dropdown-item" href="{{ route('stock') }}">Stock Prices</a>
+                                    <a class="dropdown-item" href="{{ route('stockqe') }}">Stock QE</a>
                                     <a class="dropdown-item" href="{{ route('allstock') }}">Stock</a>
                                     <a class="dropdown-item" href="{{ route('movestock') }}">Move Stock</a>
                                     <a class="dropdown-item" href="{{ route('report') }}">Report</a>
