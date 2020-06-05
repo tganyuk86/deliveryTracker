@@ -48,9 +48,9 @@
                         <button type="button" class="btn btn-danger cancelOrder" data-orderid="{{$Order->id}}">
                           Cancel
                         </button> -->
-						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-outline-success">Done</a>
-						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-outline-warning">Edit</a>
-						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-outline-danger">Cancel</a>
+						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-success">Done</a>
+						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
+						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-danger">Cancel</a>
 
                       </div>
 
