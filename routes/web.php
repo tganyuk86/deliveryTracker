@@ -35,7 +35,7 @@ Route::get('/allstock', 'HomeController@allstock')->name('allstock');
 Route::get('/customers', 'HomeController@customers')->name('customers');
 Route::get('/orders', 'HomeController@orders')->name('orders');
 Route::get('/editOrder/{id}', 'HomeController@editOrder')->name('editOrder');
-Route::get('/cancelOrder/{id}', 'HomeController@cancelOrder')->name('cancelOrder');
+Route::get('/cancelOrder/{id}', 'HomeController@cancelOrder')->name('mark.x');
 //Route::post('/cancelOrder2/{id}', 'HomeController@cancelOrder2')->name('cancelOrder2');
 Route::post('/assign', 'HomeController@assignDriver')->name('assignDriver'); 
 Route::get('/orders/{id}', 'HomeController@ordersFor')->name('ordersFor');
