@@ -49,7 +49,8 @@
                           Cancel
                         </button> -->
 						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-outline-success">Done</a>
-						<a href="/admin/orders/{{$Order->id}}/edit"><button>Edit</button></a>
+						<a href="{{ route('mark.x', ['id' => $Order->id]) }}" class="btn btn-outline-error">Cancel</a>
+						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-outline-warning">Edit</a>
 
                       </div>
 
