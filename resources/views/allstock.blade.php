@@ -50,7 +50,7 @@
 
                     <div class="card-body">
                         @foreach($driver->stock() as $stock)
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center" style="color: {{$stock->amount < 8 ? 'red' : 'green' }}">
                                 <div class="col-md-4">
                                     {{$stock->product()->name}}
                                 </div>

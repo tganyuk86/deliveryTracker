@@ -41,6 +41,14 @@ class Product extends Model
 		$homeStock->save();
     }
 
+    public function driverStock($driverID)
+    {
+    	$stock = ProductStock::where('driverID', $driverID)->where('productID', $this->id)->get();
+
+    	return isset($stock[0]) ? $stock[0]->amount : 0;
+
+    }
+
     public function homeStock()
     {
     	$stock = ProductStock::where('driverID', 0)->where('productID', $this->id)->get();
