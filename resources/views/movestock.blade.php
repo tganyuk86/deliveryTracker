@@ -31,7 +31,7 @@
                             </div>
                            
                             <div class="col-md-4">
-                                <input type="text" name="amount[{{$product->id}}]" value="0">
+                                <input type="text" name="amount[{{$product->id}}]" value="0">({{$product->homeStock()}})
                             </div>
                         </div>
 

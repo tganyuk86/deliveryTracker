@@ -170,17 +170,28 @@ class HomeController extends Controller
         foreach($request['items'] as $id => $value)
         {
             $stock = ProductStock::find($id);
-
-            
+			if($value == -1)
+			{
+				$stock->product()->update([
+                    
+                    'status' => 0,
+                ]);
+				
+				$stock->update([
+                    
+                    'amount' => 0,
+                ]);
+            }else{
                 $stock->update([
                     
                     'amount' => $value,
                 ]);
+			}
         }
 
        
 
-        return redirect('stock');
+        return redirect('stockqe');
 
     }
 
