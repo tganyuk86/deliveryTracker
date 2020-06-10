@@ -103,6 +103,7 @@
                   @endforeach
 				</div>
 			</div>
+		</div>
 			<div class="col-md-6">
             <div class="card">
                 <div class="card-header">Map</div>
