@@ -101,41 +101,9 @@
 					
 <hr />
                   @endforeach
-
-                  @foreach($doneOrders as $Order)
-                    <div class="row done" >
-                      
-                      <div class="col-md-4">
-                        {{$Order->customer()->address}}<br>
-                        <sup>{{$Order->customer()->name}}<br>
-                        {{$Order->customer()->phone}}</sup>
-                      </div>
-                      <div class="col-md-4">
-                        <ul>
-                          {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}</li>
-                        </ul>
-                      </div>
-                      <div class="col-md-2">
-
-                      </div>
-
-                    </div>
-
-                  @endforeach
-
-
-                      <script type="text/javascript">
-
-
-                    
-
-                      </script>
-                </div>
-            </div>
-           
-        </div>
-        <div class="col-md-6">
+				</div>
+			</div>
+			<div class="col-md-6">
             <div class="card">
                 <div class="card-header">Map</div>
 
@@ -193,6 +161,47 @@
                 </div>
             </div>
         </div>
+		
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Finished Orders</div>
+
+                <div class="card-body">
+
+                  @foreach($doneOrders as $Order)
+                    <div class="row done" >
+                      
+                      <div class="col-md-4">
+                        {{$Order->customer()->address}}<br>
+                        <sup>{{$Order->customer()->name}}<br>
+                        {{$Order->customer()->phone}}</sup>
+                      </div>
+                      <div class="col-md-4">
+                        <ul>
+                          {!! $Order->order !!}
+                          <li>Total: ${{$Order->value}}</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-2">
+
+                      </div>
+
+                    </div>
+
+                  @endforeach
+
+
+                      <script type="text/javascript">
+
+
+                    
+
+                      </script>
+                </div>
+            </div>
+           
+        </div>
+        
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6">
