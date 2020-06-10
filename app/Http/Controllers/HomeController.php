@@ -413,7 +413,8 @@ class HomeController extends Controller
             'payType' => $request['payType'],
             'note' => $request['orderNotes'],
             'customerID' => $customer->id,
-			'driverID' => $request['driverID']
+			'driverID' => $request['driverID'],
+			'locationID' => $request['locationID']
 
         ]);
         activity()->on($new)->log('Order Added - '.$customer->name);

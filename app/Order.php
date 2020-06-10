@@ -12,7 +12,8 @@ class Order extends Model
         'name', 'lat', 'lon', 'value', 
         'order', 'status', 'dfee',
         'phone', 'customerID', 'notes', 
-        'driverID', 'priority', 'payType'
+        'driverID', 'priority', 'payType',
+		'locationID'
     ];
 
 

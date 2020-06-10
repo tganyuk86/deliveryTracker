@@ -78,7 +78,7 @@ class Stock extends Model
         return $out;
     }
 
-    public function reduceAvailable($driverID)
+    public function reduceAvailable($driverID, $multiply = 1)
     {
         $prodStock = ProductStock::where('driverID', $driverID)
                                  ->where('productID', $this->productID)
@@ -86,10 +86,10 @@ class Stock extends Model
 // dd($this->type());
         if(!$prodStock) return;
 
-        $prodStock->amount -= $this->type()->amount;
+        $prodStock->amount -= $this->type()->amount*$multiply;
         $prodStock->save();
     }
-    public function increaseAvailable($driverID)
+    public function increaseAvailable($driverID, $multiply = 1)
     {
         $prodStock = ProductStock::where('driverID', $driverID)
                                  ->where('productID', $this->productID)
@@ -97,7 +97,7 @@ class Stock extends Model
 // dd($this->type());
         if(!$prodStock) return;
 
-        $prodStock->amount += $this->type()->amount;
+        $prodStock->amount += $this->type()->amount*$multiply;
         $prodStock->save();
     }
 

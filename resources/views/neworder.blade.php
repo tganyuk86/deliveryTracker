@@ -65,6 +65,7 @@
 
                     <hr >
                     
+                    <input type="hidden" name="locationID">
                     <input type="hidden" name="lat">
                     <input type="hidden" name="lon">
                     @if($customer->id)
@@ -186,6 +187,7 @@ $(document).ready(function(){
 
                     $('[name="lat"]').val(lat);
                     $('[name="lon"]').val(lon);
+                    $('[name="locationID"]').val(results[0].place_id);
                     $('[name="address"]').val(add+', '+city);
                     $('#address').html(addFull);
                     
