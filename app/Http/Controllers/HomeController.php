@@ -381,7 +381,7 @@ class HomeController extends Controller
 		}
 		
 		$customer->update([
-				'note' => $request['customerNote'],
+				'note' => $request['customerNotes'],
 			]);
 		
         if($request['deliveryFee'] == 'auto')
@@ -411,7 +411,7 @@ class HomeController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
             'payType' => $request['payType'],
-            'note' => $request['orderNote'],
+            'note' => $request['orderNotes'],
             'customerID' => $customer->id,
 			'driverID' => $request['driverID']
 
