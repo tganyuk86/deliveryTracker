@@ -13,6 +13,7 @@
                 <div class="card-header">Orders</div>
 
                 <div class="card-body">
+					<a href="{{$roueAllURL}}" class="btn btn-notice">Route All</a>
                   <!-- <div class="row">
                     <div class="col-md-2">
                       Called @

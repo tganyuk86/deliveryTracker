@@ -68,13 +68,24 @@ class HomeController extends Controller
             $Order->order = $out;
 			$Order->customerData = $Order->customer();
 			
+			$destination = $Order->locationID;
+			
+			if($waypoints != '')
+				$waypoints += '%7C';
+			
+			$waypoints += $Order->locationID;
+			
 			if($prevOrder)
 			{
 				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key={{ env('GOOGLE_API_KEY') }}";
 				//dump(file_get_contents($url));
+				
+				
 			}
 			$prevOrder = $Order;
         }
+		
+		$roueAllURL = "https://www.google.com/maps/dir/?api=1&destination=$destination&travelmode=driving&waypoints=".$waypoints;
 
         foreach ($doneOrders as $Order) 
         {
@@ -98,7 +109,8 @@ class HomeController extends Controller
             'currentOrder' => $currentOrder, 
             'doneOrders' => $doneOrders,
             'drivers' => User::all(),
-            'stocks' => Stock::allActiveSorted()
+            'stocks' => Stock::allActiveSorted(),
+			'roueAllURL' => $roueAllURL
         ]);
     }
 
@@ -361,7 +373,7 @@ class HomeController extends Controller
                 $value += $stock->price*$request['orderquantity'][$stockID];
             }
             $order .= $stock->product()->name.', ';
-            $stock->reduceAvailable($request['driverID']);
+            $stock->reduceAvailable($request['driverID'], $request['orderquantity'][$stockID]);
         }
 
 		if($request['customerID'] > 0)
@@ -429,6 +441,7 @@ class HomeController extends Controller
 
             if(isset($request['orderquantity'][$stockID]))
                 $updatedata['quantity'] = $request['orderquantity'][$stockID];
+			
             OrderItem::create($updatedata);
             
         }
@@ -447,7 +460,7 @@ class HomeController extends Controller
         foreach ($Order->items() as $item) 
         {
 // dd($item);
-            $item->increaseAvailable($driver->id);
+            $item->increaseAvailable($driver->id, $item->quantity);
             // $prodStock = ProductStock::where('driverID', $driver->id)
             //                          ->where('productID', $item->productID)
             //                          ->get();
