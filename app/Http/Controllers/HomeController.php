@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         $Orders = Order::getWaiting();
         $doneOrders = Order::getDone()->sortByDesc('updated_at');
-
+	$waypoints = '';
 		$prevOrder = false;
         foreach ($Orders as $Order) 
         {
