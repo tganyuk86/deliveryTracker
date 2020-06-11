@@ -85,7 +85,7 @@ class HomeController extends Controller
 			$prevOrder = $Order;
         }
 		
-		$roueAllURL = "https://www.google.com/maps/dir/?api=1&destination=$destination&travelmode=driving&waypoints=".$waypoints;
+		$roueAllURL = "https://www.google.com/maps/dir/?api=1&destination_place_id=$destination&travelmode=driving&waypoint_place_ids=".$waypoints;
 
         foreach ($doneOrders as $Order) 
         {
