@@ -71,9 +71,9 @@ class HomeController extends Controller
 			$destination = $Order->locationID;
 			
 			if($waypoints != '')
-				$waypoints += '%7C';
+				$waypoints .= '%7C';
 			
-			$waypoints += $Order->locationID;
+			$waypoints .= $Order->locationID;
 			
 			if($prevOrder)
 			{
