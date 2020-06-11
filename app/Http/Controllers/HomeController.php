@@ -373,7 +373,7 @@ class HomeController extends Controller
                 $value += $stock->price*$request['orderquantity'][$stockID];
             }
             $order .= $stock->product()->name.', ';
-            $stock->reduceAvailable($request['driverID'], $request['orderquantity'][$stockID] ? $request['orderquantity'][$stockID] : 1 );
+            $stock->reduceAvailable($request['driverID'], isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1 );
         }
 
 		if($request['customerID'] > 0)
