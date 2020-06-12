@@ -50,9 +50,9 @@
 						<!--<a href="maps://maps.google.com/maps?daddr={{$Order->lat}},{{$Order->lon}}&amp;ll=???">{{$Order->customer()->address}}</a>-->
 						<!-- 
 
-						<a href="http://maps.google.com/maps?query_place_id={{urlencode($Order->locationID.', toronto')}}">{{$Order->customer()->address}}</a>
 						-->
 						<a href="comgooglemaps://?daddr={{urlencode($Order->customer()->address.', toronto')}}&amp;ll=Here">{{$Order->customer()->address}}</a>
+						<a href="http://maps.google.com/maps?query_place_id={{$Order->locationID}}">{{$Order->customer()->address}}</a>
                         <br>
                         <sup>{{$Order->customer()->name}}<br>
                         {{$Order->phone}}</sup>
