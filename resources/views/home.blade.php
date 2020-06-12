@@ -28,36 +28,7 @@
                       Value
                     </div>
                   </div> -->
-                  @if($currentOrder)
-                  <div class="row active">
-                     <!--  <div class="col-md-2">
-
-
-                      </div> -->
-                      <div class="col-md-4">
-                        {{$currentOrder->customer()->address}}<br>
-                        <sup>{{$currentOrder->customer()->name}}<br>
-                        {{$currentOrder->customer()->phone}}</sup>
-                      </div>
-                      <div class="col-md-4">
-                        <ul>
-                          {!! $currentOrder->order !!}
-                          <li>Total: ${{$currentOrder->value}}</li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4">
-                        <a href="{{ route('mark.done', ['id' => $currentOrder->id]) }}" class="btn btn-outline-success">Done</a>
-                        <a href="tel:{{ $currentOrder->phone }}" class="btn btn-outline-info">Call</a>
-                        <a href="sms:{{ $currentOrder->phone }}" class="btn btn-outline-info">SMS</a>
-                        <a href="sms:{{ $currentOrder->phone }}&body=Hello, Im outside now in the black VW Golf" class="btn btn-outline-info">SMS</a>
-                      </div>
-
-                    </div>
-                    @endif
-
-                    <hr />
-                    <hr />
-
+                 
                   @foreach($Orders as $key => $Order)
 				  
 					<div class="row">
@@ -93,7 +64,7 @@
                         
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
                         <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
-                        <a href="sms:{{ $Order->phone }}&body=Im outside now in the black VW Golf" class="btn btn-outline-info">SMS - Here</a>
+                        <a href="sms:{{ $Order->phone }}&body=Im outside now in the black Toyota Tercel" class="btn btn-outline-info">SMS - Here</a>
                         <a href="sms:{{ $Order->phone }}&body=Hello, this is a driver from LitPhast. I will be there in approximately 15 minutes." class="btn btn-outline-info">SMS - OMW</a>
 						
                       </div>
