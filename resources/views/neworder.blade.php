@@ -38,9 +38,9 @@
                     
                     <label>Order</label>
                     @foreach($products as $prod => $row)
-                      <h3>{{ $prod }}</h3><br>
+                      <h3>{{ $prod }}</h3>
                       @foreach($row as $type => $data)
-                        <span style="border: 1px solid {{$data->isAvailable(5) ? 'green' : 'red'}}" >
+                        <span style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
                           {{$type}}
                           <input type="checkbox" name="order[{{$data->id}}]" value="{{$data->id}}" class="" />
                           @if($type == 'Single Pack')
@@ -49,6 +49,7 @@
                         </span>
 
                       @endforeach
+					  <hr />
                     @endforeach
                     <br />
                     <label>Order Notes</label>
