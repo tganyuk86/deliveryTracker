@@ -101,4 +101,17 @@ class Stock extends Model
         $prodStock->save();
     }
 
+    public function isAvailable($driverID, $multiply = 1)
+    {
+        $prodStock = ProductStock::where('driverID', $driverID)
+                                 ->where('productID', $this->productID)
+                                 ->first();
+// dd($this->type());
+        if(!$prodStock) return false;
+		
+		if($prodStock->amount >= $this->type()->amount*$multiply)
+			return true;
+
+    }
+
 }
