@@ -39,9 +39,8 @@
                     <label>Order</label>
                     @foreach($products as $prod => $row)
                       <h3>{{ $prod }}</h3><br>
-					  <sup>Available</sup>
                       @foreach($row as $type => $data)
-                        <span class="border: 1px solid {{$data->isAvailable(5) ? 'green' : 'red'}}" >
+                        <span style="border: 1px solid {{$data->isAvailable(5) ? 'green' : 'red'}}" >
                           {{$type}}
                           <input type="checkbox" name="order[{{$data->id}}]" value="{{$data->id}}" class="" />
                           @if($type == 'Single Pack')
