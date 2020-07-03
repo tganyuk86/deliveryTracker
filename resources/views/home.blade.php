@@ -78,7 +78,7 @@
                     </div>
 					
 					<div class="row doneInfo">
-						<form action="{{ route('mark.done') }}" method="post">
+						<form action="{{ route('mark.doneForm') }}" method="post">
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<input type="number" name="total" value={{ $Order->value }}" />
 							
