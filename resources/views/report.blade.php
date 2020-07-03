@@ -12,7 +12,7 @@
 
                     <form action="{{ route('loadReport') }}" method="post">
 
-						<input type="hidden" name="repDate" value="{{ Carbon\Carbon::now() }}" />
+						<input type="hidden" name="repDate" value="{{ Carbon\Carbon::today() }}" />
                    
                     @csrf
 
