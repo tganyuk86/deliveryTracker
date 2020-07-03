@@ -112,10 +112,10 @@
                             </li>
                             
                         @else
-							@if(Auth::user()->isAdmin())
 							<li class="nav-item">
                                 <a class="nav-link" href="{{ route('orders') }}">Orders</a>
                             </li>
+							@if(Auth::user()->isAdmin())
 							<li class="nav-item">
                                 <a class="nav-link" href="{{ route('neworder') }}">New Order</a>
                             </li>
