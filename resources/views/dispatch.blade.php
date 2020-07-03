@@ -91,7 +91,7 @@
                       </script>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="display:none">
                 <div class="card-header">Stock</div>
 
                 <div class="card-body">
