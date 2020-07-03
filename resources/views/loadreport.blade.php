@@ -8,7 +8,7 @@
             
 			
 			<div class="card">
-                <div class="card-header">Report</div>
+                <div class="card-header">Report for {{$date}}</div>
 
                 <div class="card-body">
 

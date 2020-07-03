@@ -580,7 +580,8 @@ class HomeController extends Controller
 			'totalOrders' => $totalOrders,
 			'total' => $total,
 			'totalDFee' => $totalDFee,
-			'totalemt' => $totalemt
+			'totalemt' => $totalemt,
+			'date' => $request['repDate']
 			]);
 	}
 
