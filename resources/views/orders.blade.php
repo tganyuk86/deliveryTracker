@@ -111,12 +111,6 @@
                   </table>
 
 
-                      <script type="text/javascript">
-$('.assignDriver').on('click', function () {
-  $('[name="orderID"]').val($(this).data('orderid'));
-})
-
-                      </script>
                 </div>
             </div>
             @csrf
@@ -170,13 +164,16 @@ $('.assignDriver').on('click', function () {
                       <script type="text/javascript">
 $('.assignDriver').on('click', function () {
   $('[name="orderID"]').val($(this).data('orderid'));
-})
+});
+
+
 $(document).ready(function() {
     // Initialise the table
-    $("#table-1").tableDnD();
+    //$("#table-1").tableDnD();
 
     $(".up,.down").on('click',function(){
         var row = $(this).parents("tr:first");
+		alert('here');
         if ($(this).is(".up")) {
             row.insertBefore(row.prev());
         } else {
