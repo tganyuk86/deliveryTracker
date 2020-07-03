@@ -145,7 +145,7 @@
 					   $('.doneInfo').hide();
 					   
 					   $('.doneButton').on('click', function(){
-						  $(this).parent().find('.doneInfo').show(); 
+						  $(this).parent().parent().parent().find('.doneInfo').show(); 
 					   });
 					   
                         @if(!Auth::user()->isAdmin() && Auth::user()->lat )
