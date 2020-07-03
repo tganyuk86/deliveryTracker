@@ -481,7 +481,7 @@ class HomeController extends Controller
         $Order->update([
 			'status'=>'done',
 			'payType' => $request['payType'],
-			'value' => $request['value']
+			'value' => $request['total']
 		]);
 		
 		$Order->customer()->update(['notes'=>$request['customerNotes']]);

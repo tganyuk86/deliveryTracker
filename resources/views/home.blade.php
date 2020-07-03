@@ -66,6 +66,7 @@
                       <div class="col-md-4">
                         
                         
+                        <a href="#" class="btn btn-outline-success doneButton">Done</a>
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
                         <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
                         <a href="sms:{{ $Order->phone }}&body=Im outside now in the black VW Golf" class="btn btn-outline-info">SMS - Here</a>
@@ -82,14 +83,13 @@
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<input type="number" name="total" value="{{ $Order->value }}" />
 							@csrf
+							
 							<select name="payType">
 								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
 								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
 							</select>
 							
-							<textarea name="customerNotes">
-							{{ $Order->customer()->notes }}
-							</textarea>
+							<textarea name="customerNotes">{{ $Order->customer()->notes }}</textarea>
 							
 							<button class="btn btn-notice" >Finish</button>
 					</div>
@@ -141,6 +141,13 @@
                             }); 
 
                        });
+					   
+					   $('.doneInfo').hide();
+					   
+					   $('.doneButton').on('click, tap', function(){
+						  $(this).parent().find('doneInfo').show(); 
+					   });
+					   
                         @if(!Auth::user()->isAdmin() && Auth::user()->lat )
                             mymap.addMarker({
                               lat: {{ Auth::user()->lat }},
