@@ -179,7 +179,7 @@ class HomeController extends Controller
 
     public function savestockqe(Request $request)
     {
-      dump($request);   
+      dd($request);   
         foreach($request['items'] as $id => $value)
         {
             $stock = ProductStock::find($id);
