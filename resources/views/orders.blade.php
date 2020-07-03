@@ -173,7 +173,7 @@ $(document).ready(function() {
 
     $(".up,.down").on('click',function(){
         var row = $(this).parents("tr:first");
-		alert('here');
+		
         if ($(this).is(".up")) {
             row.insertBefore(row.prev());
         } else {
