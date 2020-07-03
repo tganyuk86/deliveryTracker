@@ -183,7 +183,7 @@ class HomeController extends Controller
         foreach($request['items'] as $id => $value)
         {
             $stock = ProductStock::find($id);
-			if($value == -1)
+			if(isset($request['remove'][$id]))
 			{
 				$stock->product()->update([
                     

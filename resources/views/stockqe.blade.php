@@ -18,8 +18,11 @@
                                 <input type="number" name="items[{{$item->id}}]" value="{{$item->amount}}" />
 								{{$item->product()->name}}
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 {{$item->driver()->name}}
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" name="remove[{{ $item->id }}]" value=1/>Remove
                             </div>
                            
                         </div>
