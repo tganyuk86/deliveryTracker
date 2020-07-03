@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
                     <form action="{{ route('savestockqe') }}" method="post">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -12,18 +12,18 @@
 
 
                     @foreach($items as $item)
-                        
+                        @if($item->driverID > 0)
                     <div class="row justify-content-center">
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <input type="number" name="items[{{$item->id}}]" value="{{$item->amount}}" />
 								{{$item->product()->name}}
                             </div>
                             <div class="col-md-4">
-                                {{$item->driverID}}
+                                {{$item->driver()->name}}
                             </div>
                            
                         </div>
-
+						@endif
                     @endforeach
 
 
