@@ -179,12 +179,13 @@ class HomeController extends Controller
 
     public function savestockqe(Request $request)
     {
-      dd($request);   
         foreach($request['items'] as $id => $value)
         {
             $stock = ProductStock::find($id);
+				dump($id);
 			if(isset($request['remove'][$id]))
 			{
+				dump('here!');
 				$stock->product()->update([
                     
                     'status' => 0,
@@ -202,6 +203,7 @@ class HomeController extends Controller
 			}
         }
 
+      dd($request);   
        
 
         return redirect('stockqe');
