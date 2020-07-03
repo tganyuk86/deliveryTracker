@@ -81,7 +81,7 @@
 						<form action="{{ route('mark.doneForm') }}" method="post">
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<input type="number" name="total" value="{{ $Order->value }}" />
-							
+							@csrf
 							<select name="payType">
 								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
 								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
