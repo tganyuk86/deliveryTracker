@@ -199,7 +199,6 @@ class HomeController extends Controller
 			}
         }
 
-      dd($request);   
        
 
         return redirect('stockqe');
