@@ -64,7 +64,7 @@
                         </ul>
                       </div>
                       <div class="col-md-4">
-                        <a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-outline-success">Done</a>
+                        
                         
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
                         <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
@@ -72,8 +72,27 @@
                         <a href="sms:{{ $Order->phone }}&body=Hello, this is a driver from LitPhast. I will be there in approximately 15 minutes." class="btn btn-outline-info">SMS - OMW</a>
 						
                       </div>
+					  
+					  
 
                     </div>
+					
+					<div class="row doneInfo">
+						<form action="{{ route('mark.done') }}" method="post">
+							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
+							<input type="number" name="total" value={{ $Order->value }}" />
+							
+							<select name="payType">
+								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
+								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
+							</select>
+							
+							<textarea name="customerNotes">
+							{{ $Order->customer()->notes }}
+							</textarea>
+							
+							<button class="btn btn-notice" >Finish</button>
+					</div>
 					
 <hr />
                   @endforeach

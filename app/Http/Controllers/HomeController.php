@@ -475,6 +475,22 @@ class HomeController extends Controller
 
     }
 
+    public function markDoneForm(Request $request)
+	{
+		$Order = Order::find($request['orderID']);
+        $Order->update([
+			'status'=>'done',
+			'payType' => $request['payType'],
+			'value' => $request['value']
+		]);
+		
+		$Order->customer()->update(['notes'=>$request['customerNotes']]);
+        
+        activity()->on($Order)->log('Marked Done');
+		
+		return redirect()->back();
+	}
+	
     public function markDone($id)
     {
 
@@ -524,7 +540,9 @@ class HomeController extends Controller
 	public function loadReport(Request $request)
 	{
 		
-		$orders = Order::whereDate('created_at', '=', $request['repDate'])->get();
+		$orders = Order::whereDate('created_at', '=', $request['repDate'])
+		->where('status', 'done')
+		->get();
 		$total = 0;
 		$totalCash = 0;
 		$totalemt = 0;

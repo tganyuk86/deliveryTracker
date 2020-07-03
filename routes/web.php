@@ -52,5 +52,6 @@ Route::get('/rep', 'HomeController@report')->name('report');
 Route::post('/report', 'HomeController@loadReport')->name('loadReport');
 // Route::post('/assign', 'HomeController@assign')->name('assign');
 
+Route::post('/orders/mark/done', 'HomeController@markDoneForm')->name('mark.doneForm');
 Route::get('/orders/mark/done/{id}', 'HomeController@markDone')->name('mark.done');
 Route::get('/orders/mark/onroute/{id}', 'HomeController@markOnRoute')->name('mark.onRoute');
