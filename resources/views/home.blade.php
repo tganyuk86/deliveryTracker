@@ -144,7 +144,7 @@
 					   
 					   $('.doneInfo').hide();
 					   
-					   $('.doneButton').on('click, tap', function(){
+					   $('.doneButton').on('click', function(){
 						  $(this).parent().find('.doneInfo').show(); 
 					   });
 					   
