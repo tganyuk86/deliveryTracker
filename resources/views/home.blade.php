@@ -182,14 +182,21 @@
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}</li>
+                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
                         </ul>
                       </div>
                       <div class="col-md-2">
 
                       </div>
+					  
 
                     </div>
+					<div class="row done" >
+						<div class="col-md-12">{{$Order->notes}}</div>
+					</div>
+					<div class="row done" >
+						<div class="col-md-12">{{$Order->customer()->notes}}</div>
+					</div>
 
                   @endforeach
 
