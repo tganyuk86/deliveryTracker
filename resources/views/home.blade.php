@@ -92,6 +92,8 @@
 							<textarea name="customerNotes" placeholder="Customer Notes" >{{ $Order->customer()->notes }}</textarea>
 							
 							<button class="btn btn-notice" >Finish</button>
+							
+						</form>
 					</div>
 					
 <hr />
