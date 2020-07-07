@@ -110,7 +110,7 @@ class Stock extends Model
         $prodStock = ProductStock::where('driverID', $driverID)
                                  ->where('productID', $this->productID)
                                  ->first();
-// dd($this->type());
+ dd($prodStock);
         //if(!$prodStock) return;
 
         $prodStock->amount += $this->type()->amount*$multiply;
