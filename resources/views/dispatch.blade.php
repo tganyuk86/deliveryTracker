@@ -71,10 +71,14 @@
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
+                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
                         </ul>
                       </div>
-                      <div class="col-md-2">
-                          ${{$Order->value}}
+                      <div class="col-md-4">
+                        
+                      
+						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
+						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-danger">Cancel</a>
 
                       </div>
 

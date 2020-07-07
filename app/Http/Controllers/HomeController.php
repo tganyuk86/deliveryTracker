@@ -465,7 +465,6 @@ class HomeController extends Controller
             // $prodStock->amount -= $item->amount;
             // $prodStock->save();
         }
-        activity()->on($Order)->log('Marked Done');
 
         return redirect()->back();
 
