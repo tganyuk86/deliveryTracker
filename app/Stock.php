@@ -48,7 +48,7 @@ class Stock extends Model
 			
             $out[$stock->product()->name][$stock->type()->name] = $stock;
         }
-
+		ksort($out);
         return $out;
 	}
 	
