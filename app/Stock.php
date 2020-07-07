@@ -111,7 +111,7 @@ class Stock extends Model
                                  ->where('productID', $this->productID)
                                  ->first();
 // dd($this->type());
-        if(!$prodStock) return;
+        //if(!$prodStock) return;
 
         $prodStock->amount += $this->type()->amount*$multiply;
         $prodStock->save();
