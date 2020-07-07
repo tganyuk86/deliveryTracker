@@ -456,7 +456,7 @@ class HomeController extends Controller
         $driver = $Order->driver();
         foreach ($Order->items() as $item) 
         {
-// dd($item);
+ dd($item);
             $item->increaseAvailable($driver->id, $item->quantity);
             // $prodStock = ProductStock::where('driverID', $driver->id)
             //                          ->where('productID', $item->productID)
