@@ -46,7 +46,8 @@ class Stock extends Model
 			if(!$stock->product()->isActive())
 				continue;
 			
-            $out[$stock->product()->name][$stock->type()->name] = $stock;
+            //$out[$stock->product()->name][$stock->type()->name] = $stock;
+            $out[$stock->product()->type][$stock->product()->name][$stock->type()->name] = $stock;
         }
 		ksort($out);
         return $out;
