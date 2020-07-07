@@ -37,11 +37,7 @@
                      </select>
                     
                     <label>Order</label>
-                    @foreach($products as $cat => $prods)
-					<hr>
-					{{$cat}}
-					<hr>
-                    @foreach($prods as $prod => $row)
+                    @foreach($products as $prod => $row)
                       <h3>{{ $prod }}</h3>
                       @foreach($row as $type => $data)
                         <span style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
@@ -54,7 +50,6 @@
 
                       @endforeach
 					  <hr />
-                    @endforeach
                     @endforeach
                     <br />
                     <label>Order Notes</label>
