@@ -52,6 +52,21 @@ class Stock extends Model
 		ksort($out);
         return $out;
 	}
+    public static function allActiveSortedFull()
+	{
+		$stocks = Stock::orderBy('price', 'asc')->get();
+
+        foreach ($stocks as $stock) 
+        {
+			if(!$stock->product()->isActive())
+				continue;
+			
+            $out[$stock->product()->type][$stock->product()->name][$stock->type()->name] = $stock;
+        }
+		foreach($out as $o)
+			ksort($o);
+        return $out;
+	}
 	
     public static function allActive()
 	{
