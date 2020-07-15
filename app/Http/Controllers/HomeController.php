@@ -353,6 +353,13 @@ class HomeController extends Controller
         $value = 0;
         $order = '';
         $dfee = 0;
+		if($request['lat'] == '')
+			dd('Error: You forgot to hit fill.');
+		
+		if(!count($request['order']))
+			dd('Error: No items selected');
+		
+		
         foreach ($request['order'] as $stockID => $data) 
         {
             $stock = Stock::find($stockID);

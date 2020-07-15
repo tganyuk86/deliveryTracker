@@ -49,10 +49,12 @@
                           <input type="checkbox" name="order[{{$data->id}}]" value="{{$data->id}}" class="" />
                           @if($type == 'Single Pack')
                           <input type="number" name="orderquantity[{{$data->id}}]" value="1">
-                          @endif
+                          
+						  @endif
                         </span>
 
                       @endforeach
+					  
 					  <hr />
                     @endforeach
                     @endforeach
@@ -123,16 +125,17 @@
 
                   @foreach($Customers as $customer)
                     <div class="row filtered">
+					<a href="/neworder/{{$customer->id}}" class="btn btn-info">
                       <div class="col-md-4">
-                        {{$customer->address}}<br>
+                        {{$customer->name}}<br>
                         <sup>{{$customer->phone}}</sup>
                       </div>
-                      <div class="col-md-4">
-                        {{count($customer->orders())}}
+                      <div class="col-md-8 alignRight">
+					  {{$customer->address}}<br>
+                       <sup> {{count($customer->orders())}} Orders</sup>
                       </div>
-                      <div class="col-md-4">
-<a href="/neworder/{{$customer->id}}"><button>Go</button></a>
-                      </div>
+                     
+					  </a>
                     </div>
 
                   @endforeach
