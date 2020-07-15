@@ -124,7 +124,7 @@
                   
 
                   @foreach($Customers as $customer)
-                    <div class="row filtered btn btn-info">
+                    <div class="row filtered ">
                       <div class="col-md-4">
                         {{$customer->name}}<br>
                         <sup>{{$customer->phone}}</sup>
