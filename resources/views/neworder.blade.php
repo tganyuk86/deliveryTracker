@@ -124,18 +124,18 @@
                   
 
                   @foreach($Customers as $customer)
-                    <div class="row filtered">
-					<a href="/neworder/{{$customer->id}}" class="btn btn-info">
+                    <div class="row filtered btn btn-info">
                       <div class="col-md-4">
                         {{$customer->name}}<br>
                         <sup>{{$customer->phone}}</sup>
                       </div>
                       <div class="col-md-8 alignRight">
+					<a href="/neworder/{{$customer->id}}" class="">
 					  {{$customer->address}}<br>
                        <sup> {{count($customer->orders())}} Orders</sup>
+					  </a>
                       </div>
                      
-					  </a>
                     </div>
 
                   @endforeach
