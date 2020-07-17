@@ -32,7 +32,7 @@ Route::get('/stockqe', 'HomeController@stockqe')->name('stockqe');
 Route::get('/movestock', 'HomeController@movestock')->name('movestock');
 Route::post('/performMove', 'HomeController@performMove')->name('performMove');
 Route::post('/performPurchase', 'HomeController@performPurchase')->name('performPurchase');
-Route::post('/purchase', 'HomeController@purchase')->name('purchase');
+Route::get('/purchase', 'HomeController@purchase')->name('purchase');
 Route::get('/allstock', 'HomeController@allstock')->name('allstock');
 Route::get('/customers', 'HomeController@customers')->name('customers');
 Route::get('/orders', 'HomeController@orders')->name('orders');
