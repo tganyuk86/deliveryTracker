@@ -538,6 +538,18 @@ class HomeController extends Controller
 		return view('report');
 
 	}
+	public function purchase()
+	{
+		return view('purchase', [
+			'products' => Product->allActive()
+		]);
+
+	}
+	
+	public function performPurchase()
+	{
+		
+	}
 	
 	public function loadReport(Request $request)
 	{
