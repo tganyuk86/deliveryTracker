@@ -541,7 +541,7 @@ class HomeController extends Controller
 	public function purchase()
 	{
 		return view('purchase', [
-			'products' => Product->allActive()
+			'products' => Product::allActive()
 		]);
 
 	}

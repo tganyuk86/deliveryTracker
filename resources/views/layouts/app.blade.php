@@ -140,6 +140,7 @@
                                     <a class="dropdown-item" href="{{ route('stockqe') }}">Stock QE</a>
                                     <a class="dropdown-item" href="{{ route('allstock') }}">Stock</a>
                                     <a class="dropdown-item" href="{{ route('movestock') }}">Move Stock</a>
+                                    <a class="dropdown-item" href="{{ route('purchase') }}">Purchase</a>
                                     <a class="dropdown-item" href="{{ route('report') }}">Report</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
