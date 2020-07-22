@@ -13,7 +13,6 @@
 					<input type="submit" />
 
                     @foreach($items as $item)
-                        @if($item->driverID > 0)
                     <div class="row justify-content-center" style="border-bottom: 1px solid black" 
 				>
                             <div class="col-md-8">
@@ -28,7 +27,6 @@
                             </div>
                            
                         </div>
-						@endif
                     @endforeach
 
 
