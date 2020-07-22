@@ -398,7 +398,7 @@ class HomeController extends Controller
 		}
 		
 		$customer->update([
-				'note' => $request['customerNotes'],
+				'notes' => $request['customerNotes'],
 			]);
 		
         if($request['deliveryFee'] == 'auto')
