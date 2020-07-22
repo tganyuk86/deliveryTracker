@@ -562,6 +562,8 @@ class HomeController extends Controller
 				->where('driverID', 0)
 				->first();
 				
+		if(!$stock)
+			dd($request);
 		$stock->amount += $request['units'];
 		
 		$stock->save();
