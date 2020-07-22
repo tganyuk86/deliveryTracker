@@ -115,6 +115,88 @@ class HomeController extends Controller
 			'roueAllURL' => $roueAllURL
         ]);
     }
+	
+	public function driverIndex()
+    {
+        $currentOrder = Order::getCurrent();
+
+        if(isset($currentOrder[0]))
+        {
+            $currentOrder = $currentOrder[0];
+
+            $order = explode(', ', $currentOrder->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $currentOrder->order = $out;
+        }
+        else
+            $currentOrder = false;
+
+
+        $Orders = Order::getWaiting();
+        $doneOrders = Order::getDone()->sortByDesc('updated_at');
+	$waypoints = '';
+	$destination = '';
+		$prevOrder = false;
+        foreach ($Orders as $Order) 
+        {
+            $order = explode(', ', $Order->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $Order->order = $out;
+			$Order->customerData = $Order->customer();
+			
+			$destination = $Order->locationID;
+			
+			if($waypoints != '')
+				$waypoints .= '%7C';
+			
+			$waypoints .= $Order->locationID;
+			
+			if($prevOrder)
+			{
+				$url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={$prevOrder->lat},{$prevOrder->lon}&destinations={$Order->lat},{$Order->lon}&key={{ env('GOOGLE_API_KEY') }}";
+				//dump(file_get_contents($url));
+				
+				
+			}
+			$prevOrder = $Order;
+        }
+		
+		$roueAllURL = "https://www.google.com/maps/dir/?api=1&destination_place_id=$destination&travelmode=driving&waypoint_place_ids=".$waypoints;
+
+        foreach ($doneOrders as $Order) 
+        {
+            $order = explode(', ', $Order->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $Order->order = $out;
+        }
+
+        
+        $view = 'home';
+ //dump($Orders);
+        return view($view,[
+            'Orders' => $Orders, 
+            'currentOrder' => $currentOrder, 
+            'doneOrders' => $doneOrders,
+            'drivers' => User::all(),
+            'stocks' => Stock::allActiveSorted(),
+			'roueAllURL' => $roueAllURL
+        ]);
+    }
 
     public function updatePosition(Request $request)
     {

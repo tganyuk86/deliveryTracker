@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/driverhome', 'HomeController@driverIndex')->name('driverhome');
 Route::get('/map', 'HomeController@gmaps')->name('map');
 
 Route::post('/updatePosition', 'HomeController@updatePosition')->name('updatePosition');
