@@ -8,6 +8,7 @@ use App\Customer;
 use App\Product;
 use App\ProductStock;
 use App\Stock;
+use App\Purchases;
 use App\User;
 use App\Order;
 use App\OrderItem;
@@ -546,9 +547,27 @@ class HomeController extends Controller
 
 	}
 	
-	public function performPurchase()
+	public function performPurchase(Request $request)
 	{
+		 $new = Purchases::create([
+            'supplier' => $request['supplier'],
+            'productID' => $request['productID'],
+            'cost' => $request['cost'],
+            'units' => $request['units'],
+            
+
+        ]);
 		
+		$stock = ProductStock::where('productID', $request['productID'])
+				->where('driverID', 0)
+				->first();
+				
+		$stock->amount += $request['units'];
+		
+		$stock->save();
+		
+		return redirect('stock');
+
 	}
 	
 	public function loadReport(Request $request)
