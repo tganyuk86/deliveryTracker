@@ -379,7 +379,12 @@ class HomeController extends Controller
 
     public function stockqe()
     {
-        return view('stockqe', [ 'items' => ProductStock::all() ]);
+        return view('stockqe', [ 'drivers' => User::all() ]);
+
+    }
+    public function stockqefor($userID)
+    {
+        return view('stockqefor', [ 'items' => User::find($userID)->stock() ]);
 
     }
     public function stock()
