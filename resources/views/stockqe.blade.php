@@ -11,7 +11,7 @@
 
 
                     @foreach($drivers as $driver)
-                        <a href="/stockqe/{{$driver->id}}" class="btn btn-info" >{{ $driver->name}}</a>
+                        <a href="/stockqefor/{{$driver->id}}" class="btn btn-info" >{{ $driver->name}}</a>
                     @endforeach
 
 
