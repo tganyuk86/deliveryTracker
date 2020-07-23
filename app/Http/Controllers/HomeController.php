@@ -54,7 +54,6 @@ class HomeController extends Controller
 
 
         $Orders = Order::getWaiting();
-        $doneOrders = Order::getDone()->sortByDesc('updated_at');
 	$waypoints = '';
 	$destination = '';
 		$prevOrder = false;
@@ -88,8 +87,22 @@ class HomeController extends Controller
         }
 		
 		$roueAllURL = "https://www.google.com/maps/dir/?api=1&destination_place_id=$destination&travelmode=driving&waypoint_place_ids=".$waypoints;
+        $doneOrders = Order::getDone()->sortByDesc('updated_at');
 
         foreach ($doneOrders as $Order) 
+        {
+            $order = explode(', ', $Order->order);
+            $out = '';
+            foreach($order as $o)
+            {
+                if($o == '') continue;
+                $out .= "<li>$o</li>";
+            }
+            $Order->order = $out;
+        }
+$pendingOrders = Order::getPending()->sortByDesc('updated_at');
+
+        foreach ($pendingOrders as $Order) 
         {
             $order = explode(', ', $Order->order);
             $out = '';
@@ -110,7 +123,7 @@ class HomeController extends Controller
             'Orders' => $Orders, 
             'currentOrder' => $currentOrder, 
             'doneOrders' => $doneOrders,
-            'pendingOrders' => [],
+            'pendingOrders' => $pendingOrders,
             'drivers' => User::all(),
             'stocks' => Stock::allActiveSorted(),
 			'roueAllURL' => $roueAllURL
