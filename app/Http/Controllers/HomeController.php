@@ -110,6 +110,7 @@ class HomeController extends Controller
             'Orders' => $Orders, 
             'currentOrder' => $currentOrder, 
             'doneOrders' => $doneOrders,
+            'pendingOrders' => [],
             'drivers' => User::all(),
             'stocks' => Stock::allActiveSorted(),
 			'roueAllURL' => $roueAllURL
