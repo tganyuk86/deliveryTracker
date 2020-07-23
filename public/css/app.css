@@ -19,6 +19,10 @@
 {
 	background-color: #d4fcd6;
 }
+.done
+{
+	background-color: yellow;
+}
 
 .row.active {
 	/*background-color: yellow;*/

@@ -60,7 +60,7 @@
 
 
                   @foreach($pendingOrders as $Order)
-                    <div class="row done" >
+                    <div class="row pending" >
                       
                       <div class="col-md-4">
                         {{$Order->customer()->address}}
