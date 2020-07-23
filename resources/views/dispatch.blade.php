@@ -37,7 +37,7 @@
                       <div class="col-md-4">
                         
                         <button type="button" class="btn btn-primary assignDriver" data-orderid="{{$Order->id}}" data-toggle="modal" data-target="#assignDriver">
-                          {{ $Order->driver()->isAdmin() ? 'Unassigned' : $Order->driver()->name}}
+                          {{ $Order->driver()->isAdmin() ? 'House' : $Order->driver()->name}}
                         </button>
                         <!-- <a href="{{ route('editOrder', $Order->id) }}">
                           <button type="button" class="btn btn-warning editOrder" data-orderid="{{$Order->id}}">
@@ -59,6 +59,39 @@
                   @endforeach
 
 
+                  @foreach($pendingOrders as $Order)
+                    <div class="row done" >
+                      
+                      <div class="col-md-4">
+                        {{$Order->customer()->address}}
+                        <sup>{{$Order->customer()->name}}</sup>
+                        <sup>{{$Order->customer()->phone}}</sup>
+                        <sup>{{ $Order->created_at->diffForHumans() }}<sup>
+                      </div>
+                      <div class="col-md-4">
+                        <ul>
+                          {!! $Order->order !!}
+                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-4">
+                        
+                      
+						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-success">Done</a>
+						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
+						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-danger">Cancel</a>
+
+                      </div>
+
+                    </div>
+					<div class="row done" >
+						<div class="col-md-12">{{$Order->notes}}</div>
+					</div>
+					<div class="row done" >
+						<div class="col-md-12">{{$Order->customer()->notes}}</div>
+					</div>
+
+                  @endforeach
                   @foreach($doneOrders as $Order)
                     <div class="row done" >
                       

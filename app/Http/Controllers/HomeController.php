@@ -568,8 +568,17 @@ class HomeController extends Controller
     public function markDoneForm(Request $request)
 	{
 		$Order = Order::find($request['orderID']);
+		
+		if($Order['payType'] == 'cash')
+			$status = 'done';
+		elseif($Order['payType'] == 'emt' && $Order['status'] == 'waiting')
+			$status = 'pending';
+		else
+			$status = 'done';
+		
+		
         $Order->update([
-			'status'=>'done',
+			'status'=> $status,
 			'payType' => $request['payType'],
 			'value' => $request['total']
 		]);
@@ -585,19 +594,17 @@ class HomeController extends Controller
     {
 
         $Order = Order::find($id);
-        $Order->update(['status'=>'done']);
+		if($Order['payType'] == 'cash')
+			$status = 'done';
+		elseif($Order['payType'] == 'emt' && $Order['status'] == 'waiting')
+			$status = 'pending';
+		else
+			$status = 'done';
+		
+		
+        $Order->update(['status'=>$status]);
         $driver = $Order->driver();
-        foreach ($Order->items() as $item) 
-        {
-// dd($item);
-            //$item->reduceAvailable($driver->id);
-            // $prodStock = ProductStock::where('driverID', $driver->id)
-            //                          ->where('productID', $item->productID)
-            //                          ->get();
 
-            // $prodStock->amount -= $item->amount;
-            // $prodStock->save();
-        }
         activity()->on($Order)->log('Marked Done');
 
         return redirect()->back();
