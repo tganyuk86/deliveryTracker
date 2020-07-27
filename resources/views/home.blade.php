@@ -69,7 +69,7 @@
                         <a href="#" class="btn btn-outline-success doneButton">Done</a>
                         <a href="tel:{{ $Order->phone }}" class="btn btn-outline-info">Call</a>
                         <a href="sms:{{ $Order->phone }}" class="btn btn-outline-info">SMS</a>
-                        <a href="sms:{{ $Order->phone }}&body=Im outside now in the black Volvo" class="btn btn-outline-info">SMS - Here</a>
+                        <a href="sms:{{ $Order->phone }}&body=Im outside now in the black VW Golf" class="btn btn-outline-info">SMS - Here</a>
                         <a href="sms:{{ $Order->phone }}&body=Hello, this is a driver from LitPhast. I will be there in approximately 15 minutes." class="btn btn-outline-info">SMS - OMW</a>
 						
                       </div>
