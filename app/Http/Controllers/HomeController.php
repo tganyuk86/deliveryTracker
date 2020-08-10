@@ -435,7 +435,9 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 					->where('driverID', 0)
 					->first();
 					
-			$home->update({'amount'=>$home->amount+$stock->amount});
+			$home->update({
+				'amount'=> $home->amount + $stock->amount
+				});
 			
 			$stock->update({'amount'=>0});
 			
