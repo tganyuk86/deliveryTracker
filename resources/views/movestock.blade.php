@@ -9,6 +9,8 @@
                 <div class="card-header">Home Stock</div>
 
                 <div class="card-body">
+					<a href="{{ route('movestock/allHome') }}" class="btn" >Bring all home</a>
+					<hr />
                     <form action="{{ route('performMove') }}" method="post">
 
                         <select name="destination">
@@ -31,7 +33,8 @@
                             </div>
                            
                             <div class="col-md-4">
-                                <input type="text" name="amount[{{$product->id}}]" value="0">({{$product->homeStock()}})
+                                <input type="text" name="amount[{{$product->id}}]" value="0" data-value="$product->homeStock()" >
+								({{$product->homeStock()}})
                             </div>
                         </div>
 
@@ -56,5 +59,10 @@
 </div>
 
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
+	$("input").on('dblclick', function(){
+		$(this).val($(this).data('value'));
+		console.log('hit');
+	});
+</script>
 @endsection

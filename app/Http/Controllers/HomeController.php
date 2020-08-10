@@ -425,6 +425,29 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         ]);
 
     }
+    public function movestockAllHome()
+    {
+		
+		$stocks = ProductStock::where('driverID', '>', 0)->get();
+		foreach($stocks as $stock)
+		{
+			$home = ProductStock::where('productID', $stock->productID)
+					->where('driverID', 0)
+					->first();
+					
+			$home->update({'amount'=>$home->amount+$stock->amount});
+			
+			$stock->update({'amount'=>0});
+			
+		}
+		
+        return view('movestock', [ 
+            'products' => Product::allActive(),
+            'drivers' => User::drivers(),
+
+        ]);
+
+    }
     public function newOrder()
     {
         $products = Stock::allActiveSortedFull();
