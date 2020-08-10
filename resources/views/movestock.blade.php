@@ -33,7 +33,7 @@
                             </div>
                            
                             <div class="col-md-4">
-                                <input type="text" name="amount[{{$product->id}}]" value="0" data-value="$product->homeStock()" >
+                                <input type="text" name="amount[{{$product->id}}]" value="0" data-value="{{$product->homeStock()}}" >
 								({{$product->homeStock()}})
                             </div>
                         </div>
