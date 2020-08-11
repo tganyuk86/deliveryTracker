@@ -52,7 +52,8 @@
 
 						<a href="http://maps.google.com/maps?query_place_id={{$Order->locationID}}">{{$Order->customer()->address}}</a>
 						-->
-						<a href="comgooglemaps://?daddr={{urlencode($Order->customer()->address.', toronto')}}&amp;ll=Here">{{$Order->customer()->address}}</a>
+						<a href="comgooglemaps://?daddr={{urlencode($Order->customer()->address)}}&amp;ll=Here">{{$Order->customer()->address}}</a>
+						<a href="comgooglemaps://?q={{urlencode($Order->locationID)}}&amp;ll=Here">{{$Order->customer()->address}}</a>
                         <br>
                         <sup>{{$Order->customer()->name}}<br>
                         {{$Order->phone}}</sup>
