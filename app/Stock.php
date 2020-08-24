@@ -45,7 +45,8 @@ class Stock extends Model
         {
 			if(!$stock->product()->isActive())
 				continue;
-			
+			if(!$stock->product()) dd($stock);
+			if(!$stock->type()) dd($stock);
             $out[$stock->product()->name][$stock->type()->name] = $stock;
             //$out[$stock->product()->type][$stock->product()->name][$stock->type()->name] = $stock;
         }
