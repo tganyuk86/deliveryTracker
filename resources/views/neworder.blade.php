@@ -54,6 +54,7 @@
 								  data-action="calcTotal"								  
 								 data-content="${{ $data->price }}"  
 								   data-value="{{ $data->price }}" 
+								   data-product-id="{{ $data->product()->id }}" 
 						  />
                           @if($type == 'Single Pack')
 
@@ -63,7 +64,7 @@
                         </span>
 
                       @endforeach
-					  <input type="text" value="0" name="ordervalue[{{$data->id}}]" />
+					  <input type="text" value="0" name="ordervalue[{{$data->product()->id}}]" />
 					  
 					  <hr />
                     @endforeach
@@ -181,7 +182,7 @@ $(document).ready(function(){
   });
   
   $('[data-action="calcTotal"]').on("click", function() {
-	  id = $(this).val();
+	  id = $(this).data('product-id');
 	  price = parseInt($(this).data('value'));
 	  
 	  curPrice = parseInt($('[name="ordervalue['+id+']"').val());
