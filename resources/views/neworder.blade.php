@@ -185,8 +185,8 @@ $(document).ready(function(){
 	  id = $(this).data('product-id');
 	  price = parseInt($(this).data('value'));
 	  
-	  curPrice = parseInt($('[name="ordervalue['+id+']"').val());
-	  orderquantity = parseInt($('[name="orderquantity['+id+']"').val());
+	  //curPrice = parseInt($('[name="ordervalue['+id+']"').val());
+	  orderquantity = parseInt($('[name="orderquantity['+$(this).val()+']"').val());
 	  
 	  $('[name="ordervalue['+id+']"').val(price*orderquantity);
 	  
