@@ -63,7 +63,7 @@
                         </span>
 
                       @endforeach
-					  <input type="text" value="" name="ordervalue[{{$data->id}}]" />
+					  <input type="text" value="0" name="ordervalue[{{$data->id}}]" />
 					  
 					  <hr />
                     @endforeach
