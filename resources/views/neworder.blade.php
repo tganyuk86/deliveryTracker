@@ -182,7 +182,7 @@ $(document).ready(function(){
   
   $('[data-action="calcTotal"]').on("click", function() {
 	  id = $(this).val();
-	  price = pareInt($(this).data('value'));
+	  price = parseInt($(this).data('value'));
 	  
 	  curPrice = parseInt($('[name="ordervalue['+id+']').val());
 	  $('[name="ordervalue['+id+']').val(curPrice+price);
