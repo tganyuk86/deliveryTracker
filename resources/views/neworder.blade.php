@@ -46,14 +46,24 @@
                       @foreach($row as $type => $data)
                         <span style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
                           {{$type}}
-                          <input type="checkbox" name="order[{{$data->id}}]" value="{{$data->id}}" class="" data-toggle="popover" data-content="${{ $data->price }}"/>
+                          <input 		 type="checkbox" 
+										 name="order[{{$data->id}}]" 
+										value="{{$data->id}}" 
+										class="" 
+								  data-toggle="popover"
+								  data-action="calcTotal"								  
+								 data-content="${{ $data->price }}"  
+								   data-value="{{ $data->price }}" 
+						  />
                           @if($type == 'Single Pack')
+
                           <input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
 						  @endif
                         </span>
 
                       @endforeach
+					  <input type="text" value="" name="ordervalue[{{$data->id}}]" />
 					  
 					  <hr />
                     @endforeach
@@ -168,6 +178,15 @@ $(document).ready(function(){
     $(".filtered").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
+  });
+  
+  $('[data-action="calcTotal"]').on("click", function() {
+	  id = $(this).val();
+	  price = $(this).data('value');
+	  
+	  curPrice = $('[name="ordervalue['+id+']').val();
+	  $('[name="ordervalue['+id+']').val(curPrice+price);
+	  
   });
 });
 
