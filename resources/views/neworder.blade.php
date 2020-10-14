@@ -184,8 +184,10 @@ $(document).ready(function(){
 	  id = $(this).val();
 	  price = parseInt($(this).data('value'));
 	  
-	  curPrice = parseInt($('[name="ordervalue['+id+']').val());
-	  $('[name="ordervalue['+id+']').val(curPrice+price);
+	  curPrice = parseInt($('[name="ordervalue['+id+']"').val());
+	  orderquantity = parseInt($('[name="orderquantity['+id+']"').val());
+	  
+	  $('[name="ordervalue['+id+']"').val(price*orderquantity);
 	  
   });
 });
