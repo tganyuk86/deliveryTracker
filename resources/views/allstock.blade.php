@@ -28,6 +28,9 @@
                             <div class="col-md-4">
                                 {{$product->homeStock()}}
                             </div>
+                            <div class="col-md-4">
+                                {{$product->cost()}}
+                            </div>
                         </div>
 
                     @endforeach

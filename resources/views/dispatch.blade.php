@@ -143,7 +143,6 @@
 
                 @foreach($stocks as $product => $data)
                     <h2>{{$product}}</h2>
-					<super>{{product->cost()}}</super>
                      <div class="row ">
                         @foreach($data as $type => $stock)
                           <div class="col-md-3">
