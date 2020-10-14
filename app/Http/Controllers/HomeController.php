@@ -567,7 +567,9 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             // $stock = Stock::find($stockID);
             $updatedata = [
                 'stockID' => $stockID,
-                'orderID' => $new->id
+                'orderID' => $new->id,
+			//	'value' => ,
+			//	'markup' =>
             ];
 
             if(isset($request['orderquantity'][$stockID]))

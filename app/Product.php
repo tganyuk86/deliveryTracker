@@ -49,6 +49,14 @@ class Product extends Model
 
     }
 
+    public function cost()
+	{
+		$purchase = Purchases::where('productID', $this->id)->last();
+		if($purchase)
+			return $purchase->cost/$purchase->units;
+		
+		return 'na';
+	}
     public function homeStock()
     {
     	$stock = ProductStock::where('driverID', 0)->where('productID', $this->id)->get();

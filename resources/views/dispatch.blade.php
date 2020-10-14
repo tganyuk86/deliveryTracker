@@ -134,7 +134,7 @@
                       </script>
                 </div>
             </div>
-            <div class="card" style="display:none">
+            <div class="card" style="display:">
                 <div class="card-header">Stock</div>
 
                 <div class="card-body">
@@ -143,6 +143,7 @@
 
                 @foreach($stocks as $product => $data)
                     <h2>{{$product}}</h2>
+					<super>{{product->cost()}}</super>
                      <div class="row ">
                         @foreach($data as $type => $stock)
                           <div class="col-md-3">
