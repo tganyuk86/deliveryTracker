@@ -187,8 +187,9 @@ $(document).ready(function(){
 	  
 	  //curPrice = parseInt($('[name="ordervalue['+id+']"').val());
 	  orderquantity = parseInt($('[name="orderquantity['+$(this).val()+']"').val());
-	  
-	  $('[name="ordervalue['+id+']"').val(price*orderquantity);
+	  if(!isNaN(orderquantity))
+		  price *= orderquantity;
+	  $('[name="ordervalue['+id+']"').val(price);
 	  
   });
 });
