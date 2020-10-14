@@ -51,7 +51,7 @@ class Product extends Model
 
     public function cost()
 	{
-		$purchase = Purchases::where('productID', $this->id)->last();
+		$purchase = Purchases::where('productID', $this->id)->latest()->first();
 		if($purchase)
 			return $purchase->cost/$purchase->units;
 		
