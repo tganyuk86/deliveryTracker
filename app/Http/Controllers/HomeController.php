@@ -571,7 +571,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             $updatedata = [
                 'stockID' => $stockID,
                 'orderID' => $new->id,
-				'quantity' = $quantity,
+				'quantity' => $quantity,
 				'value' => $value,
 				'markup' => $value - ($stock->product()->cost*quantity)
             ];
