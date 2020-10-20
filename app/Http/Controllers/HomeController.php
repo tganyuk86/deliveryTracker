@@ -564,17 +564,19 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 
         foreach ($request['order'] as $stockID => $data) 
         {
-            // $stock = Stock::find($stockID);
+            $stock = Stock::find($stockID);
+			
+			$quantity = isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1;
+			$value = $request['ordervalue'][$stockID];
             $updatedata = [
                 'stockID' => $stockID,
                 'orderID' => $new->id,
-			//	'value' => ,
-			//	'markup' =>
+				'quantity' = $quantity,
+				'value' => $value,
+				'markup' => $value - ($stock->product()->cost*quantity)
             ];
+           
 
-            if(isset($request['orderquantity'][$stockID]))
-                $updatedata['quantity'] = $request['orderquantity'][$stockID];
-			
             OrderItem::create($updatedata);
             
         }

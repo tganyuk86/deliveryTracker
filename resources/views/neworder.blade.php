@@ -44,7 +44,7 @@
                     @foreach($prods as $prod => $row)
                       <h3>{{ $prod }}</h3>
                       @foreach($row as $type => $data)
-                        <span style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
+                        <div style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
                           {{$type}}
                           <input 		 type="checkbox" 
 										 name="order[{{$data->id}}]" 
@@ -56,14 +56,13 @@
 								   data-value="{{ $data->price }}" 
 								   data-product-id="{{ $data->product()->id }}" 
 						  />
-                          @if($type == 'Single Pack')
-
+                         
                           <input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
-						  @endif
-                        </span>
+                        </div>
 
                       @endforeach
+					  Value:
 					  <input type="text" value="0" name="ordervalue[{{$data->product()->id}}]" />
 					  
 					  <hr />
