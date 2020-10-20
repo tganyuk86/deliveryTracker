@@ -44,21 +44,29 @@
                     @foreach($prods as $prod => $row)
                       <h3>{{ $prod }}</h3>
                       @foreach($row as $type => $data)
-                        <div style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
-                          {{$type}}
-                          <input 		 type="checkbox" 
-										 name="order[{{$data->id}}]" 
-										value="{{$data->id}}" 
-										class="" 
-								  data-toggle="popover"
-								  data-action="calcTotal"								  
-								 data-content="${{ $data->price }}"  
-								   data-value="{{ $data->price }}" 
-								   data-product-id="{{ $data->product()->id }}" 
-						  />
+                        <div class="row" style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
+							<div class="col-md-1">
+							  <input 		 type="checkbox" 
+											 name="order[{{$data->id}}]" 
+											value="{{$data->id}}" 
+											class="" 
+									  data-toggle="popover"
+									  data-action="calcTotal"								  
+									 data-content="${{ $data->price }}"  
+									   data-value="{{ $data->price }}" 
+									   data-product-id="{{ $data->product()->id }}" 
+							  />
+							
+							</div>
+							<div class="col-md-4">
+							
+							  {{$type}}
+							 </div>
+							<div class="col-md-4">
                          
-                          <input type="number" name="orderquantity[{{$data->id}}]" value="1">
+								<input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
+							</div>
                         </div>
 
                       @endforeach
