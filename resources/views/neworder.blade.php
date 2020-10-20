@@ -64,7 +64,7 @@
 							 </div>
 							<div class="col-md-4">
                          
-								<input type="number" name="orderquantity[{{$data->id}}]" value="1">
+								X<input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
 							</div>
                         </div>
