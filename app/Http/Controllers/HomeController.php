@@ -697,7 +697,13 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 				->first();
 				
 		if(!$stock)
-			dd($request);
+		{
+			$stock = ProductStock::create([
+				'productID' => $request['productID'],
+				'driverID' => 0
+			]);
+			
+		}
 		$stock->amount += $request['units'];
 		
 		$stock->save();
