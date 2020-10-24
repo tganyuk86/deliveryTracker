@@ -493,16 +493,13 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 
             if($stock->type()->id != 5)
             {
-                $value += $stock->price;
                 $order .= $stock->type()->name.' of ';
             }
             else
             {
-
-            
                 $order .= $request['orderquantity'][$stockID].'x ';
-                $value += $stock->price*$request['orderquantity'][$stockID];
             }
+            $value += $request['ordervalue'][$stock->product()->id];
             $order .= $stock->product()->name.', ';
             $stock->reduceAvailable($request['driverID'], isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1 );
         }

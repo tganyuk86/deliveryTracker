@@ -62,9 +62,12 @@
 							
 							  {{$type}}
 							 </div>
+							 <div class="col-md-1">
+								X
+							 </div>
 							<div class="col-md-4">
                          
-								X<input type="number" name="orderquantity[{{$data->id}}]" value="1">
+								<input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
 							</div>
                         </div>
