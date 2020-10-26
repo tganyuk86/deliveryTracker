@@ -275,7 +275,7 @@
 					   $('.doneButton').on('click', function(){
 						  //$(this).parent().parent().find('.doneInfo').show(); 
 						  id = $(this).data('oid');
-						  $('doneInfo-'+id).show();
+						  $('.doneInfo-'+id).show();
 					   });
 						
 						@foreach(Auth::user()->drivers() as $driver)
