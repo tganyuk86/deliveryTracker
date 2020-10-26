@@ -11,7 +11,7 @@ class Balance extends Model
         'value', 'note'
     ];
 	
-    protected $table = 'balance';
+    protected $table = 'Balance';
 	
 	public static function balance()
 	{
