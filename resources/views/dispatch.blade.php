@@ -72,9 +72,9 @@
 							<button class="btn btn-success" >Finish</button>
 							
 						</form>
-
-
+						</div>
                     </div>
+
 				<hr />
                   @endforeach
 
@@ -229,7 +229,7 @@
 						$('.doneInfo').hide();
 					   
 					   $('.doneButton').on('click', function(){
-						  $(this).parent().find('.doneInfo').show(); 
+						  $(this).parent().parent().find('.doneInfo').show(); 
 					   });
 						
 						@foreach(Auth::user()->drivers() as $driver)
