@@ -50,11 +50,11 @@
                 <div class="card-header">Recent Activity</div>
 
                 <div class="card-body">
-				@foreach($orders as $order)
+				@foreach($Orders as $order)
                         <div class="row justify-content-center">
-                            <div class="col-md-4">{{order->created_at</div>
-                            <div class="col-md-4">{{order->value</div>
-                            <div class="col-md-4">{{order->note</div>
+                            <div class="col-md-4">{{order->created_at}}</div>
+                            <div class="col-md-4">{{order->value}}</div>
+                            <div class="col-md-4">{{order->note}}</div>
                             
                         </div>
 
