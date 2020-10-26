@@ -60,15 +60,18 @@
 						<form action="{{ route('mark.doneForm') }}" method="post">
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							@csrf
-							
-							<select name="payType">
+							<div class="col-md-4">
+							<select name="payType" class="form-control">
 								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
 								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
 							</select>
+							</div>
+							<div class="col-md-4">
 							<input type="number" name="total" value="{{ $Order->value }}" />
-							
+							</div>
+							<div class="col-md-4">
 							<textarea name="customerNotes" placeholder="Customer Notes" >{{ $Order->customer()->notes }}</textarea>
-							
+							</div>
 							<button class="btn btn-success" >Finish</button>
 							
 						</form>
