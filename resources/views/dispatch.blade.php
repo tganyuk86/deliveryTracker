@@ -50,14 +50,14 @@
                         </button> 
 						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-success">Done</a>
 						-->
-						<a href="#" class="btn btn-outline-success doneButton">Done</a>
+						<a href="#" class="btn btn-outline-success doneButton" data-oid="{{$Order->id}}">Done</a>
 						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
 						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-danger">Cancel</a>
 
                       </div>
 					  
 						<form action="{{ route('updateOrder') }}" method="post">
-					  <div class="row doneInfo">
+					  <div class="row doneInfo doneInfo-{{$Order->id}}">
 							@csrf
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<div class="col-md-4">
@@ -117,7 +117,7 @@
                     </div>
 					
 					<form action="{{ route('updateOrder') }}" method="post">
-						<div class="row doneInfo-{{$Order->id}}">
+						<div class="row doneInfo doneInfo-{{$Order->id}}">
 							@csrf
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<div class="col-md-4">
