@@ -760,6 +760,11 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 			]);
 	}
 
+    public function finances()
+    {
+        
+        return view('finances');
+    }
     public function gmaps()
     {
         $Orders = Order::all();

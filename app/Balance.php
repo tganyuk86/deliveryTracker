@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Balance extends Model
 {
 	protected $fillable = [
-        'productID', 'cost', 'units', 'supplier',
+        'value', 'note'
     ];
 	
     protected $table = 'balance';
