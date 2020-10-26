@@ -709,7 +709,9 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 		
 		$stock->save();
 		
-		Balance::add($request['cost']*-1, 'Purchase '.$stock->product()->name.' ({$new->id})';
+		Balance::add(
+			$request['cost']*-1, 
+			'Purchase '.$stock->product()->name.' ({$new->id})');
 		
 		
 		return redirect('stock');
