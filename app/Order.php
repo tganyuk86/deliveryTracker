@@ -89,11 +89,11 @@ class Order extends Model
     {
     	if(\Auth::user()->isAdmin())
             return Order::where('status', 'pending')
-						->whereDate('created_at', Carbon::today())
+						//->whereDate('created_at', Carbon::today())
 						->get();
         else
             return Order::where('status', 'pending')
-        					->whereDate('created_at', Carbon::today())
+        					//->whereDate('created_at', Carbon::today())
                             ->where('driverID', \Auth::user()->id)
                             ->get();
     }
