@@ -22,9 +22,9 @@
 
                       </div> -->
                       <div class="col-md-4">
-                        <b>#{{$key++}}:</b><br>
+                        <b>#{{$key++}}: {{$Order->customer()->name}}</b><br>
                         {{$Order->customer()->address}}<br>
-                        <sup>{{$Order->customer()->name}}</sup>
+                        
                         <sup>{{$Order->customer()->phone}}</sup>
                         <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
