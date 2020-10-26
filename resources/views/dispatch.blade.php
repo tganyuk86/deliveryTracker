@@ -47,12 +47,32 @@
 
                         <button type="button" class="btn btn-danger cancelOrder" data-orderid="{{$Order->id}}">
                           Cancel
-                        </button> -->
+                        </button> 
 						<a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-success">Done</a>
+						-->
+						<a href="#" class="btn btn-outline-success doneButton">Done</a>
 						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
 						<a href="{{ route('cancelOrder', ['id' => $Order->id]) }}" class="btn btn-danger">Cancel</a>
 
                       </div>
+					  
+					  <div class="row doneInfo">
+						<form action="{{ route('mark.doneForm') }}" method="post">
+							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
+							@csrf
+							
+							<select name="payType">
+								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
+								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
+							</select>
+							<input type="number" name="total" value="{{ $Order->value }}" />
+							
+							<textarea name="customerNotes" placeholder="Customer Notes" >{{ $Order->customer()->notes }}</textarea>
+							
+							<button class="btn btn-success" >Finish</button>
+							
+						</form>
+
 
                     </div>
 				<hr />
@@ -205,6 +225,12 @@
 						setTimeout(function() {
 						  location.reload();
 						}, 180000);
+						
+						$('.doneInfo').hide();
+					   
+					   $('.doneButton').on('click', function(){
+						  $(this).parent().parent().find('.doneInfo').show(); 
+					   });
 						
 						@foreach(Auth::user()->drivers() as $driver)
 						@if($driver->lat)

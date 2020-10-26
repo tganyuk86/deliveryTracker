@@ -13,7 +13,7 @@ class Order extends Model
         'order', 'status', 'dfee',
         'phone', 'customerID', 'notes', 
         'driverID', 'priority', 'payType',
-		'locationID'
+		'locationID', 'outstanding'
     ];
 
 

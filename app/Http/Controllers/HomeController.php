@@ -547,6 +547,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             'lat' => $request['lat'],
             'lon' => $request['lon'],
             'value' => $value,
+            'outstanding' => $value,
             'order' => $order,
             'dfee' => $dfee,
             'phone' => $request['phone'],
@@ -584,6 +585,20 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         return redirect('neworder');
     }
 
+    public function updateOrder(Request $request)
+    {
+		$Order = Order::find($request['orderID']);
+		
+		$update = [
+			'status'=> $request['status'],
+			'payType' => $request['payType'],
+			'outstanding' => $request['outstanding']
+		];
+		
+		 $Order->update($update);
+
+		return redirect()->back();
+	}
 
     public function cancelOrder($id)
     {
@@ -644,7 +659,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 		
 		
         $Order->update(['status'=>$status]);
-        $driver = $Order->driver();
+        //$driver = $Order->driver();
 
         activity()->on($Order)->log('Marked Done');
 
@@ -711,7 +726,8 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 		
 		Balance::add(
 			$request['cost']*-1, 
-			'Purchase '.$stock->product()->name.' ({$new->id})');
+			'Purchase '.$stock->product()->name." ({$new->id})"
+		);
 		
 		
 		return redirect('stock');
