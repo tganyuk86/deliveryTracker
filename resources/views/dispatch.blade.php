@@ -93,15 +93,15 @@
                     <div class="row pending" >
                       
                       <div class="col-md-4">
-                        {{$Order->customer()->address}}
-                        <sup>{{$Order->customer()->name}}</sup>
+                        {{$Order->customer()->name}}
+                        <sup>{{$Order->customer()->address}}</sup>
                         <sup>{{$Order->customer()->phone}}</sup>
                         <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
+                          <li>Total: ${{$Order->outstanding}}({{$Order->payType}})</li>
                         </ul>
                       </div>
                       <div class="col-md-4">
