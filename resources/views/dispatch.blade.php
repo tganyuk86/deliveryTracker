@@ -56,14 +56,21 @@
 
                       </div>
 					  
-						<form action="{{ route('mark.doneForm') }}" method="post">
+						<form action="{{ route('updateOrder') }}" method="post">
 					  <div class="row doneInfo">
-							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							@csrf
+							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<div class="col-md-4">
 							<select name="payType" class="form-control">
 								<option value="cash" {{ $Order->payType == 'cash' ? 'selected' : '' }} >Cash</option>
 								<option value="emt" {{ $Order->payType == 'emt' ? 'selected' : '' }} >E-Transfer</option>
+							</select>
+							</div>
+							<div class="col-md-4">
+							<select name="status" class="form-control">
+								<option value="waiting" {{ $Order->status == 'waiting' ? 'selected' : '' }} >Waiting</option>
+								<option value="pending" {{ $Order->status == 'pending' ? 'selected' : '' }} >Pending Payment</option>
+								<option value="done" {{ $Order->status == 'done' ? 'selected' : '' }} >Done</option>
 							</select>
 							</div>
 							<div class="col-md-4">
