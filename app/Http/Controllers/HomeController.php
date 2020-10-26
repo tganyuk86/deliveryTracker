@@ -769,6 +769,17 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 	
     public function updFinances(Request $request)
     {
+		if(isset($request['uvalue']))
+		{
+			Balance::add($request['uvalue'], $request['note']);
+		}
+		else if(isset($request['svalue']))
+		{
+			Balance::create([
+				'value' => $request['svalue'],
+				'note' => $request['note']
+			]);
+		}
         return redirect('finances');
     }
     public function gmaps()
