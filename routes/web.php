@@ -54,6 +54,7 @@ Route::get('/assignPage/{id}', 'HomeController@showAssign')->name('assignPage');
 Route::post('/savePriority', 'HomeController@savePriority')->name('savePriority');
 
 Route::get('/finances', 'HomeController@finances')->name('finances');
+Route::post('/updfinances', 'HomeController@updFinances')->name('updFinances');
 
 
 Route::get('/rep', 'HomeController@report')->name('report');

@@ -10,10 +10,10 @@
                 <div class="card-header">Update Balance</div>
 
                 <div class="card-body">
-					<form action="" method="POST" >
+					<form action="{{route('updFinances')}}" method="POST" >
 						
 						                    
-						<input type="number" class="form-control" name="value" value="" placeholder="Update Balance"  required>
+						<input type="number" class="form-control" name="uvalue" value="" placeholder="Update Balance"  required>
 						<input type="text" class="form-control" name="note" value="" placeholder="Note"  required>
 						<input type="submit" class="form-control" value="Update Balance">
 
@@ -30,10 +30,10 @@
                 <div class="card-header">Set Balance</div>
 
                 <div class="card-body">
-					<form action="" method="POST" >
+					<form action="{{route('updFinances')}}" method="POST" >
 						
 						                    
-						<input type="number" class="form-control" name="value" value="" placeholder="Set Balance"  required>
+						<input type="number" class="form-control" name="svalue" value="" placeholder="Set Balance"  required>
 						<input type="text" class="form-control" name="note" value="" placeholder="Note"  required>
 						<input type="submit" class="form-control" value="Set Balance">
 
