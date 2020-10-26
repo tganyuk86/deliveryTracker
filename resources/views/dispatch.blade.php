@@ -229,7 +229,7 @@
 						$('.doneInfo').hide();
 					   
 					   $('.doneButton').on('click', function(){
-						  $(this).parent().parent().find('.doneInfo').show(); 
+						  $(this).parent().find('.doneInfo').show(); 
 					   });
 						
 						@foreach(Auth::user()->drivers() as $driver)
