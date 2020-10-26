@@ -12,6 +12,7 @@ use App\Purchases;
 use App\User;
 use App\Order;
 use App\OrderItem;
+use App\Balance;
 
 use Auth;
 
