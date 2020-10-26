@@ -53,6 +53,9 @@ Route::post('/savestockqe', 'HomeController@savestockqe')->name('savestockqe');
 Route::get('/assignPage/{id}', 'HomeController@showAssign')->name('assignPage');
 Route::post('/savePriority', 'HomeController@savePriority')->name('savePriority');
 
+Route::get('/finances', 'HomeController@finances')->name('finances');
+
+
 Route::get('/rep', 'HomeController@report')->name('report');
 Route::post('/report', 'HomeController@loadReport')->name('loadReport');
 // Route::post('/assign', 'HomeController@assign')->name('assign');
