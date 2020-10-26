@@ -31,7 +31,7 @@
                       <div class="col-md-4">
                         <ul>
                           {!! $Order->order !!}
-                          <li>Total: ${{$Order->value}}({{$Order->payType}})</li>
+                          <li>Total: ${{$Order->outstanding}}({{$Order->payType}})</li>
                         </ul>
                       </div>
                       <div class="col-md-4">
