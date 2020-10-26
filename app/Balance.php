@@ -21,7 +21,7 @@ class Balance extends Model
 	public static function add($amount, $note)
 	{
 		$value = Balance::balance();
-		Balance::insert([
+		Balance::create([
 			'value' => $value+$amount,
 			'note' => $note
 		]);
