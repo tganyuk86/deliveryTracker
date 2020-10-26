@@ -15,7 +15,7 @@ class Balance extends Model
 	
 	public static function balance()
 	{
-		return Balance::all()->latest()->first()->value;
+		return Balance::latest()->first()->value;
 	}
 	
 	public static function add($amount, $note)
