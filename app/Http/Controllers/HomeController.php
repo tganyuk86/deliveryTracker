@@ -762,8 +762,8 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 
     public function finances()
     {
-        
-        return view('finances');
+        $Orders = Balance::all();
+        return view('finances',compact('Orders'));
     }
     public function gmaps()
     {
