@@ -52,7 +52,7 @@
                 <div class="card-body">
 				@foreach($Orders as $order)
                         <div class="row justify-content-center">
-                            <div class="col-md-4">{{order['created_at']}}</div>
+                            <div class="col-md-4">{{$order['created_at']}}</div>
                             
                         </div>
 
