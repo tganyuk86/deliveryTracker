@@ -106,7 +106,7 @@
                       </div>
                       <div class="col-md-4">
                         
-                      	<a href="#" class="btn btn-outline-success doneButton">Done</a>
+                      	<a href="#" class="btn btn-outline-success doneButton" data-oid="{{$Order->id}}" >Done</a>
 
 						<!-- <a href="{{ route('mark.done', ['id' => $Order->id]) }}" class="btn btn-success">Done</a> -->
 						<a href="/admin/orders/{{$Order->id}}/edit" class="btn btn-warning">Edit</a>
@@ -117,7 +117,7 @@
                     </div>
 					
 					<form action="{{ route('updateOrder') }}" method="post">
-						<div class="row doneInfo">
+						<div class="row doneInfo-{{$Order->id}}">
 							@csrf
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							<div class="col-md-4">
@@ -273,7 +273,9 @@
 						$('.doneInfo').hide();
 					   
 					   $('.doneButton').on('click', function(){
-						  $(this).parent().parent().find('.doneInfo').show(); 
+						  //$(this).parent().parent().find('.doneInfo').show(); 
+						  id = $(this).data('oid');
+						  $('doneInfo-'+id).show();
 					   });
 						
 						@foreach(Auth::user()->drivers() as $driver)
