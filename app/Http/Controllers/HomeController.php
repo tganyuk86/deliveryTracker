@@ -491,13 +491,13 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         {
             $stock = Stock::find($stockID);
 
+            if($request['orderquantity'][$stockID] > 1)
+            {
+                $order .= $request['orderquantity'][$stockID].'x ';
+            }
             if($stock->type()->id != 5)
             {
                 $order .= $stock->type()->name.' of ';
-            }
-            else
-            {
-                $order .= $request['orderquantity'][$stockID].'x ';
             }
             $value += $request['ordervalue'][$stock->product()->id];
             $order .= $stock->product()->name.', ';
