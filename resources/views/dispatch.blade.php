@@ -74,7 +74,7 @@
 							</select>
 							</div>
 							<div class="col-md-4">
-							<input type="number" name="total" value="{{ $Order->value }}" class="form-control" />
+							<input type="number" name="outstanding" value="{{ $Order->outstanding }}" class="form-control" />
 							</div>
 							<div class="col-md-4">
 							<textarea name="customerNotes" placeholder="Customer Notes" class="form-control" >{{ $Order->customer()->notes }}</textarea>
