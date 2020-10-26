@@ -56,8 +56,8 @@
 
                       </div>
 					  
-					  <div class="row doneInfo">
 						<form action="{{ route('mark.doneForm') }}" method="post">
+					  <div class="row doneInfo">
 							<input type="hidden" name="orderID" value="{{ $Order->id }}" />
 							@csrf
 							<div class="col-md-4">
@@ -67,15 +67,15 @@
 							</select>
 							</div>
 							<div class="col-md-4">
-							<input type="number" name="total" value="{{ $Order->value }}" />
+							<input type="number" name="total" value="{{ $Order->value }}" class="form-control" />
 							</div>
 							<div class="col-md-4">
-							<textarea name="customerNotes" placeholder="Customer Notes" >{{ $Order->customer()->notes }}</textarea>
+							<textarea name="customerNotes" placeholder="Customer Notes" class="form-control" >{{ $Order->customer()->notes }}</textarea>
 							</div>
 							<button class="btn btn-success" >Finish</button>
 							
-						</form>
 						</div>
+						</form>
                     </div>
 
 				<hr />
