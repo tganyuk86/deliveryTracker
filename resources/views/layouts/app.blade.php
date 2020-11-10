@@ -100,7 +100,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                            @if(Auth::user()->isAdmin())
+                                
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-warning" href="#">${{App\Balance::balance()}}</a>
+                            </li>
+                            @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -112,13 +117,10 @@
                             </li>
                             
                         @else
-							<li class="nav-item">
-                                <a class="nav-link" href="{{ route('orders') }}">Orders</a>
-                            </li>
-							@if(Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link btn btn-error" href="#">${{App\Balance::balance()}}</a>
+                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">Orders</a>
                             </li>
+                            @if(Auth::user()->isAdmin())
 							<li class="nav-item">
                                 <a class="nav-link btn btn-info" href="{{ route('neworder') }}">New Order</a>
                             </li>
