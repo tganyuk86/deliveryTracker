@@ -451,6 +451,73 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         ]);
 
     }
+    public function saveQuickSale()
+    {
+        $totalValue = 0;
+        $order = '';
+        $dfee = 0;
+        
+        foreach ($request['order'] as $stockID => $data) 
+        {
+            $stock = Stock::find($stockID);
+
+
+            $quantity = isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1;
+            $value = $request['ordervalue'][$stock->product()->id];
+            $updatedata = [
+                'stockID' => $stockID,
+                'orderID' => $new->id,
+                'quantity' => $quantity,
+                'value' => $value,
+                'markup' => $value - ($stock->product()->cost()*$quantity)
+            ];
+           
+
+            OrderItem::create($updatedata);
+            
+
+            if($request['orderquantity'][$stockID] > 1)
+            {
+                $order .= $request['orderquantity'][$stockID].'x ';
+            }
+            if($stock->type()->id != 5)
+            {
+                $order .= $stock->type()->name.' of ';
+            }
+            $totalValue += $request['ordervalue'][$stock->product()->id];
+            $order .= $stock->product()->name.', ';
+            $stock->reduceAvailable($request['driverID'], isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1 );
+        }
+
+        $customer = Customer::find($request['customerID']);
+        
+        $customer->update([
+            'phone' => $request['phone'],
+            'address' => $request['address'],
+        ]);
+        
+        $new = Order::create([
+            'lat' => $request['lat'],
+            'lon' => $request['lon'],
+            'value' => $totalValue,
+            'outstanding' => $totalValue,
+            'order' => $order,
+            'dfee' => $dfee,
+            'phone' => $customer->phone,
+            'address' => $customer->address,
+            'payType' => $request['payType'],
+            'customerID' => $customer->id,
+            'driverID' => $request['driverID'],
+            'locationID' => 'na'
+
+        ]);
+        activity()->on($new)->log('Order Added - '.$customer->name);
+
+        
+
+        return redirect('neworder');
+    }
+
     public function quickSale()
     {
         $products = Stock::allActiveSortedFull();
