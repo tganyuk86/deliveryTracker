@@ -451,7 +451,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         ]);
 
     }
-    public function saveQuickSale()
+    public function saveQuickSale(Request $request)
     {
         $totalValue = 0;
         $order = '';
@@ -508,11 +508,13 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             'payType' => $request['payType'],
             'customerID' => $customer->id,
             'driverID' => $request['driverID'],
-            'locationID' => 'na'
+            'locationID' => 'na',
+            'status' => 'done'
 
         ]);
-        activity()->on($new)->log('Order Added - '.$customer->name);
+        activity()->on($new)->log('Order quick Added - '.$customer->name);
 
+        Balance::add($totalValue, $customer->name . ' bought ' . $order);
         
 
         return redirect('neworder');
