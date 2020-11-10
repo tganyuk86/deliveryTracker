@@ -34,3 +34,9 @@ sup {
 	vertical-align: super;
 	line-height: 15px;
 }
+
+.staticButton {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}

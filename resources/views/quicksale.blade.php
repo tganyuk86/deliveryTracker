@@ -95,7 +95,7 @@
 						@endforeach
 					</select>
 					  
-                    <input type="submit" class="form-control btn btn-info" name="" value="Save">
+                    <input type="submit" class="form-control btn btn-info staticButton" name="" value="Save">
                     </form>
 
 
