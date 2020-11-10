@@ -494,7 +494,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             'customerID' => $customer->id,
             'driverID' => $request['driverID'],
             'locationID' => 'na',
-            'status' = => 'done'
+            'status' => 'done'
 
         ]);
         activity()->on($new)->log('Order Added - '.$customer->name);
