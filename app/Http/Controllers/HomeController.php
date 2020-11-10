@@ -451,16 +451,27 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         ]);
 
     }
+    public function quickSale()
+    {
+        $products = Stock::allActiveSortedFull();
+        $Customers = Customer::all();
+        
+        return view('quicksale', [ 
+            'products' => $products, 
+            'customer' => new Customer() ,
+            'Customers' => $Customers
+        ]);
+    }
     public function newOrder()
     {
         $products = Stock::allActiveSortedFull();
         $Customers = Customer::all();
-		
+        
         return view('neworder', [ 
-			'products' => $products, 
-			'customer' => new Customer() ,
-			'Customers' => $Customers
-		]);
+            'products' => $products, 
+            'customer' => new Customer() ,
+            'Customers' => $Customers
+        ]);
     }
     public function newOrderFor($customerID)
     {

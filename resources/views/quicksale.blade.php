@@ -14,7 +14,7 @@
                         
                     <select name="customerID">
                     	<option value="0">General</option>
-                    	@foreach($customers as $customer)
+                    	@foreach($Customers as $customer)
                     	<option value="{{$customer->id}}">{{$customer->name}}</option>
                     	@endforeach
                     </select>

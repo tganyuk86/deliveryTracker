@@ -122,8 +122,11 @@
 							<li class="nav-item">
                                 <a class="nav-link" href="/admin">Admin</a>
                             </li>
-							<li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="/driverhome">Driver View</a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="/quicksale">Quick Sale</a>
                             </li>
 							@endif
                             <li class="nav-item dropdown">
