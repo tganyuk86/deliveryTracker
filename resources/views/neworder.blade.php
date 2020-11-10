@@ -38,45 +38,59 @@
                     
                     <label>Order</label>
                     @foreach($products as $cat => $prods)
-					<hr>
-					{{$cat}}
-					<hr>
+                    {{$cat}}
                     @foreach($prods as $prod => $row)
-                      <h3>{{ $prod }}</h3>
-                      @foreach($row as $type => $data)
-                        <div class="row" style="color: {{$data->isAvailable(5) ? 'green' : 'red'}}" >
-							<div class="col-md-1">
-							  <input 		 type="checkbox" 
-											 name="order[{{$data->id}}]" 
-											value="{{$data->id}}" 
-											class="" 
-									  data-toggle="popover"
-									  data-action="calcTotal"								  
-									 data-content="${{ $data->price }}"  
-									   data-value="{{ $data->price }}" 
-									   data-product-id="{{ $data->product()->id }}" 
-							  />
-							
-							</div>
-							<div class="col-md-4">
-							
-							  {{$type}}
-							 </div>
-							 <div class="col-md-1">
-								X
-							 </div>
-							<div class="col-md-4">
+
+                    <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{$loop->iteration}}{{$loop->parent->iteration}}" aria-expanded="true" aria-controls="collapseOne">
+                    {{$prod}}
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapse{{$loop->iteration}}{{$loop->parent->iteration}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+            @foreach($row as $type => $data)
+                        <div class="row" style="color: {{$data->isAvailable(0) ? 'green' : 'red'}}" >
+              <div class="col-md-1">
+                <input     type="checkbox" 
+                       name="order[{{$data->id}}]" 
+                      value="{{$data->id}}" 
+                      class="" 
+                    data-toggle="popover"
+                    data-action="calcTotal"                 
+                   data-content="${{ $data->price }}"  
+                     data-value="{{ $data->price }}" 
+                     data-product-id="{{ $data->product()->id }}" 
+                />
+              
+              </div>
+              <div class="col-md-4">
+              
+                {{$type}}
+               </div>
+               <div class="col-md-1">
+                X
+               </div>
+              <div class="col-md-4">
                          
-								<input type="number" name="orderquantity[{{$data->id}}]" value="1">
+                <input type="number" name="orderquantity[{{$data->id}}]" value="1">
                           
-							</div>
+              </div>
                         </div>
 
                       @endforeach
-					  Value:
-					  <input type="text" value="0" name="ordervalue[{{$data->product()->id}}]" />
-					  
-					  <hr />
+            Value:
+            <input type="text" value="0" name="ordervalue[{{$data->product()->id}}]" />
+            
+                </div>
+              </div>
+            </div>
+          </div>
+                      
                     @endforeach
                     @endforeach
                     <br />
