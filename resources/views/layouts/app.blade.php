@@ -117,7 +117,7 @@
                             </li>
 							@if(Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link btn btn-error" href="#">${{Balance::balance()}}</a>
+                                <a class="nav-link btn btn-error" href="#">${{App\Balance::balance()}}</a>
                             </li>
 							<li class="nav-item">
                                 <a class="nav-link btn btn-info" href="{{ route('neworder') }}">New Order</a>
