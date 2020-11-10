@@ -506,7 +506,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
                 'orderID' => $new->id,
                 'quantity' => $quantity,
                 'value' => $value,
-                'markup' => $value - ($stock->product()->cost()*$quantity)
+                'markup' => $value - ($stock->product()->cost()*($quantity*$stock->type()->amount))
             ];
            
 
@@ -646,7 +646,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 			
 			$quantity = isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1;
 			$value = $request['ordervalue'][$stock->product()->id];
-dd([$value, $stock->product()->cost(), $quantity, $stock->type()->amount]);
+//dd([$value, $stock->product()->cost(), $quantity, $stock->type()->amount]);
             $updatedata = [
                 'stockID' => $stockID,
                 'orderID' => $new->id,
