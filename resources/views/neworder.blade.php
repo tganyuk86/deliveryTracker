@@ -23,9 +23,9 @@
                     
                      <label>Delivery fee</label>
                      <select class="form-control" name="deliveryFee">
+                       <option value="0">No</option>
                        <option value="auto">Auto</option>
                        <option value="1">Yes</option>
-                       <option value="0">No</option>
                      </select>
 					 
 					 
@@ -105,7 +105,7 @@
 					
 					<label>Assigne to</label>
 					<select name="driverID" class="form-control" required>
-						<option value='' >Choose Driver</option>
+						<!-- <option value='' >Choose Driver</option> -->
 						<option value='0' >House</option>
 						@foreach(Auth::user()->drivers() as $driver)
 						  <option value="{{$driver->id}}">{{$driver->name}}</option>
