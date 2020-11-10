@@ -35,7 +35,7 @@
 					  <div class="card">
 					    <div class="card-header" id="headingOne">
 					      <h2 class="mb-0">
-					        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{data->id}}" aria-expanded="true" aria-controls="collapseOne">
+					        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapseOne">
 					          {{$prod}}
 					        </button>
 					      </h2>
