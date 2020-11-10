@@ -62,6 +62,7 @@ Route::post('/report', 'HomeController@loadReport')->name('loadReport');
 // Route::post('/assign', 'HomeController@assign')->name('assign');
 
 Route::get('/quicksale', 'HomeController@quickSale')->name('quickSale');
+Route::post('/savequicksale', 'HomeController@saveQuickSale')->name('saveQuickSale');
 Route::post('/orders/update', 'HomeController@updateOrder')->name('updateOrder');
 Route::post('/orders/mark/done', 'HomeController@markDoneForm')->name('mark.doneForm');
 Route::get('/orders/mark/done/{id}', 'HomeController@markDone')->name('mark.done');
