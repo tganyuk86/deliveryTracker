@@ -453,28 +453,13 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
     }
     public function saveQuickSale(Request $request)
     {
-        $totalValue = 0;
+        $value = 0;
         $order = '';
         $dfee = 0;
         
         foreach ($request['order'] as $stockID => $data) 
         {
             $stock = Stock::find($stockID);
-
-
-            $quantity = isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1;
-            $value = $request['ordervalue'][$stock->product()->id];
-            $updatedata = [
-                'stockID' => $stockID,
-                'orderID' => $new->id,
-                'quantity' => $quantity,
-                'value' => $value,
-                'markup' => $value - ($stock->product()->cost()*$quantity)
-            ];
-           
-
-            OrderItem::create($updatedata);
-            
 
             if($request['orderquantity'][$stockID] > 1)
             {
@@ -484,7 +469,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             {
                 $order .= $stock->type()->name.' of ';
             }
-            $totalValue += $request['ordervalue'][$stock->product()->id];
+            $value += $request['ordervalue'][$stock->product()->id];
             $order .= $stock->product()->name.', ';
             $stock->reduceAvailable($request['driverID'], isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1 );
         }
@@ -499,8 +484,8 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         $new = Order::create([
             'lat' => $request['lat'],
             'lon' => $request['lon'],
-            'value' => $totalValue,
-            'outstanding' => $totalValue,
+            'value' => $value,
+            'outstanding' => $value,
             'order' => $order,
             'dfee' => $dfee,
             'phone' => $customer->phone,
@@ -509,12 +494,31 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
             'customerID' => $customer->id,
             'driverID' => $request['driverID'],
             'locationID' => 'na',
-            'status' => 'done'
+            'status' = => 'done'
 
         ]);
-        activity()->on($new)->log('Order quick Added - '.$customer->name);
+        activity()->on($new)->log('Order Added - '.$customer->name);
+        Balance::add($value, $customer->name . ' bought ' . $order);
 
-        Balance::add($totalValue, $customer->name . ' bought ' . $order);
+        foreach ($request['order'] as $stockID => $data) 
+        {
+            $stock = Stock::find($stockID);
+            
+            $quantity = isset($request['orderquantity'][$stockID]) ? $request['orderquantity'][$stockID] : 1;
+            $value = $request['ordervalue'][$stock->product()->id];
+            $updatedata = [
+                'stockID' => $stockID,
+                'orderID' => $new->id,
+                'quantity' => $quantity,
+                'value' => $value,
+                'markup' => $value - ($stock->product()->cost()*$quantity)
+            ];
+           
+
+            OrderItem::create($updatedata);
+            
+        }
+        
         
 
         return redirect('neworder');
