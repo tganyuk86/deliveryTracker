@@ -594,7 +594,20 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 			'payType' => $request['payType'],
 			'outstanding' => $request['outstanding']
 		];
-		
+
+        
+        if($request['status'] == 'done')
+        {
+            $update['outstanding'] = 0;
+            Balance::add($Order->outstanding,$Order->customer()->name.' paid');
+        }
+		else if($request['outstanding'] != $Order->outstanding)
+        {
+            $dif = $Order->outstanding-$request['outstanding'];
+            Balance::add($diff,$Order->customer()->name.' paid');
+            
+        }
+
 		 $Order->update($update);
 
 		return redirect()->back();
@@ -624,20 +637,25 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
     public function markDoneForm(Request $request)
 	{
 		$Order = Order::find($request['orderID']);
+
+        $update = [
+            'payType' => $request['payType'],
+            'value' => $request['total']
+        ];
 		
-		if($Order['payType'] == 'cash')
-			$status = 'done';
-		elseif($Order['payType'] == 'emt' && $Order['status'] == 'waiting')
-			$status = 'pending';
+		if($Order['payType'] == 'emt' && $Order['status'] == 'waiting')
+        {
+			$update['status'] = 'pending';
+        }
 		else
-			$status = 'done';
+        {
+			$update['status'] = 'done';
+            $update['outstanding'] = 0;
+            Balance::add($Order->outstanding,$Order->customer()->name.' paid');
+        }
 		
 		
-        $Order->update([
-			'status'=> $status,
-			'payType' => $request['payType'],
-			'value' => $request['total']
-		]);
+        $Order->update($update);
 		
 		$Order->customer()->update(['notes'=>$request['customerNotes']]);
         
@@ -648,7 +666,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 	
     public function markDone($id)
     {
-
+die('This doesnt calc finances');
         $Order = Order::find($id);
 		if($Order['payType'] == 'cash')
 			$status = 'done';
