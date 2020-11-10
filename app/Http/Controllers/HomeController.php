@@ -603,7 +603,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         }
 		else if($request['outstanding'] != $Order->outstanding)
         {
-            $dif = $Order->outstanding-$request['outstanding'];
+            $diff = $Order->outstanding-$request['outstanding'];
             Balance::add($diff,$Order->customer()->name.' paid');
             
         }
