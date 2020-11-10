@@ -35,13 +35,13 @@
 					  <div class="card">
 					    <div class="card-header" id="headingOne">
 					      <h2 class="mb-0">
-					        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="true" aria-controls="collapseOne">
+					        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{$loop->iteration}}{{$loop->parent->iteration}}" aria-expanded="true" aria-controls="collapseOne">
 					          {{$prod}}
 					        </button>
 					      </h2>
 					    </div>
 
-					    <div id="collapse{{$loop->iteration}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					    <div id="collapse{{$loop->iteration}}{{$loop->parent->iteration}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 					      <div class="card-body">
 						@foreach($row as $type => $data)
                         <div class="row" style="color: {{$data->isAvailable(0) ? 'green' : 'red'}}" >
