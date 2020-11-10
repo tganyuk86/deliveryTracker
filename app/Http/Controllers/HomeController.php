@@ -477,10 +477,10 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         $customer = Customer::find($request['customerID']);
         
         $new = Order::create([
-            'lat' => $request['lat'],
-            'lon' => $request['lon'],
+            'lat' => 0,
+            'lon' => 0,
             'value' => $value,
-            'outstanding' => $value,
+            'outstanding' => 0,
             'order' => $order,
             'dfee' => $dfee,
             'phone' => $customer->phone,
