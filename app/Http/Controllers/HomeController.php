@@ -651,7 +651,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
                 'orderID' => $new->id,
 				'quantity' => $quantity,
 				'value' => $value,
-				'markup' => $value - ($stock->product()->cost()*$quantity)
+				'markup' => $value - ($stock->product()->cost() * ($quantity * $stock->amount))
             ];
            
 
