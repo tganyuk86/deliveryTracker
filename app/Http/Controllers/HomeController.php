@@ -516,7 +516,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         
         
 
-        return redirect('quickSale');
+        return redirect('quicksale');
     }
 
     public function quickSale()
