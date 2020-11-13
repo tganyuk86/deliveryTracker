@@ -535,7 +535,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         $products = Stock::allActiveSortedFull();
         $Customers = Customer::all();
         
-        return view('neworder', [ 
+        return view(env('APP_BRAND').'.neworder', [ 
             'products' => $products, 
             'customer' => new Customer() ,
             'Customers' => $Customers

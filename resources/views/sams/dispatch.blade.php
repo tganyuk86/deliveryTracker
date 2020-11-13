@@ -8,7 +8,7 @@
         </div>
     @endif
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Orders</div>
 
@@ -23,9 +23,6 @@
                       </div> -->
                       <div class="col-md-4">
                         <b>#{{$key++}}: {{$Order->customer()->name}}</b><br>
-                        {{$Order->customer()->address}}<br>
-                        
-                        <sup>{{$Order->customer()->phone}}</sup>
                         <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
                       <div class="col-md-4">
@@ -94,8 +91,6 @@
                       
                       <div class="col-md-4">
                         {{$Order->customer()->name}}
-                        <sup>{{$Order->customer()->address}}</sup>
-                        <sup>{{$Order->customer()->phone}}</sup>
                         <sup>{{ $Order->created_at->diffForHumans() }}<sup>
                       </div>
                       <div class="col-md-4">
@@ -198,139 +193,11 @@
                       </script>
                 </div>
             </div>
-            <div class="card" style="display:">
-                <div class="card-header">Stock</div>
-
-                <div class="card-body">
-
-
-
-                @foreach($stocks as $product => $data)
-                    <h2>{{$product}}</h2>
-                     <div class="row ">
-                        @foreach($data as $type => $stock)
-                          <div class="col-md-3">
-                            {{$type}} (${{$stock->price}})
-                          </div>
-                        @endforeach
-                      </div>
-                @endforeach
-                        
-                       
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Map</div>
-
-                <div class="card-body">
-
-
-                      <div class="myMap" id="mymap"></div>
-
-
-
-
-                      <script type="text/javascript">
-
-
-                        var Orders = <?php print_r(json_encode($Orders)) ?>;
-
-
-                        var mymap = new GMaps({
-                          el: '#mymap',
-                          lat: 43.6532,
-                          lng: -79.3832,
-                          zoom:11
-                        });
-
-						ind = -1;
-                        $.each( Orders, function( index, value ){
-							ind++;
-                            mymap.addMarker({
-                              lat: value.lat,
-                              lng: value.lon,
-                              title: value.customerData.address,
-                              label: '('+ind+')',
-                              click: function(e) {
-                                alert('This is '+value.lat+'.');
-                              }
-                            }); 
-
-                       });
-
-                        $('.assignDriver').on('click', function () {
-                          $('[name="orderID"]').val($(this).data('orderid'));
-                        });
-						
-						setTimeout(function() {
-						  location.reload();
-						}, 180000);
-						
-						$('.doneInfo').hide();
-					   
-					   $('.doneButton').on('click', function(){
-						  //$(this).parent().parent().find('.doneInfo').show(); 
-						  id = $(this).data('oid');
-						  $('.doneInfo-'+id).show();
-					   });
-						
-						@foreach(Auth::user()->drivers() as $driver)
-						@if($driver->lat)
-						 mymap.addMarker({
-                              lat: {{ $driver->lat }},
-                              lng: {{ $driver->lon }},
-                              title: '{{ $driver->name }}',
-                              label: '{{ substr($driver->name, 0, 1) }}',
-                              click: function(e) {
-                                alert('{{ $driver->updated_at->diffForHumans()}}');
-                              }
-                            });
-						@endif
-                        @endforeach
-                      </script>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
             
         </div>
-
+        
     </div>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="assignDriver" tabindex="-1" role="dialog" aria-labelledby="assignDriverLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <form action="/assign" method="POST">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Assign to</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          @csrf
-          <select name="driverID">
-            @foreach($drivers as $driver)
-              <option value="{{$driver->id}}">{{$driver->name}}</option>
-            @endforeach
-          </select>
-          <input type="hidden" name="orderID">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-        </form>
-    </div>
-  </div>
-</div>
 @endsection
