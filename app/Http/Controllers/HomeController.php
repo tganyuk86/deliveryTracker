@@ -116,7 +116,7 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         }
 
         if(Auth::user()->isAdmin())
-            $view = 'custom/'.$config[].'.dispatch';
+            $view = 'custom/'.config('APP_BRAND').'.dispatch';
         else
             $view = 'home';
  //dump($Orders);
