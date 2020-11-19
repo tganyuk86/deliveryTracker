@@ -106,10 +106,14 @@
                             @if(Auth::user()->isAdmin())
                                 
 							<li class="nav-item">
-                                <a class="nav-link btn btn-info" href="/quicksale">Quick Sale</a>
+                                <a class="nav-link" href="/quicksale">
+                                    <button class="btn btn-info">Quick Sale</button>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-warning" href="#">${{App\Balance::balance()}}</a>
+                                <a class="nav-link" href="/finances">
+                                    <button class="btn btn-info">${{App\Balance::balance()}}</button>
+                                </a>
                             </li>
                             @endif
                     </ul>
@@ -124,17 +128,25 @@
                             
                         @else
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">Orders</a>
+                                <a class="nav-link" href="{{ route('orders') }}">
+                                    <button class="btn btn-info">Orders</button>
+                                </a>
                             </li>
                             @if(Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="{{ route('neworder') }}">New Order</a>
+                                <a class="nav-link" href="{{ route('neworder') }}">
+                                    <button class="btn btn-info">New Order</button>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="/admin">Admin</a>
+                                <a class="nav-link" href="/admin">
+                                    <button class="btn btn-info">Admin</button>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="/driverhome">Driver View</a>
+                                <a class="nav-link" href="/driverhome">
+                                    <button class="btn btn-info">Driver View</button>
+                                </a>
                             </li>
 							@endif
                             <li class="nav-item dropdown">
@@ -183,7 +195,9 @@
                             
                         @else
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">Orders</a>
+                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">
+                                    <button class="btn btn-info">Orders</button>
+                                </a>
                             </li>
                             @if(Auth::user()->isAdmin())
                             <li class="nav-item">
@@ -192,7 +206,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="/driverhome">Driver View</a>
+                                <a class="nav-link btn btn-info" href="/driverhome">
+                                    <button class="btn btn-info">Driver View</button>
+                                </a>
                             </li>
                             @endif
                             <li class="nav-item dropdown">
