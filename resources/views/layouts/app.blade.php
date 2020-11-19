@@ -99,6 +99,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+@if(env('APP_BRAND') == 'sams')
                     @guest
                     @else
                     <ul class="navbar-nav mr-auto">
@@ -170,6 +171,62 @@
                             </li>
                         @endguest
                     </ul>
+@elseif(env('APP_BRAND') == 'litphast')
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">Orders</a>
+                            </li>
+                            @if(Auth::user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-info" href="{{ route('neworder') }}">New Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-info" href="/driverhome">Driver View</a>
+                            </li>
+                            @endif
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    More <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->isAdmin())
+                                    <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="/admin">Admin</a>
+                                    <a class="dropdown-item" href="{{ route('orders') }}">Orders</a>
+                                    <a class="dropdown-item" href="{{ route('neworder') }}">New Order</a>
+                                    <a class="dropdown-item" href="{{ route('map') }}">Map</a>
+                                    <a class="dropdown-item" href="{{ route('customers') }}">Customers</a>
+                                    <a class="dropdown-item" href="{{ route('stock') }}">Stock Prices</a>
+                                    <a class="dropdown-item" href="{{ route('stockqe') }}">Stock QE</a>
+                                    <a class="dropdown-item" href="{{ route('allstock') }}">Stock</a>
+                                    <a class="dropdown-item" href="{{ route('movestock') }}">Move Stock</a>
+                                    <a class="dropdown-item" href="{{ route('report') }}">Report</a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+
+@endif
                 </div>
             </div>
         </nav>
