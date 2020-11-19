@@ -62,7 +62,7 @@
 
 
                   @foreach($pendingOrders as $Order)
-                    <div class="row pending" >
+                    <div class="row pending" data-filtered="orders">
                       
                       <div class="col-md-4">
                         {{$Order->customer()->address}}
@@ -95,7 +95,7 @@
 
                   @endforeach
                   @foreach($doneOrders as $Order)
-                    <div class="row done" >
+                    <div class="row done" data-filtered="orders">
                       
                       <div class="col-md-4">
                         {{$Order->customer()->address}}
