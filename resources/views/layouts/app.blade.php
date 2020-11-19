@@ -195,8 +195,8 @@
                             
                         @else
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="{{ route('orders') }}">
-                                    <button class="btn btn-info">Orders</button>
+                                <a class="nav-link" href="{{ route('orders') }}">
+                                    <button class="btn">Orders</button>
                                 </a>
                             </li>
                             @if(Auth::user()->isAdmin())
@@ -206,7 +206,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="/driverhome">
+                                <a class="nav-link" href="/driverhome">
                                     <button class="btn btn-info">Driver View</button>
                                 </a>
                             </li>
