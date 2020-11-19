@@ -55,7 +55,7 @@ class Product extends Model
 		if($purchase)
 			return round($purchase->cost/$purchase->units,2);
 		
-		return 'na';
+		return 0;
 	}
     public function homeStock()
     {
