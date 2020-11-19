@@ -186,7 +186,13 @@
 
 
                       <script type="text/javascript">
-
+$('.doneInfo').hide();
+             
+             $('.doneButton').on('click', function(){
+              //$(this).parent().parent().find('.doneInfo').show(); 
+              id = $(this).data('oid');
+              $('.doneInfo-'+id).show();
+             });
 
                     
 
