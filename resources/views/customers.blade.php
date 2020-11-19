@@ -6,8 +6,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Customers</div>
-<input id="myInput" placeholder="filter" />
+                <div class="card-header">Customers
+<input id="myInput" placeholder="filter" class="ml-auto" />
+                </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-2">
@@ -16,7 +17,7 @@
                     <div class="col-md-2">
                       Phone
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                       # of Orders
                     </div>
                     <div class="col-md-4">
@@ -43,8 +44,8 @@
                         {{$customer->name}}
                       </div>
                       <div class="col-md-2">
-<a href="/admin/customers/{{$customer->id}}/edit" class="btn btn-info"><button>Edit</button></a>
-<a href="/neworder/{{$customer->id}}" class="btn btn-info"><button>Order</button></a>
+<a href="/admin/customers/{{$customer->id}}/edit" class="btn btn-info">Edit</a>
+<a href="/neworder/{{$customer->id}}" class="btn btn-info">Order</a>
                       </div>
                     </div>
 
