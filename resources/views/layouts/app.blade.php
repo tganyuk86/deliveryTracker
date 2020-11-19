@@ -187,7 +187,9 @@
                             </li>
                             @if(Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link btn btn-info" href="{{ route('neworder') }}">New Order</a>
+                                <a class="nav-link" href="{{ route('neworder') }}">
+                                    <button class="btn btn-info">New Order</button>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link btn btn-info" href="/driverhome">Driver View</a>
