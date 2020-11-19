@@ -135,17 +135,17 @@
                             @if(Auth::user()->isAdmin())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('neworder') }}">
-                                    <button class="btn btn-info">New Order</button>
+                                    <button class="btn">New Order</button>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin">
-                                    <button class="btn btn-info">Admin</button>
+                                    <button class="btn">Admin</button>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/driverhome">
-                                    <button class="btn btn-info">Driver View</button>
+                                    <button class="btn">Driver View</button>
                                 </a>
                             </li>
 							@endif
@@ -202,12 +202,12 @@
                             @if(Auth::user()->isAdmin())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('neworder') }}">
-                                    <button class="btn btn-info">New Order</button>
+                                    <button class="btn">New Order</button>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/driverhome">
-                                    <button class="btn btn-info">Driver View</button>
+                                    <button class="btn">Driver View</button>
                                 </a>
                             </li>
                             @endif
