@@ -235,5 +235,16 @@
             @yield('content')
         </main>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $(".myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("[data-filtered="+$(this).data('filter')+"]").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
 </body>
 </html>

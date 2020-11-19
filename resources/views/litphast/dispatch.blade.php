@@ -10,13 +10,15 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Orders</div>
+                <div class="card-header">Orders
+                <input data-filter="orders" placeholder="Filter" class="myInput" />
+                </div>
 
                 <div class="card-body">
                  
 
                   @foreach($Orders as $key => $Order)
-                    <div class="row">
+                    <div class="row" data-filtered="orders">
                      <!--  <div class="col-md-2">
                         {{ $Order->called_at}}
 

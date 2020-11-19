@@ -6,8 +6,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Customers
-<input id="myInput" placeholder="filter" class="ml-auto" />
+                <div class="card-header">
+                  Customers
+                  <input data-filter="customers" placeholder="Filter" class="myInput" />
                 </div>
                 <div class="card-body">
                   <div class="row">
@@ -29,7 +30,7 @@
                   </div>
 
                   @foreach($Customers as $customer)
-                    <div class="row filtered">
+                    <div class="row" data-filtered="customers">
                       <div class="col-md-2">
                         {{$customer->address}}
                         
@@ -65,14 +66,7 @@
 </div>
 
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $(".filtered").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
+
 
 </script>
 @endsection
