@@ -746,7 +746,8 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 	
     public function markDone($id)
     {
-die('This doesnt calc finances');
+//Litphast uses this...
+//die('This doesnt calc finances');
         $Order = Order::find($id);
 		if($Order['payType'] == 'cash')
 			$status = 'done';
