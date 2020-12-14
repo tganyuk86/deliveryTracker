@@ -23,7 +23,8 @@ class Customer extends Model
 
 		$did = '6478128291';
 		$dst = $this->phone;
-		//$message = 'test';
+		if(substr($dst,0,2) == '+1') $dst = substr($dst,2,10);
+		if(substr($dst,0,1) == '1') $dst = substr($dst,1,10);
 		
 		$url = "https://voip.ms/api/v1/rest.php?api_username=".env('VOIP_USER')."&api_password=".env('VOIP_PASS')."&method=".$method."&did=".$did."&dst=".$dst."&message=".$message;
 		//dump($url);
