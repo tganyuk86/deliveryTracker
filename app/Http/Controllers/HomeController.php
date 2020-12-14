@@ -910,10 +910,9 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
 	
 	public function sendSMS(Request $request)
 	{
-		dump($request);
 		foreach($request['users'] as $userID)
 		{
-			dd(User::find($userID));//->sendSMS($request['message']);
+			Customer::find($userID)->sendSMS($request['message']);
 		}
 		return redirect('home');
 	}
