@@ -16,7 +16,7 @@ use App\Balance;
 
 use Auth;
 
-class HomeController extends Controller
+class VoipController extends Controller
 {
     /**
      * Create a new controller instance.
