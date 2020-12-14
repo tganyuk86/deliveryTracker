@@ -50,7 +50,7 @@ class VoipController extends Controller
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt($ch, CURLOPT_URL, 
-			"https://voip.ms/api/v1/rest.php?api_username=".env('voipUser')."&api_password=".env('voipPass')."&method=".$method."&did=".$did."&dst=".$dst."&message=".$message);
+			"https://voip.ms/api/v1/rest.php?api_username=".env('VOIP_USER')."&api_password=".env('VOIP_PASS')."&method=".$method."&did=".$did."&dst=".$dst."&message=".$message);
 		$result = curl_exec($ch);
 		curl_close($ch);
 
