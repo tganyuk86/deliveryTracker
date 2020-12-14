@@ -13,7 +13,7 @@
                 <div class="card-body">
 			<form action="{{route('sendSMS')}}" method="POST" >
 				<label>Message</label>
-				<textarea>myTest</textarea>
+				<textarea name="message">myTest</textarea>
 				
 				<label>Customers</label>
                   <div class="row">
