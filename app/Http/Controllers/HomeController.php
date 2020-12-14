@@ -907,4 +907,17 @@ $pendingOrders = Order::getPending()->sortByDesc('updated_at');
         $Orders = Order::all();
         return view('map',compact('Orders'));
     }
+	
+	public function sendSMS(Request $request)
+	{
+		dd($request);
+	}
+	
+	public function makeSMS()
+	{
+		$Customers = Customer::all();
+
+        return view('sendSMS', ['Customers' => $Customers]);
+    
+	}
 }

@@ -57,7 +57,8 @@ Route::get('/finances', 'HomeController@finances')->name('finances');
 Route::post('/updfinances', 'HomeController@updFinances')->name('updFinances');
 
 
-Route::get('/tv', 'VoipController@testVoip');
+Route::get('/sms', 'HomeController@makeSMS')->name('makeSMS');
+Route::get('/sendsms', 'HomeController@sendSMS')->name('sendSMS');
 
 
 Route::get('/rep', 'HomeController@report')->name('report');

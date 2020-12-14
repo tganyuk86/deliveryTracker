@@ -65,8 +65,6 @@ class VoipController extends Controller
 			exit;
 		}
 
-		/* Get Clients Array */
-		$clients = $response['clients'];
-		dd($clients);
+		
 	}
 }
