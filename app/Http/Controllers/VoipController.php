@@ -46,6 +46,7 @@ class VoipController extends Controller
 
 		$did = '6478128291';
 		$dst = '4169907119';
+		$message = 'test';
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
