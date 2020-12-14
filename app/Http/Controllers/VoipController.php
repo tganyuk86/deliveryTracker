@@ -58,13 +58,13 @@ class VoipController extends Controller
 		$response=json_decode($result,true);
 
 		/* Get Errors - Invalid_Client */
-		if($response[status]!='success'){
-			echo $response[status];
+		if($response['status']!='success'){
+			echo $response['status'];
 			exit;
 		}
 
 		/* Get Clients Array */
-		$clients = $response[clients];
+		$clients = $response['clients'];
 		dd($clients);
 	}
 }
