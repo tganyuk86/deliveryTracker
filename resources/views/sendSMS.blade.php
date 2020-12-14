@@ -14,7 +14,7 @@
 			<form action="{{route('sendSMS')}}" method="POST" >
 				<label>Message</label>
 				<textarea name="message">myTest</textarea>
-				
+				@csrf
 				<label>Customers</label>
                   <div class="row">
 					  <div class="col-md-2">
