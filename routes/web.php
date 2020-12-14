@@ -57,6 +57,9 @@ Route::get('/finances', 'HomeController@finances')->name('finances');
 Route::post('/updfinances', 'HomeController@updFinances')->name('updFinances');
 
 
+Route::get('/tv', 'VoipController@testVoip');
+
+
 Route::get('/rep', 'HomeController@report')->name('report');
 Route::post('/report', 'HomeController@loadReport')->name('loadReport');
 // Route::post('/assign', 'HomeController@assign')->name('assign');
