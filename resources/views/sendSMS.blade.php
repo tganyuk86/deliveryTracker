@@ -50,7 +50,7 @@
                         {{count($customer->orders())}}
                       </div>
                       <div class="col-md-4">
-                        {{$customer->orders()->last()->created_at}}
+                        {{count($customer->orders()) ? $customer->orders()->last()->created_at : '-'}}
                       </div>
                     </div>
                   @endforeach
