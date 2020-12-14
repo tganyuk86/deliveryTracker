@@ -47,11 +47,13 @@ class VoipController extends Controller
 		$did = '6478128291';
 		$dst = '4169907119';
 		$message = 'test';
+		
+		$url = "https://voip.ms/api/v1/rest.php?api_username=".env('VOIP_USER')."&api_password=".env('VOIP_PASS')."&method=".$method."&did=".$did."&dst=".$dst."&message=".$message;
+		dump($url);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt($ch, CURLOPT_URL, 
-			"https://voip.ms/api/v1/rest.php?api_username=".env('VOIP_USER')."&api_password=".env('VOIP_PASS')."&method=".$method."&did=".$did."&dst=".$dst."&message=".$message);
+		curl_setopt($ch, CURLOPT_URL, $url);
 		$result = curl_exec($ch);
 		curl_close($ch);
 
