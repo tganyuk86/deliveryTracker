@@ -38,6 +38,8 @@
                     <div class="row" data-filtered="customers">
                       <div class="col-md-2">
 						<input type="checkbox" name='users[]' value="{{$customer->id}}" />
+                      </div>
+                      <div class="col-md-2">
                         {{$customer->address}}
                         
                       </div>
@@ -48,7 +50,7 @@
                         {{count($customer->orders())}}
                       </div>
                       <div class="col-md-4">
-                        {{$customer->name}}
+                        {{$customer->order()->last()->created_at}}
                       </div>
                     </div>
                   @endforeach
