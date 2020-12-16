@@ -51,6 +51,7 @@
                       </div>
                       <div class="col-md-4">
                         {{count($customer->orders()) ? $customer->orders()->last()->created_at->diffForHumans() : '-'}}
+						<a href="/admin/customers/{{$customer->id}}/edit" class="btn btn-info">Edit</a>
                       </div>
                     </div>
                   @endforeach
