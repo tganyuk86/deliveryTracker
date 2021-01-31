@@ -40,7 +40,7 @@ class Stock extends Model
     public static function allActiveSorted()
 	{
 		$stocks = Stock::orderBy('price', 'asc')->get();
-
+$out = [];
         foreach ($stocks as $stock) 
         {
 			if(!$stock->product()->isActive())
