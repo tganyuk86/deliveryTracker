@@ -56,7 +56,7 @@ $out = [];
     public static function allActiveSortedFull()
 	{
 		$stocks = Stock::orderBy('price', 'asc')->get();
-
+        $out = [];
         foreach ($stocks as $stock) 
         {
 			if(!$stock->product()->isActive())
