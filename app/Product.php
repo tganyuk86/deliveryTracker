@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'amount', 'status'
+        'amount', 'status', 'name'
     ];
 
     public function moveStock($driverID, $amount)
